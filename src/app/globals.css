@@ -1,94 +1,95 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg-base: var(--bg-base);
-  --color-bg-panel: var(--bg-panel);
-  --color-text-base: var(--text-base);
-  --color-border-base: var(--border-base);
-  --color-neon-cyan: var(--neon-cyan);
-  --color-neon-emerald: var(--neon-emerald);
+  --color-bg-base: #0B1018;
+  --color-surface-card: #151D28;
+  --color-surface-elevated: #1B2636;
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-focus: #D6F45A;
+  
+  --color-accent-lime: #D6F45A;
+  --color-accent-lime-dim: rgba(214, 244, 90, 0.12);
+  
+  --color-text-main: #F4F7FB;
+  --color-text-muted: #8794A6;
+  --color-text-dim: #546274;
+  
+  --color-semantic-success: #43D9A3;
+  --color-semantic-warning: #F8BE62;
+  --color-semantic-danger: #FF6E73;
   
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-display: 'Montserrat', 'Inter', system-ui, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
 }
 
 :root {
-  --bg-base: #f8f9fa;
-  --bg-panel: rgba(255, 255, 255, 0.7);
-  --text-base: #111827;
-  --border-base: rgba(209, 213, 219, 0.6);
-  --neon-cyan: #0284c7; 
-  --neon-emerald: #059669;
+  --bg-base: #0B1018;
+  --surface-card: #151D28;
+  --surface-elevated: #1B2636;
+  --border-subtle: rgba(255, 255, 255, 0.08);
   
-  --background: #f8f9fa;
-  --foreground: #111827;
+  --accent-lime: #D6F45A;
+  --accent-lime-dim: rgba(214, 244, 90, 0.12);
+  
+  --text-main: #F4F7FB;
+  --text-muted: #8794A6;
+  --text-dim: #546274;
+  
+  --semantic-success: #43D9A3;
+  --semantic-warning: #F8BE62;
+  --semantic-danger: #FF6E73;
 }
 
-.dark {
-  --bg-base: #000000;
-  --bg-panel: rgba(10, 10, 10, 0.75);
-  --text-base: #ffffff;
-  --border-base: rgba(63, 63, 70, 0.4);
-  --neon-cyan: #00f0ff;
-  --neon-emerald: #05ff80;
-  
-  --background: #000000;
-  --foreground: #ffffff;
-}
-
+/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-base);
+  background: #0B1018;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(120, 120, 120, 0.3);
-  border-radius: 3px;
+  background: #1B2636;
+  border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(120, 120, 120, 0.5);
+  background: #2A3B52;
 }
 
-.glass-panel {
-  background: var(--bg-panel);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-base);
+/* Base surface card styling - clean, restrained */
+.nebula-card {
+  background-color: #151D28;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.glass-panel-glow-cyan {
-  box-shadow: 0 0 30px rgba(0, 240, 255, 0.04);
+.nebula-card:hover {
+  border-color: rgba(255, 255, 255, 0.16);
 }
 
-.glass-panel-glow-emerald {
-  box-shadow: 0 0 30px rgba(5, 255, 128, 0.04);
+.nebula-card-elevated {
+  background-color: #1B2636;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
 }
 
-@keyframes pulse-cyan {
-  0%, 100% {
-    opacity: 0.6;
-    box-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
-  }
-  50% {
-    opacity: 1;
-    box-shadow: 0 0 16px rgba(0, 240, 255, 0.8), 0 0 24px rgba(0, 240, 255, 0.4);
-  }
+/* Restrained accent highlight */
+.accent-border-lime {
+  border-color: #D6F45A;
+  box-shadow: 0 0 16px rgba(214, 244, 90, 0.08);
 }
 
-.animate-pulse-cyan {
-  animation: pulse-cyan 2s infinite alternate;
-}
-
-body {
-  background-color: var(--bg-base);
-  color: var(--text-base);
-  overflow-x: hidden;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-}
-
+/* Numeric text monospace formatting */
 .font-mono-numbers {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   font-variant-numeric: tabular-nums;
+}
+
+body {
+  background-color: #0B1018;
+  color: #F4F7FB;
+  overflow-x: hidden;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }

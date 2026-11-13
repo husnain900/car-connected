@@ -1,191 +1,201 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import Navbar from "@/components/Navbar";
-import HeroVisualizer from "@/components/HeroVisualizer";
-import TelemetryGrid from "@/components/TelemetryGrid";
-import DiagnosticGrid from "@/components/DiagnosticGrid";
-import ProfileSidebar from "@/components/ProfileSidebar";
-import TelemetryTab from "@/components/TelemetryTab";
-import SystemsTab from "@/components/SystemsTab";
-import NavigationTab from "@/components/NavigationTab";
-import CreditsModal from "@/components/CreditsModal";
-import gsap from "gsap";
-import { Award, ShieldCheck, Sparkles } from "lucide-react";
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import {
+  Activity,
+  Cpu,
+  Camera,
+  MapPin,
+  Sliders,
+  BarChart3,
+  ArrowRight,
+  Info,
+  AlertTriangle,
+} from "lucide-react";
+import { useSimulationStore } from "@/lib/simulationStore";
 
-export default function Home() {
-  const [currentTab, setCurrentTab] = useState("CONSOLE");
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
-  const [isCreditsOpen, setIsCreditsOpen] = useState(false);
+export default function LandingPage() {
+  const { activeVehicle } = useSimulationStore();
 
-  const [profile, setProfile] = useState({
-    name: "Zainab Amanat",
-    license: "M24-5008",
-    pin: "5008",
-    valetLimit: 50,
-    energySaving: true,
-  });
-
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-  };
-
-  useEffect(() => {
-    const root = document.documentElement;
-    if (theme === "dark") {
-      root.classList.add("dark");
-    } else {
-      root.classList.remove("dark");
-    }
-  }, [theme]);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".gsap-animate-card",
-        {
-          opacity: 0,
-          y: 20,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.08,
-          ease: "power2.out",
-        }
-      );
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, [currentTab]);
+  const features = [
+    {
+      title: "Real-Time Telemetry & TPMS",
+      desc: "Deterministic 4-corner tyre pressure & thermal mesh monitoring with dynamic drive profiles.",
+      icon: Activity,
+      href: `/vehicle/${activeVehicle.id}/diagnostics`,
+      badge: "LIVE MESH",
+    },
+    {
+      title: "AI Camera Inspection",
+      desc: "Browser camera & upload visual assessment for exterior scratches, dents, and tyre tread condition.",
+      icon: Camera,
+      href: `/vehicle/${activeVehicle.id}/inspection`,
+      badge: "VISION AI",
+    },
+    {
+      title: "Tactical GPS & Trip Playback",
+      desc: "Vector-rendered route replay with timestamped waypoints, elevation, and energy analytics.",
+      icon: MapPin,
+      href: `/vehicle/${activeVehicle.id}/location`,
+      badge: "MAP HUD",
+    },
+    {
+      title: "Remote Commands & Audit Log",
+      desc: "Perimeter lock, valet governor, and climate control with simulated latency and security audit logging.",
+      icon: Sliders,
+      href: `/vehicle/${activeVehicle.id}/controls`,
+      badge: "SECURE",
+    },
+    {
+      title: "OBD-II DTC Diagnostics",
+      desc: "Automated controller scanning across 48 virtual ECUs with freeze-frame fault analysis.",
+      icon: Cpu,
+      href: `/vehicle/${activeVehicle.id}/diagnostics`,
+      badge: "ISO-14229",
+    },
+    {
+      title: "Fleet Analytics & PDF Reports",
+      desc: "Historical trend analysis, energy efficiency curves, and one-click downloadable PDF reports.",
+      icon: BarChart3,
+      href: "/analytics",
+      badge: "EXPORT",
+    },
+  ];
 
   return (
-    <div
-      ref={containerRef}
-      className="min-h-screen bg-bg-base text-text-base flex flex-col font-sans transition-colors duration-300 selection:bg-neon-cyan/20 selection:text-neon-cyan"
-    >
-      <Navbar
-        currentTab={currentTab}
-        setCurrentTab={setCurrentTab}
-        theme={theme}
-        toggleTheme={toggleTheme}
-        onProfileClick={() => setIsProfileOpen(true)}
-        onOpenCredits={() => setIsCreditsOpen(true)}
-        driverName={profile.name}
-      />
+    <div className="flex flex-col min-h-screen">
+      {/* Hero Section */}
+      <section className="relative overflow-hidden pt-12 pb-20 border-b border-white/8">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(214,244,90,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(214,244,90,0.03)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none opacity-50" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#D6F45A]/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col space-y-6 sm:space-y-8">
-        <div className="flex flex-col space-y-2 gsap-animate-card">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-2">
-              <span className="w-2 h-2 rounded-full bg-neon-cyan animate-pulse" />
-              <span className="font-mono text-[10px] tracking-widest text-neon-cyan font-bold uppercase">
-                {currentTab} STATE: NOMINAL
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-5">
+            {/* Attribution & Platform Badge */}
+            <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#151D28] border border-white/10 text-xs font-mono">
+              <span className="w-2 h-2 rounded-full bg-[#D6F45A] animate-pulse" />
+              <span className="text-[#8794A6]">FINAL-YEAR PROJECT //</span>
+              <span className="text-[#F4F7FB] font-bold">ZAINAB AMANAT</span>
+              <span className="text-[#D6F45A] font-bold">M245008</span>
+            </div>
+
+            <h1 className="font-display font-black text-4xl sm:text-6xl tracking-tight text-[#F4F7FB] leading-none">
+              NEBULA DRIVE
+              <span className="block text-2xl sm:text-3xl font-bold text-[#8794A6] mt-2 font-sans tracking-normal">
+                Intelligence in Motion
+              </span>
+            </h1>
+
+            <p className="text-sm sm:text-base text-[#8794A6] leading-relaxed max-w-2xl font-mono">
+              Enterprise-grade connected car telemetry, predictive TPMS diagnostics, AI visual inspection, and remote command cockpit for next-generation vehicle fleets.
+            </p>
+
+            {/* CTAs */}
+            <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+              <Link
+                href="/dashboard"
+                className="px-6 py-3.5 rounded-xl bg-[#D6F45A] hover:bg-[#c2df47] text-[#0B1018] font-display font-black text-sm tracking-wide transition-all shadow-[0_0_25px_rgba(214,244,90,0.25)] flex items-center space-x-2 cursor-pointer"
+              >
+                <span>ENTER COMMAND COCKPIT</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+
+              <Link
+                href="/about"
+                className="px-5 py-3.5 rounded-xl bg-[#151D28] hover:bg-[#1B2636] border border-white/10 hover:border-white/25 text-[#F4F7FB] font-mono text-xs font-bold transition-colors flex items-center space-x-2 cursor-pointer"
+              >
+                <Info className="w-4 h-4 text-[#8794A6]" />
+                <span>ARCHITECTURE & CREDITS</span>
+              </Link>
+            </div>
+
+            {/* Simulation Disclosure Notice (Non-Negotiable Requirement) */}
+            <div className="pt-4 flex items-center space-x-2 text-[10px] font-mono text-[#8794A6] bg-[#151D28]/60 border border-white/8 px-4 py-2 rounded-xl">
+              <AlertTriangle className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+              <span>
+                Demonstration platform powered by a deterministic telemetry simulator. No real vehicle hardware connection is fabricated.
               </span>
             </div>
-            <button
-              onClick={() => setIsCreditsOpen(true)}
-              className="hidden sm:inline-flex items-center space-x-1.5 text-[10px] font-mono text-zinc-400 hover:text-neon-cyan transition-colors"
-            >
-              <Sparkles className="w-3 h-3 text-neon-cyan" />
-              <span>STUDENT PROJECT // SPECIFICATIONS</span>
-            </button>
           </div>
 
-          <div className="flex flex-wrap items-baseline justify-between gap-3">
-            <h1 className="font-display font-black text-2xl sm:text-3xl tracking-wider text-text-base">
-              {currentTab === "CONSOLE" ? "VEHICLE OVERVIEW" : currentTab}
-            </h1>
-            <div className="font-mono text-xs tracking-wider text-zinc-400 font-semibold uppercase flex items-center space-x-2">
-              <span>PILOT ACTIVE:</span>
-              <span className="text-white font-bold">{profile.name}</span>
-              <span className="text-zinc-600">{"//"}</span>
-              <span className="text-neon-cyan font-mono-numbers">{profile.license}</span>
-            </div>
-          </div>
-
-          <div className="h-[1px] w-full bg-gradient-to-r from-border-base via-border-base/50 to-transparent" />
-        </div>
-
-        {currentTab === "CONSOLE" && (
-          <div className="flex flex-col space-y-6 sm:space-y-8">
-            <div className="gsap-animate-card">
-              <HeroVisualizer />
+          {/* Cinematic Automotive Visual Preview */}
+          <div className="relative mt-12 w-full max-w-4xl mx-auto h-72 sm:h-96 rounded-2xl overflow-hidden nebula-card border border-white/10 shadow-2xl flex items-center justify-center p-6">
+            <div className="absolute top-4 left-4 z-10 flex items-center space-x-2 text-[10px] font-mono text-[#8794A6] bg-[#0B1018]/80 px-2.5 py-1 rounded-lg border border-white/10">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#D6F45A]" />
+              <span>DIGITAL TWIN // HYPERION GT (SIMULATED PROTOTYPE)</span>
             </div>
 
-            <div className="gsap-animate-card">
-              <TelemetryGrid />
+            <div className="relative w-full h-full">
+              <Image
+                src="/assets/images/hyperion-gt-hero.jpg"
+                alt="Nebula Hyperion GT Luxury Electric Hypercar"
+                fill
+                className="object-contain filter contrast-110 drop-shadow-[0_20px_40px_rgba(0,0,0,0.9)]"
+                priority
+              />
             </div>
 
-            <div className="gsap-animate-card">
-              <DiagnosticGrid />
+            <div className="absolute bottom-4 right-4 z-10">
+              <Link
+                href="/dashboard"
+                className="px-3 py-1.5 rounded-lg bg-[#D6F45A]/15 border border-[#D6F45A]/30 text-[#D6F45A] hover:bg-[#D6F45A]/25 text-[10px] font-mono font-bold flex items-center space-x-1.5 transition-colors"
+              >
+                <span>OPEN DIGITAL TWIN</span>
+                <ArrowRight className="w-3 h-3" />
+              </Link>
             </div>
-          </div>
-        )}
-
-        {currentTab === "TELEMETRY" && (
-          <div className="gsap-animate-card">
-            <TelemetryTab />
-          </div>
-        )}
-
-        {currentTab === "SYSTEMS" && (
-          <div className="gsap-animate-card">
-            <SystemsTab />
-          </div>
-        )}
-
-        {currentTab === "NAVIGATION" && (
-          <div className="gsap-animate-card">
-            <NavigationTab />
-          </div>
-        )}
-      </main>
-
-      <ProfileSidebar
-        isOpen={isProfileOpen}
-        onClose={() => setIsProfileOpen(false)}
-        profile={profile}
-        onSave={(updated) => setProfile(updated)}
-      />
-
-      <CreditsModal
-        isOpen={isCreditsOpen}
-        onClose={() => setIsCreditsOpen(false)}
-      />
-
-      <footer className="w-full border-t border-border-base py-6 bg-black/10 dark:bg-black/60 mt-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row justify-between items-center gap-4 text-zinc-500 font-mono text-[10px] tracking-wider font-bold">
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
-            <span className="text-text-base">© 2026 NEBULA VEHICLE SYSTEMS</span>
-            <span className="text-zinc-700 hidden sm:inline">•</span>
-            <span className="text-neon-cyan flex items-center space-x-1">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>TERMINAL SECURED (AES-256)</span>
-            </span>
-          </div>
-
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <span className="text-zinc-400 text-center sm:text-right">
-              Designed & Engineered by{" "}
-              <strong className="text-neon-cyan font-bold tracking-wide">Zainab Amanat</strong>
-              {" — "}
-              Roll No: <span className="text-white font-mono-numbers">M245008</span>
-            </span>
-            <button
-              onClick={() => setIsCreditsOpen(true)}
-              className="px-2.5 py-1 rounded bg-zinc-900 border border-zinc-800 hover:border-neon-cyan text-zinc-300 hover:text-white transition-colors cursor-pointer flex items-center space-x-1"
-            >
-              <Award className="w-3 h-3 text-neon-cyan" />
-              <span>ABOUT PROJECT</span>
-            </button>
           </div>
         </div>
-      </footer>
+      </section>
+
+      {/* Feature Matrix Grid */}
+      <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 w-full">
+        <div className="flex flex-col items-center text-center mb-12">
+          <span className="text-[10px] font-mono uppercase tracking-widest text-[#D6F45A] font-bold">
+            ARCHITECTURE & CAPABILITIES
+          </span>
+          <h2 className="font-display font-black text-2xl sm:text-3xl text-[#F4F7FB] mt-1">
+            Engineered for Comprehensive Fleet Oversight
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          {features.map((feat) => {
+            const Icon = feat.icon;
+            return (
+              <Link
+                key={feat.title}
+                href={feat.href}
+                className="nebula-card p-6 flex flex-col justify-between group hover:border-[#D6F45A]/40 transition-all cursor-pointer"
+              >
+                <div>
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="w-10 h-10 rounded-xl bg-[#1B2636] border border-white/10 flex items-center justify-center text-[#D6F45A] group-hover:scale-105 transition-transform">
+                      <Icon className="w-5 h-5" />
+                    </div>
+                    <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[#8794A6]">
+                      {feat.badge}
+                    </span>
+                  </div>
+                  <h3 className="font-display font-bold text-base text-[#F4F7FB] group-hover:text-[#D6F45A] transition-colors">
+                    {feat.title}
+                  </h3>
+                  <p className="text-xs font-mono text-[#8794A6] mt-2 leading-relaxed">
+                    {feat.desc}
+                  </p>
+                </div>
+
+                <div className="flex items-center space-x-1 text-xs font-mono text-[#D6F45A] font-semibold mt-6 group-hover:translate-x-1 transition-transform">
+                  <span>Explore Module</span>
+                  <ArrowRight className="w-3.5 h-3.5" />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </section>
     </div>
   );
 }
