@@ -21,6 +21,11 @@ export const metadata: Metadata = {
     "Zainab Amanat",
     "M245008",
   ],
+  icons: {
+    icon: "/assets/images/nebula-logo.png",
+    shortcut: "/assets/images/nebula-logo.png",
+    apple: "/assets/images/nebula-logo.png",
+  },
 };
 
 export const viewport: Viewport = {

@@ -73,6 +73,18 @@ export default function LandingPage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-5">
+            {/* Glowing Hero Emblem */}
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-[#151D28] border-2 border-[#D6F45A]/50 shadow-[0_0_35px_rgba(214,244,90,0.3)] mb-1 flex-shrink-0">
+              <Image
+                src="/assets/images/nebula-logo.png"
+                alt="Nebula Drive Crest"
+                fill
+                sizes="96px"
+                className="object-cover rounded-xl filter contrast-125"
+                priority
+              />
+            </div>
+
             {/* Attribution & Platform Badge */}
             <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#151D28] border border-white/10 text-xs font-mono">
               <span className="w-2 h-2 rounded-full bg-[#D6F45A] animate-pulse" />

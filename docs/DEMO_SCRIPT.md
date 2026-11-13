@@ -129,3 +129,4 @@
 ### Q3: *"How does the AI camera inspection work?"*
 **Answer:**
 > *"The frontend captures video frames via WebRTC `navigator.mediaDevices.getUserMedia` onto an offscreen canvas. The image is evaluated against a synthetic MobileNet-V3 classification model trained for automotive surface scratches, dents, and tyre sidewall cracks, outputting bounding areas and confidence scores."*
+

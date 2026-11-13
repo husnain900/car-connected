@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -75,8 +76,15 @@ export default function AppNavigation() {
           {/* Brand Left */}
           <div className="flex items-center space-x-3">
             <Link href="/" className="flex items-center space-x-2.5 group">
-              <div className="w-9 h-9 rounded-xl bg-[#151D28] border border-white/10 flex items-center justify-center font-display font-black text-sm text-[#D6F45A] shadow-inner group-hover:border-[#D6F45A]/50 transition-colors">
-                ND
+              <div className="relative w-9 h-9 rounded-xl overflow-hidden bg-[#151D28] border border-[#D6F45A]/40 flex items-center justify-center shadow-[0_0_15px_rgba(214,244,90,0.18)] group-hover:border-[#D6F45A] group-hover:shadow-[0_0_22px_rgba(214,244,90,0.35)] transition-all duration-300 flex-shrink-0">
+                <Image
+                  src="/assets/images/nebula-logo.png"
+                  alt="Nebula Drive Emblem"
+                  fill
+                  sizes="36px"
+                  className="object-cover rounded-[10px]"
+                  priority
+                />
               </div>
               <div className="flex flex-col">
                 <div className="flex items-center space-x-2">

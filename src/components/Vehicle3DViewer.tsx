@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import Image from "next/image";
@@ -62,10 +62,10 @@ export default function Vehicle3DViewer({
   const carBodyMeshRef = useRef<THREE.Mesh[]>([]);
   const animationFrameId = useRef<number | null>(null);
 
-  const tyreFL = vehicle.tires[0] || { psi: 35.0, tempC: 26, status: "optimal" };
-  const tyreFR = vehicle.tires[1] || { psi: 35.0, tempC: 26, status: "optimal" };
-  const tyreRL = vehicle.tires[2] || { psi: 35.0, tempC: 26, status: "optimal" };
-  const tyreRR = vehicle.tires[3] || { psi: 35.0, tempC: 26, status: "optimal" };
+  const tyreFL = useMemo(() => vehicle.tires[0] || { psi: 35.0, tempC: 26, status: "optimal" }, [vehicle.tires]);
+  const tyreFR = useMemo(() => vehicle.tires[1] || { psi: 35.0, tempC: 26, status: "optimal" }, [vehicle.tires]);
+  const tyreRL = useMemo(() => vehicle.tires[2] || { psi: 35.0, tempC: 26, status: "optimal" }, [vehicle.tires]);
+  const tyreRR = useMemo(() => vehicle.tires[3] || { psi: 35.0, tempC: 26, status: "optimal" }, [vehicle.tires]);
 
   // Status mapping based on vehicle state
   const isRrTyreCrit = tyreRR.status === "critical" || tyreRR.psi < 28;

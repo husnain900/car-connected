@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Info } from "lucide-react";
 
 export default function AppFooter() {
@@ -9,7 +10,18 @@ export default function AppFooter() {
     <footer className="w-full border-t border-white/8 bg-[#0B1018]/80 py-6 mt-auto select-none">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4 text-xs font-mono text-[#8794A6]">
         <div className="flex flex-wrap items-center justify-center md:justify-start gap-3">
-          <span className="font-bold text-[#F4F7FB]">NEBULA DRIVE</span>
+          <div className="flex items-center space-x-2">
+            <div className="relative w-5 h-5 rounded-md overflow-hidden bg-[#151D28] border border-[#D6F45A]/40 flex-shrink-0">
+              <Image
+                src="/assets/images/nebula-logo.png"
+                alt="Nebula Logo"
+                fill
+                sizes="20px"
+                className="object-cover"
+              />
+            </div>
+            <span className="font-bold text-[#F4F7FB]">NEBULA DRIVE</span>
+          </div>
           <span className="text-white/20 hidden sm:inline">•</span>
           <span>INTELLIGENCE IN MOTION</span>
           <span className="text-white/20 hidden sm:inline">•</span>

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Mail, CheckCircle2, ArrowLeft } from "lucide-react";
 
 export default function ForgotPasswordPage() {
@@ -17,8 +18,15 @@ export default function ForgotPasswordPage() {
     <div className="flex-1 flex items-center justify-center p-4 sm:p-6 py-12 select-none">
       <div className="w-full max-w-md p-6 sm:p-8 rounded-2xl nebula-card border border-white/10 space-y-6">
         <div className="text-center space-y-1">
-          <div className="w-10 h-10 rounded-xl bg-[#D6F45A]/15 border border-[#D6F45A]/30 flex items-center justify-center font-display font-black text-sm text-[#D6F45A] mx-auto mb-3">
-            ND
+          <div className="relative w-12 h-12 rounded-xl overflow-hidden bg-[#151D28] border border-[#D6F45A]/40 flex items-center justify-center shadow-[0_0_20px_rgba(214,244,90,0.25)] mx-auto mb-3">
+            <Image
+              src="/assets/images/nebula-logo.png"
+              alt="Nebula Drive Emblem"
+              fill
+              sizes="48px"
+              className="object-cover rounded-xl"
+              priority
+            />
           </div>
           <h1 className="font-display font-black text-2xl text-[#F4F7FB]">
             Password Recovery
