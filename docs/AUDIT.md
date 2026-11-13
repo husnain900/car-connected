@@ -50,15 +50,23 @@ In strict adherence to academic evaluation ethics:
 
 ## 4. UI/UX & Design System Validation
 
-- **Background:** `#0B1018` (Tactical deep space black)
-- **Elevated Surfaces / Cards:** `#151D28` / `#1B2636` with 1px border `rgba(255,255,255,0.08)`
-- **Accent Highlight:** `#D6F45A` (Cyber Lime)
-- **Primary Typography:** `#F4F7FB` (High-contrast clean white)
-- **Secondary / Telemetry Labels:** `#8794A6` (Muted aerospace grey)
+- **Main Background:** `#091321` (Deep luxury midnight navy)
+- **Sidebar & Card Background:** `#152437` (Rich navy slate)
+- **Elevated Surfaces:** `#1E314B` (Precision navy elevation)
+- **Subtle Borders:** `#293C51` (Crisp 1px architectural borders)
+- **Primary Accent:** `#79C7FF` (Electric celestial azure)
+- **Primary Typography:** `#F5F8FC` (High-contrast clean ice white)
+- **Secondary / Telemetry Labels:** `#A5B5C8` (Muted aerospace platinum slate)
 - **Semantic Colors:**
-  - Optimal / Nominal: `#43D9A3` (Emerald)
-  - Warning / Caution: `#F8BE62` (Amber)
-  - Critical / Fault: `#FF6E73` (Crimson)
+  - Optimal / Nominal (Success): `#35C99A` (Precision mint green)
+  - Warning / Caution: `#F2B65B` (Warm automotive amber)
+  - Critical / Fault (Error): `#F16D78` (Refined automotive rose-crimson)
+- **Typography Stack:**
+  - Headings: `Manrope` (weights 600–800)
+  - Interface / Body: `Inter` (weights 400–600)
+  - Numerical Telemetry & DTC Codes: `JetBrains Mono` (weights 400–700)
+- **Brand Identity & Emblem:**
+  - Bespoke Aerospace Automotive Crest SVG vector emblem in `NebulaLogo.tsx` with hexagonal shield facets, aerodynamic hypercar delta wings, titanium chrome bevels, and central telemetry horizon nexus.
 - **Viewports Tested:**
   - 375px (Mobile Safari / Chrome)
   - 768px (Tablet portrait)

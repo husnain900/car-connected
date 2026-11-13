@@ -1,95 +1,98 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --color-bg-base: #0B1018;
-  --color-surface-card: #151D28;
-  --color-surface-elevated: #1B2636;
-  --color-border-subtle: rgba(255, 255, 255, 0.08);
-  --color-border-focus: #D6F45A;
-  
-  --color-accent-lime: #D6F45A;
-  --color-accent-lime-dim: rgba(214, 244, 90, 0.12);
-  
-  --color-text-main: #F4F7FB;
-  --color-text-muted: #8794A6;
-  --color-text-dim: #546274;
-  
-  --color-semantic-success: #43D9A3;
-  --color-semantic-warning: #F8BE62;
-  --color-semantic-danger: #FF6E73;
-  
+  --color-bg-base: #091321;
+  --color-surface-card: #152437;
+  --color-surface-elevated: #1E314B;
+  --color-border-subtle: #293C51;
+  --color-border-focus: #79C7FF;
+
+  --color-accent-primary: #79C7FF;
+  --color-accent-primary-dim: rgba(121, 199, 255, 0.12);
+
+  --color-text-main: #F5F8FC;
+  --color-text-muted: #A5B5C8;
+  --color-text-dim: #647B95;
+
+  --color-semantic-success: #35C99A;
+  --color-semantic-warning: #F2B65B;
+  --color-semantic-danger: #F16D78;
+
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  --font-display: 'Manrope', 'Inter', system-ui, sans-serif;
 }
 
 :root {
-  --bg-base: #0B1018;
-  --surface-card: #151D28;
-  --surface-elevated: #1B2636;
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  
-  --accent-lime: #D6F45A;
-  --accent-lime-dim: rgba(214, 244, 90, 0.12);
-  
-  --text-main: #F4F7FB;
-  --text-muted: #8794A6;
-  --text-dim: #546274;
-  
-  --semantic-success: #43D9A3;
-  --semantic-warning: #F8BE62;
-  --semantic-danger: #FF6E73;
+  --bg-base: #091321;
+  --surface-card: #152437;
+  --surface-elevated: #1E314B;
+  --border-subtle: #293C51;
+  --border-focus: #79C7FF;
+
+  --accent-primary: #79C7FF;
+  --accent-primary-dim: rgba(121, 199, 255, 0.12);
+
+  --text-main: #F5F8FC;
+  --text-muted: #A5B5C8;
+  --text-dim: #647B95;
+
+  --semantic-success: #35C99A;
+  --semantic-warning: #F2B65B;
+  --semantic-danger: #F16D78;
 }
 
-/* Custom scrollbar */
+/* Luxury Automotive Precision Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B1018;
+  background: #091321;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1B2636;
+  background: #203349;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2A3B52;
+  background: #2E4766;
 }
 
-/* Base surface card styling - clean, restrained */
+/* Base surface card styling - Dark Navy Luxury Automotive */
 .nebula-card {
-  background-color: #151D28;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 1rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background-color: #152437;
+  border: 1px solid #293C51;
+  border-radius: 0.875rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .nebula-card:hover {
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(121, 199, 255, 0.35);
 }
 
 .nebula-card-elevated {
-  background-color: #1B2636;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 1rem;
+  background-color: #1E314B;
+  border: 1px solid #293C51;
+  border-radius: 0.875rem;
 }
 
-/* Restrained accent highlight */
-.accent-border-lime {
-  border-color: #D6F45A;
-  box-shadow: 0 0 16px rgba(214, 244, 90, 0.08);
+/* Refined electric blue accent highlight */
+.accent-border-blue {
+  border-color: #79C7FF;
+  box-shadow: 0 0 16px rgba(121, 199, 255, 0.12);
 }
 
 /* Numeric text monospace formatting */
 .font-mono-numbers {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-variant-numeric: tabular-nums;
 }
 
 body {
-  background-color: #0B1018;
-  color: #F4F7FB;
+  background-color: #091321;
+  color: #F5F8FC;
+  font-family: var(--font-sans);
   overflow-x: hidden;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }

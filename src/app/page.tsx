@@ -15,6 +15,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { useSimulationStore } from "@/lib/simulationStore";
+import NebulaLogo from "@/components/NebulaLogo";
 
 export default function LandingPage() {
   const { activeVehicle } = useSimulationStore();
@@ -65,42 +66,35 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[#091321] text-[#F5F8FC]">
       {/* Hero Section */}
-      <section className="relative overflow-hidden pt-12 pb-20 border-b border-white/8">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(214,244,90,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(214,244,90,0.03)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none opacity-50" />
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#D6F45A]/5 rounded-full blur-[140px] pointer-events-none" />
+      <section className="relative overflow-hidden pt-12 pb-20 border-b border-[#293C51]">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(121,199,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(121,199,255,0.03)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none opacity-40" />
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[#79C7FF]/5 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
           <div className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-5">
-            {/* Glowing Hero Emblem */}
-            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden bg-[#151D28] border-2 border-[#D6F45A]/50 shadow-[0_0_35px_rgba(214,244,90,0.3)] mb-1 flex-shrink-0">
-              <Image
-                src="/assets/images/nebula-logo.png"
-                alt="Nebula Drive Crest"
-                fill
-                sizes="96px"
-                className="object-cover rounded-xl filter contrast-125"
-                priority
-              />
+            {/* Glowing Hero Automotive Crest Emblem */}
+            <div className="mb-1">
+              <NebulaLogo size="xl" showText={false} />
             </div>
 
             {/* Attribution & Platform Badge */}
-            <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#151D28] border border-white/10 text-xs font-mono">
-              <span className="w-2 h-2 rounded-full bg-[#D6F45A] animate-pulse" />
-              <span className="text-[#8794A6]">FINAL-YEAR PROJECT //</span>
-              <span className="text-[#F4F7FB] font-bold">ZAINAB AMANAT</span>
-              <span className="text-[#D6F45A] font-bold">M245008</span>
+            <div className="inline-flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#152437] border border-[#293C51] text-xs font-mono shadow-sm">
+              <span className="w-2 h-2 rounded-full bg-[#79C7FF] animate-pulse" />
+              <span className="text-[#A5B5C8]">FINAL-YEAR PROJECT //</span>
+              <span className="text-[#F5F8FC] font-bold">ZAINAB AMANAT</span>
+              <span className="text-[#79C7FF] font-bold">M245008</span>
             </div>
 
-            <h1 className="font-display font-black text-4xl sm:text-6xl tracking-tight text-[#F4F7FB] leading-none">
+            <h1 className="font-display font-extrabold text-4xl sm:text-6xl tracking-tight text-[#F5F8FC] leading-none">
               NEBULA DRIVE
-              <span className="block text-2xl sm:text-3xl font-bold text-[#8794A6] mt-2 font-sans tracking-normal">
+              <span className="block text-2xl sm:text-3xl font-semibold text-[#A5B5C8] mt-2 font-sans tracking-normal">
                 Intelligence in Motion
               </span>
             </h1>
 
-            <p className="text-sm sm:text-base text-[#8794A6] leading-relaxed max-w-2xl font-mono">
+            <p className="text-sm sm:text-base text-[#A5B5C8] leading-relaxed max-w-2xl font-mono">
               Enterprise-grade connected car telemetry, predictive TPMS diagnostics, AI visual inspection, and remote command cockpit for next-generation vehicle fleets.
             </p>
 
@@ -108,7 +102,7 @@ export default function LandingPage() {
             <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
               <Link
                 href="/dashboard"
-                className="px-6 py-3.5 rounded-xl bg-[#D6F45A] hover:bg-[#c2df47] text-[#0B1018] font-display font-black text-sm tracking-wide transition-all shadow-[0_0_25px_rgba(214,244,90,0.25)] flex items-center space-x-2 cursor-pointer"
+                className="px-6 py-3.5 rounded-xl bg-[#79C7FF] hover:bg-[#68b5ea] text-[#091321] font-display font-extrabold text-sm tracking-wide transition-all shadow-[0_0_25px_rgba(121,199,255,0.25)] flex items-center space-x-2 cursor-pointer"
               >
                 <span>ENTER COMMAND COCKPIT</span>
                 <ArrowRight className="w-4 h-4" />
@@ -116,16 +110,16 @@ export default function LandingPage() {
 
               <Link
                 href="/about"
-                className="px-5 py-3.5 rounded-xl bg-[#151D28] hover:bg-[#1B2636] border border-white/10 hover:border-white/25 text-[#F4F7FB] font-mono text-xs font-bold transition-colors flex items-center space-x-2 cursor-pointer"
+                className="px-5 py-3.5 rounded-xl bg-[#152437] hover:bg-[#1E314B] border border-[#293C51] hover:border-[#79C7FF]/40 text-[#F5F8FC] font-mono text-xs font-bold transition-colors flex items-center space-x-2 cursor-pointer"
               >
-                <Info className="w-4 h-4 text-[#8794A6]" />
+                <Info className="w-4 h-4 text-[#A5B5C8]" />
                 <span>ARCHITECTURE & CREDITS</span>
               </Link>
             </div>
 
-            {/* Simulation Disclosure Notice (Non-Negotiable Requirement) */}
-            <div className="pt-4 flex items-center space-x-2 text-[10px] font-mono text-[#8794A6] bg-[#151D28]/60 border border-white/8 px-4 py-2 rounded-xl">
-              <AlertTriangle className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+            {/* Simulation Disclosure Notice */}
+            <div className="pt-4 flex items-center space-x-2 text-[10px] font-mono text-[#A5B5C8] bg-[#152437]/80 border border-[#293C51] px-4 py-2 rounded-xl">
+              <AlertTriangle className="w-3.5 h-3.5 text-[#F2B65B] flex-shrink-0" />
               <span>
                 Demonstration platform powered by a deterministic telemetry simulator. No real vehicle hardware connection is fabricated.
               </span>
@@ -133,9 +127,9 @@ export default function LandingPage() {
           </div>
 
           {/* Cinematic Automotive Visual Preview */}
-          <div className="relative mt-12 w-full max-w-4xl mx-auto h-72 sm:h-96 rounded-2xl overflow-hidden nebula-card border border-white/10 shadow-2xl flex items-center justify-center p-6">
-            <div className="absolute top-4 left-4 z-10 flex items-center space-x-2 text-[10px] font-mono text-[#8794A6] bg-[#0B1018]/80 px-2.5 py-1 rounded-lg border border-white/10">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D6F45A]" />
+          <div className="relative mt-12 w-full max-w-4xl mx-auto h-72 sm:h-96 rounded-2xl overflow-hidden nebula-card border border-[#293C51] shadow-2xl flex items-center justify-center p-6">
+            <div className="absolute top-4 left-4 z-10 flex items-center space-x-2 text-[10px] font-mono text-[#A5B5C8] bg-[#091321]/90 px-2.5 py-1 rounded-lg border border-[#293C51]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#35C99A]" />
               <span>DIGITAL TWIN // HYPERION GT (SIMULATED PROTOTYPE)</span>
             </div>
 
@@ -152,7 +146,7 @@ export default function LandingPage() {
             <div className="absolute bottom-4 right-4 z-10">
               <Link
                 href="/dashboard"
-                className="px-3 py-1.5 rounded-lg bg-[#D6F45A]/15 border border-[#D6F45A]/30 text-[#D6F45A] hover:bg-[#D6F45A]/25 text-[10px] font-mono font-bold flex items-center space-x-1.5 transition-colors"
+                className="px-3 py-1.5 rounded-lg bg-[#79C7FF]/15 border border-[#79C7FF]/30 text-[#79C7FF] hover:bg-[#79C7FF]/25 text-[10px] font-mono font-bold flex items-center space-x-1.5 transition-colors"
               >
                 <span>OPEN DIGITAL TWIN</span>
                 <ArrowRight className="w-3 h-3" />
@@ -165,10 +159,10 @@ export default function LandingPage() {
       {/* Feature Matrix Grid */}
       <section className="py-16 max-w-7xl mx-auto px-4 sm:px-6 w-full">
         <div className="flex flex-col items-center text-center mb-12">
-          <span className="text-[10px] font-mono uppercase tracking-widest text-[#D6F45A] font-bold">
+          <span className="text-[10px] font-mono uppercase tracking-widest text-[#79C7FF] font-bold">
             ARCHITECTURE & CAPABILITIES
           </span>
-          <h2 className="font-display font-black text-2xl sm:text-3xl text-[#F4F7FB] mt-1">
+          <h2 className="font-display font-black text-2xl sm:text-3xl text-[#F5F8FC] mt-1">
             Engineered for Comprehensive Fleet Oversight
           </h2>
         </div>
@@ -180,26 +174,26 @@ export default function LandingPage() {
               <Link
                 key={feat.title}
                 href={feat.href}
-                className="nebula-card p-6 flex flex-col justify-between group hover:border-[#D6F45A]/40 transition-all cursor-pointer"
+                className="nebula-card p-6 flex flex-col justify-between group hover:border-[#79C7FF]/50 transition-all cursor-pointer"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-[#1B2636] border border-white/10 flex items-center justify-center text-[#D6F45A] group-hover:scale-105 transition-transform">
+                    <div className="w-10 h-10 rounded-xl bg-[#1E314B] border border-[#293C51] flex items-center justify-center text-[#79C7FF] group-hover:scale-105 transition-transform">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[#8794A6]">
+                    <span className="text-[9px] font-mono font-bold px-2 py-0.5 rounded bg-[#1E314B] border border-[#293C51] text-[#A5B5C8]">
                       {feat.badge}
                     </span>
                   </div>
-                  <h3 className="font-display font-bold text-base text-[#F4F7FB] group-hover:text-[#D6F45A] transition-colors">
+                  <h3 className="font-display font-bold text-base text-[#F5F8FC] group-hover:text-[#79C7FF] transition-colors">
                     {feat.title}
                   </h3>
-                  <p className="text-xs font-mono text-[#8794A6] mt-2 leading-relaxed">
+                  <p className="text-xs font-mono text-[#A5B5C8] mt-2 leading-relaxed">
                     {feat.desc}
                   </p>
                 </div>
 
-                <div className="flex items-center space-x-1 text-xs font-mono text-[#D6F45A] font-semibold mt-6 group-hover:translate-x-1 transition-transform">
+                <div className="flex items-center space-x-1 text-xs font-mono text-[#79C7FF] font-semibold mt-6 group-hover:translate-x-1 transition-transform">
                   <span>Explore Module</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </div>

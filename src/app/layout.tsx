@@ -32,7 +32,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#0B1018",
+  themeColor: "#091321",
 };
 
 export default function RootLayout({
@@ -46,7 +46,7 @@ export default function RootLayout({
         <meta name="author" content="Zainab Amanat - Roll No: M245008" />
         <meta name="developer" content="Zainab Amanat (Roll No: M245008)" />
       </head>
-      <body className="min-h-full flex flex-col bg-[#0B1018] text-[#F4F7FB] selection:bg-[#D6F45A]/25 selection:text-[#D6F45A]">
+      <body className="min-h-full flex flex-col bg-[#091321] text-[#F5F8FC] selection:bg-[#79C7FF]/20 selection:text-[#79C7FF]">
         <SimulationProvider>
           <AppNavigation />
           <div className="flex-1 flex flex-col">{children}</div>

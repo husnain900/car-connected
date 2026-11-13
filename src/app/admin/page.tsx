@@ -89,41 +89,41 @@ export default function AdminSimulatorPage() {
   };
 
   return (
-    <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col space-y-6 sm:space-y-8 select-none">
+    <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col space-y-6 sm:space-y-8 select-none text-[#F5F8FC]">
       {/* Header */}
       <div className="flex flex-col space-y-2">
-        <div className="flex items-center space-x-2 text-xs font-mono text-[#8794A6]">
-          <Link href="/dashboard" className="hover:text-[#D6F45A]">Dashboard</Link>
+        <div className="flex items-center space-x-2 text-xs font-mono text-[#A5B5C8]">
+          <Link href="/dashboard" className="hover:text-[#79C7FF]">Dashboard</Link>
           <span>/</span>
           <span>Simulation Engine</span>
           <span>/</span>
-          <span className="text-[#D6F45A]">Examiner Simulator Controller</span>
+          <span className="text-[#79C7FF]">Examiner Simulator Controller</span>
         </div>
 
         <div className="flex flex-wrap items-baseline justify-between gap-4">
           <div>
-            <h1 className="font-display font-black text-2xl sm:text-3xl text-[#F4F7FB]">
+            <h1 className="font-display font-extrabold text-2xl sm:text-3xl text-[#F5F8FC]">
               Viva Simulator Control Center
             </h1>
-            <p className="text-xs font-mono text-[#8794A6] mt-0.5">
+            <p className="text-xs font-mono text-[#A5B5C8] mt-0.5">
               Interactive test bench for university evaluation: inject faults, trigger viva scenarios, inspect raw CAN telemetry, and modulate ticker speed.
             </p>
           </div>
 
           <div className="flex items-center space-x-2">
-            <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#D6F45A]/15 text-[#D6F45A] border border-[#D6F45A]/30 flex items-center space-x-1.5">
+            <span className="px-3 py-1 rounded-full text-xs font-mono font-bold bg-[#79C7FF]/15 text-[#79C7FF] border border-[#79C7FF]/30 flex items-center space-x-1.5">
               <Zap className="w-3.5 h-3.5" />
               <span>TEST-BENCH READY</span>
             </span>
           </div>
         </div>
 
-        <div className="h-[1px] w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+        <div className="h-[1px] w-full bg-gradient-to-r from-[#293C51] via-[#293C51]/50 to-transparent" />
       </div>
 
       {/* Notification Toast */}
       {injectedNotification && (
-        <div className="p-3.5 rounded-xl bg-[#D6F45A]/15 border border-[#D6F45A]/40 text-[#D6F45A] text-xs font-mono flex items-center space-x-2 animate-in fade-in">
+        <div className="p-3.5 rounded-xl bg-[#79C7FF]/15 border border-[#79C7FF]/40 text-[#79C7FF] text-xs font-mono flex items-center space-x-2 animate-in fade-in">
           <CheckCircle2 className="w-4 h-4 flex-shrink-0" />
           <span>{injectedNotification}</span>
         </div>
@@ -132,79 +132,79 @@ export default function AdminSimulatorPage() {
       {/* Primary Viva Scenarios Deck */}
       <div className="nebula-card p-6 sm:p-8 space-y-6">
         <div>
-          <span className="text-[10px] font-mono uppercase text-[#D6F45A] font-bold">
+          <span className="text-[10px] font-mono uppercase text-[#79C7FF] font-bold">
             EXAMINER ONE-CLICK PRESETS
           </span>
-          <h2 className="font-display font-bold text-xl text-[#F4F7FB] mt-1">
+          <h2 className="font-display font-bold text-xl text-[#F5F8FC] mt-1">
             Official University Viva Evaluation Scenarios
           </h2>
-          <p className="text-xs font-mono text-[#8794A6] mt-1">
+          <p className="text-xs font-mono text-[#A5B5C8] mt-1">
             Click any button below during your live presentation to demonstrate how the platform responds in real time.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* Scenario 1 */}
-          <div className="p-5 rounded-xl bg-[#1B2636] border border-white/10 hover:border-[#43D9A3]/50 transition-all flex flex-col justify-between space-y-4">
+          <div className="p-5 rounded-xl bg-[#1E314B] border border-[#293C51] hover:border-[#35C99A]/50 transition-all flex flex-col justify-between space-y-4">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#43D9A3]/10 text-[#43D9A3] border border-[#43D9A3]/20 font-bold">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#35C99A]/10 text-[#35C99A] border border-[#35C99A]/20 font-bold">
                   SCENARIO 1
                 </span>
-                <CheckCircle2 className="w-4 h-4 text-[#43D9A3]" />
+                <CheckCircle2 className="w-4 h-4 text-[#35C99A]" />
               </div>
-              <h3 className="font-bold text-sm text-[#F4F7FB]">Nominal Cruising Baseline</h3>
-              <p className="text-[11px] font-mono text-[#8794A6] leading-relaxed">
+              <h3 className="font-bold text-sm text-[#F5F8FC]">Nominal Cruising Baseline</h3>
+              <p className="text-[11px] font-mono text-[#A5B5C8] leading-relaxed">
                 All 4 tyres at 34.0 PSI, battery temp 28°C, zero active DTC fault codes, 92% battery health. Ideal state demonstration.
               </p>
             </div>
             <button
               onClick={() => triggerVivaScenario("SCENARIO_1_NOMINAL")}
-              className="w-full py-2.5 rounded-lg bg-[#43D9A3]/20 hover:bg-[#43D9A3]/30 text-[#43D9A3] text-xs font-mono font-bold transition-colors cursor-pointer"
+              className="w-full py-2.5 rounded-lg bg-[#35C99A]/20 hover:bg-[#35C99A]/30 text-[#35C99A] text-xs font-mono font-bold transition-colors cursor-pointer"
             >
               TRIGGER SCENARIO 1
             </button>
           </div>
 
           {/* Scenario 2 */}
-          <div className="p-5 rounded-xl bg-[#1B2636] border border-white/10 hover:border-red-500/50 transition-all flex flex-col justify-between space-y-4">
+          <div className="p-5 rounded-xl bg-[#1E314B] border border-[#293C51] hover:border-[#F16D78]/50 transition-all flex flex-col justify-between space-y-4">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-red-500/10 text-red-400 border border-red-500/20 font-bold">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F16D78]/10 text-[#F16D78] border border-[#F16D78]/20 font-bold">
                   SCENARIO 2
                 </span>
-                <AlertTriangle className="w-4 h-4 text-red-400" />
+                <AlertTriangle className="w-4 h-4 text-[#F16D78]" />
               </div>
-              <h3 className="font-bold text-sm text-[#F4F7FB]">TPMS Rapid Puncture (RR 22 PSI)</h3>
-              <p className="text-[11px] font-mono text-[#8794A6] leading-relaxed">
+              <h3 className="font-bold text-sm text-[#F5F8FC]">TPMS Rapid Puncture (RR 22 PSI)</h3>
+              <p className="text-[11px] font-mono text-[#A5B5C8] leading-relaxed">
                 Injects pressure loss on Rear Right tyre. Demonstrates 3D digital twin red beacon, CAN DTC P0537, and warning notification.
               </p>
             </div>
             <button
               onClick={() => triggerVivaScenario("SCENARIO_2_TPMS_PUNCTURE")}
-              className="w-full py-2.5 rounded-lg bg-red-500/20 hover:bg-red-500/30 text-red-300 text-xs font-mono font-bold transition-colors cursor-pointer"
+              className="w-full py-2.5 rounded-lg bg-[#F16D78]/20 hover:bg-[#F16D78]/30 text-[#F16D78] text-xs font-mono font-bold transition-colors cursor-pointer"
             >
               TRIGGER SCENARIO 2
             </button>
           </div>
 
           {/* Scenario 3 */}
-          <div className="p-5 rounded-xl bg-[#1B2636] border border-white/10 hover:border-amber-400/50 transition-all flex flex-col justify-between space-y-4">
+          <div className="p-5 rounded-xl bg-[#1E314B] border border-[#293C51] hover:border-[#F2B65B]/50 transition-all flex flex-col justify-between space-y-4">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-amber-500/10 text-amber-400 border border-amber-500/20 font-bold">
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#F2B65B]/10 text-[#F2B65B] border border-[#F2B65B]/20 font-bold">
                   SCENARIO 3
                 </span>
-                <Activity className="w-4 h-4 text-amber-400" />
+                <Activity className="w-4 h-4 text-[#F2B65B]" />
               </div>
-              <h3 className="font-bold text-sm text-[#F4F7FB]">Battery Thermal Alert (61°C)</h3>
-              <p className="text-[11px] font-mono text-[#8794A6] leading-relaxed">
+              <h3 className="font-bold text-sm text-[#F5F8FC]">Battery Thermal Alert (61°C)</h3>
+              <p className="text-[11px] font-mono text-[#A5B5C8] leading-relaxed">
                 Elevates 800V battery pack temperature past 50°C safety threshold. Triggers thermal derating alert and DTC P0A7F.
               </p>
             </div>
             <button
               onClick={() => triggerVivaScenario("SCENARIO_3_BATTERY_FAULT")}
-              className="w-full py-2.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-mono font-bold transition-colors cursor-pointer"
+              className="w-full py-2.5 rounded-lg bg-[#F2B65B]/20 hover:bg-[#F2B65B]/30 text-[#F2B65B] text-xs font-mono font-bold transition-colors cursor-pointer"
             >
               TRIGGER SCENARIO 3
             </button>
@@ -219,9 +219,9 @@ export default function AdminSimulatorPage() {
               setInjectedNotification("All fault conditions cleared. Restored to nominal state.");
               setTimeout(() => setInjectedNotification(null), 3000);
             }}
-            className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-mono text-[#F4F7FB] flex items-center space-x-2 transition-colors cursor-pointer"
+            className="px-4 py-2 rounded-xl bg-[#1E314B] hover:bg-[#253956] border border-[#293C51] text-xs font-mono text-[#F5F8FC] flex items-center space-x-2 transition-colors cursor-pointer"
           >
-            <RotateCcw className="w-3.5 h-3.5 text-[#D6F45A]" />
+            <RotateCcw className="w-3.5 h-3.5 text-[#79C7FF]" />
             <span>RESET SIMULATOR TO CALIBRATED NOMINAL BASELINE</span>
           </button>
         </div>
@@ -231,15 +231,15 @@ export default function AdminSimulatorPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="nebula-card p-6 space-y-4">
           <div className="flex items-center justify-between">
-            <h3 className="font-display font-bold text-base text-[#F4F7FB]">
+            <h3 className="font-display font-bold text-base text-[#F5F8FC]">
               Telemetry Ticker Clock
             </h3>
-            <span className="text-[10px] font-mono text-[#D6F45A] font-bold uppercase">
+            <span className="text-[10px] font-mono text-[#79C7FF] font-bold uppercase">
               STATUS: {tickerSpeed.toUpperCase()}
             </span>
           </div>
 
-          <p className="text-xs font-mono text-[#8794A6]">
+          <p className="text-xs font-mono text-[#A5B5C8]">
             Control the background signal generation frequency. Simulates varying CAN bus baud rates and mobile cellular bandwidth conditions.
           </p>
 
@@ -255,8 +255,8 @@ export default function AdminSimulatorPage() {
                 onClick={() => setTickerSpeed(speed.id as typeof tickerSpeed)}
                 className={`py-2 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
                   tickerSpeed === speed.id
-                    ? "bg-[#D6F45A] text-[#0B1018]"
-                    : "bg-[#1B2636] text-[#8794A6] hover:text-[#F4F7FB]"
+                    ? "bg-[#79C7FF] text-[#091321]"
+                    : "bg-[#1E314B] border border-[#293C51] text-[#A5B5C8] hover:text-[#F5F8FC]"
                 }`}
               >
                 {speed.label}
@@ -265,8 +265,8 @@ export default function AdminSimulatorPage() {
           </div>
 
           {/* Active Vehicle Switcher */}
-          <div className="pt-4 border-t border-white/10 space-y-2">
-            <span className="text-[10px] font-mono text-[#8794A6] uppercase font-bold block">
+          <div className="pt-4 border-t border-[#293C51] space-y-2">
+            <span className="text-[10px] font-mono text-[#A5B5C8] uppercase font-bold block">
               TARGET VEHICLE IN TEST-BENCH
             </span>
             <div className="flex flex-wrap gap-2">
@@ -276,8 +276,8 @@ export default function AdminSimulatorPage() {
                   onClick={() => setActiveVehicle(v.id)}
                   className={`px-3 py-1.5 rounded-lg text-xs font-mono font-bold transition-all cursor-pointer ${
                     activeVehicle.id === v.id
-                      ? "bg-[#D6F45A] text-[#0B1018]"
-                      : "bg-[#1B2636] text-[#8794A6] hover:text-[#F4F7FB]"
+                      ? "bg-[#79C7FF] text-[#091321]"
+                      : "bg-[#1E314B] border border-[#293C51] text-[#A5B5C8] hover:text-[#F5F8FC]"
                   }`}
                 >
                   {v.name}
@@ -289,43 +289,43 @@ export default function AdminSimulatorPage() {
 
         {/* Custom DTC Injector Form */}
         <div className="nebula-card p-6 space-y-4">
-          <h3 className="font-display font-bold text-base text-[#F4F7FB]">
+          <h3 className="font-display font-bold text-base text-[#F5F8FC]">
             Custom OBD-II / CAN DTC Injector
           </h3>
-          <p className="text-xs font-mono text-[#8794A6]">
+          <p className="text-xs font-mono text-[#A5B5C8]">
             Inject ad-hoc diagnostic trouble codes to test the UI notification banner and scanner interrogation behavior.
           </p>
 
           <form onSubmit={handleCustomInject} className="space-y-3 pt-1">
             <div>
-              <label className="text-[10px] font-mono text-[#8794A6] uppercase font-bold block mb-1">
+              <label className="text-[10px] font-mono text-[#A5B5C8] uppercase font-bold block mb-1">
                 Diagnostic Trouble Code (DTC)
               </label>
               <input
                 type="text"
                 value={customFaultCode}
                 onChange={(e) => setCustomFaultCode(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg bg-[#1B2636] border border-white/10 text-xs font-mono text-[#F4F7FB] focus:border-[#D6F45A] focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-[#091321] border border-[#293C51] text-xs font-mono text-[#F5F8FC] focus:border-[#79C7FF] focus:outline-none"
                 placeholder="e.g. P0537, P0A7F, C1201"
               />
             </div>
 
             <div>
-              <label className="text-[10px] font-mono text-[#8794A6] uppercase font-bold block mb-1">
+              <label className="text-[10px] font-mono text-[#A5B5C8] uppercase font-bold block mb-1">
                 Fault Description
               </label>
               <input
                 type="text"
                 value={customFaultDesc}
                 onChange={(e) => setCustomFaultDesc(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg bg-[#1B2636] border border-white/10 text-xs font-mono text-[#F4F7FB] focus:border-[#D6F45A] focus:outline-none"
+                className="w-full px-3 py-2 rounded-lg bg-[#091321] border border-[#293C51] text-xs font-mono text-[#F5F8FC] focus:border-[#79C7FF] focus:outline-none"
                 placeholder="Description of simulated anomaly"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full py-2.5 rounded-xl bg-[#D6F45A] hover:bg-[#c2df47] text-[#0B1018] font-mono font-bold text-xs flex items-center justify-center space-x-2 transition-colors cursor-pointer"
+              className="w-full py-2.5 rounded-xl bg-[#79C7FF] hover:bg-[#68b5ea] text-[#091321] font-mono font-bold text-xs flex items-center justify-center space-x-2 transition-colors cursor-pointer"
             >
               <Send className="w-3.5 h-3.5" />
               <span>TRANSMIT DTC OVER SIMULATED CAN-BUS</span>
@@ -338,20 +338,20 @@ export default function AdminSimulatorPage() {
       <div className="nebula-card p-6 space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-2">
-            <Terminal className="w-4 h-4 text-[#D6F45A]" />
-            <h3 className="font-display font-bold text-base text-[#F4F7FB]">
+            <Terminal className="w-4 h-4 text-[#79C7FF]" />
+            <h3 className="font-display font-bold text-base text-[#F5F8FC]">
               Simulated ISO-11898 CAN-Bus Packet Monitor
             </h3>
           </div>
 
-          <span className="text-[10px] font-mono text-[#43D9A3] flex items-center space-x-1">
-            <span className="w-2 h-2 rounded-full bg-[#43D9A3] animate-pulse" />
+          <span className="text-[10px] font-mono text-[#35C99A] flex items-center space-x-1">
+            <span className="w-2 h-2 rounded-full bg-[#35C99A] animate-pulse" />
             <span>500 KBPS // HIGH-SPEED CAN</span>
           </span>
         </div>
 
-        <div className="p-4 rounded-xl bg-black/60 border border-white/10 font-mono text-[11px] overflow-x-auto max-h-64 space-y-1">
-          <div className="text-[#8794A6] pb-1 border-b border-white/10 grid grid-cols-4 sm:grid-cols-5 text-[10px] font-bold">
+        <div className="p-4 rounded-xl bg-[#091321] border border-[#293C51] font-mono text-[11px] overflow-x-auto max-h-64 space-y-1">
+          <div className="text-[#A5B5C8] pb-1 border-b border-[#293C51] grid grid-cols-4 sm:grid-cols-5 text-[10px] font-bold">
             <span>TIMESTAMP</span>
             <span>CAN ARB ID</span>
             <span className="hidden sm:inline">CONTROLLER</span>
@@ -359,11 +359,11 @@ export default function AdminSimulatorPage() {
           </div>
 
           {packetStream.map((p) => (
-            <div key={p.id} className="grid grid-cols-4 sm:grid-cols-5 text-[#8794A6] hover:text-[#F4F7FB] py-0.5">
-              <span className="text-[#8794A6]">{p.timestamp}</span>
-              <span className="text-[#D6F45A] font-bold">{p.canId}</span>
-              <span className="hidden sm:inline text-cyan-400">{p.source}</span>
-              <span className="col-span-2 font-mono-numbers text-white/90">{p.payload}</span>
+            <div key={p.id} className="grid grid-cols-4 sm:grid-cols-5 text-[#A5B5C8] hover:text-[#F5F8FC] py-0.5">
+              <span className="text-[#A5B5C8]">{p.timestamp}</span>
+              <span className="text-[#79C7FF] font-bold">{p.canId}</span>
+              <span className="hidden sm:inline text-[#79C7FF]">{p.source}</span>
+              <span className="col-span-2 font-mono-numbers text-[#F5F8FC]">{p.payload}</span>
             </div>
           ))}
         </div>

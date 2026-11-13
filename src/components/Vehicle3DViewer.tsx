@@ -32,11 +32,11 @@ interface Hotspot3D {
 }
 
 const CAR_COLORS = [
-  { name: "Cyber Lime", hex: "#D6F45A", roughness: 0.2, metalness: 0.75 },
-  { name: "Obsidian Black", hex: "#11141A", roughness: 0.15, metalness: 0.9 },
+  { name: "Celestial Azure", hex: "#79C7FF", roughness: 0.18, metalness: 0.8 },
+  { name: "Midnight Obsidian", hex: "#0D1520", roughness: 0.15, metalness: 0.95 },
   { name: "Liquid Silver", hex: "#C8D1DC", roughness: 0.1, metalness: 0.95 },
-  { name: "Hyper Blue", hex: "#1E6BFF", roughness: 0.2, metalness: 0.8 },
-  { name: "Stealth Grey", hex: "#3A414B", roughness: 0.35, metalness: 0.5 },
+  { name: "Deep Navy Metallic", hex: "#162C47", roughness: 0.2, metalness: 0.85 },
+  { name: "Stealth Slate", hex: "#293C51", roughness: 0.35, metalness: 0.6 },
 ];
 
 export default function Vehicle3DViewer({
@@ -261,8 +261,8 @@ export default function Vehicle3DViewer({
     // Scene
     const scene = new THREE.Scene();
     sceneRef.current = scene;
-    scene.background = new THREE.Color("#0B1018");
-    scene.fog = new THREE.FogExp2("#0B1018", 0.04);
+    scene.background = new THREE.Color("#091321");
+    scene.fog = new THREE.FogExp2("#091321", 0.04);
 
     // Camera
     const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
@@ -306,16 +306,16 @@ export default function Vehicle3DViewer({
     keyLight.shadow.mapSize.height = 1024;
     scene.add(keyLight);
 
-    const rimLight = new THREE.DirectionalLight("#D6F45A", 1.5);
+    const rimLight = new THREE.DirectionalLight("#79C7FF", 1.6);
     rimLight.position.set(-6, 4, -5);
     scene.add(rimLight);
 
-    const frontFillLight = new THREE.DirectionalLight("#43D9A3", 0.8);
+    const frontFillLight = new THREE.DirectionalLight("#35C99A", 0.6);
     frontFillLight.position.set(0, 2, 6);
     scene.add(frontFillLight);
 
     // Studio Floor Grid
-    const gridHelper = new THREE.GridHelper(16, 24, 0xd6f45a, 0x1f2937);
+    const gridHelper = new THREE.GridHelper(16, 24, 0x79c7ff, 0x1e314b);
     gridHelper.position.y = 0;
     scene.add(gridHelper);
 
@@ -423,7 +423,7 @@ export default function Vehicle3DViewer({
 
     // 8. Headlights (LED Neon Lightbar)
     const headLightGeo = new THREE.BoxGeometry(0.45, 0.08, 0.08);
-    const headLightMat = new THREE.MeshBasicMaterial({ color: 0xd6f45a });
+    const headLightMat = new THREE.MeshBasicMaterial({ color: 0x79c7ff });
 
     const leftHeadlight = new THREE.Mesh(headLightGeo, headLightMat);
     leftHeadlight.position.set(-0.65, 0.58, 1.88);
@@ -435,7 +435,7 @@ export default function Vehicle3DViewer({
 
     // 9. Taillight Bar (Full-Width Neon Red)
     const tailLightGeo = new THREE.BoxGeometry(1.65, 0.08, 0.06);
-    const tailLightMat = new THREE.MeshBasicMaterial({ color: 0xff3b30 });
+    const tailLightMat = new THREE.MeshBasicMaterial({ color: 0xf16d78 });
     const tailLight = new THREE.Mesh(tailLightGeo, tailLightMat);
     tailLight.position.set(0, 0.65, -1.88);
     carGroup.add(tailLight);
@@ -451,7 +451,7 @@ export default function Vehicle3DViewer({
       metalness: 0.9,
       roughness: 0.15,
     });
-    const caliperMat = new THREE.MeshBasicMaterial({ color: 0xd6f45a });
+    const caliperMat = new THREE.MeshBasicMaterial({ color: 0x79c7ff });
 
     const createWheel = (x: number, z: number) => {
       const wGroup = new THREE.Group();
@@ -484,8 +484,8 @@ export default function Vehicle3DViewer({
 
     carGroup.add(wheelFL, wheelFR, wheelRL, wheelRR);
 
-    // Underglow Neon Glow (Subtle Lime)
-    const underglowLight = new THREE.PointLight("#D6F45A", 1.8, 4.5);
+    // Underglow Neon Glow (Subtle Ice Blue)
+    const underglowLight = new THREE.PointLight("#79C7FF", 1.4, 4.5);
     underglowLight.position.set(0, 0.15, 0);
     carGroup.add(underglowLight);
 
@@ -550,20 +550,20 @@ export default function Vehicle3DViewer({
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-[480px] sm:h-[540px] rounded-2xl nebula-card overflow-hidden border border-white/10 select-none bg-[#0B1018] ${className}`}
+      className={`relative w-full h-[480px] sm:h-[540px] rounded-2xl nebula-card overflow-hidden border border-[#293C51] select-none bg-[#091321] ${className}`}
     >
       {/* Background Grid Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(rgba(121,199,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
       {/* Top HUD Controls Bar */}
       <div className="absolute top-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-3 pointer-events-auto">
         <div className="flex items-center space-x-2">
-          <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-[#151D28]/90 border border-white/10 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-[#D6F45A] animate-pulse" />
-            <span className="text-[10px] font-mono uppercase text-[#8794A6] font-bold">
+          <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-[#152437]/90 border border-[#293C51] backdrop-blur-md">
+            <span className="w-2 h-2 rounded-full bg-[#79C7FF] animate-pulse" />
+            <span className="text-[10px] font-mono uppercase text-[#A5B5C8] font-bold">
               3D DIGITAL TWIN
             </span>
-            <span className="text-[10px] font-mono text-[#D6F45A] font-bold">
+            <span className="text-[10px] font-mono text-[#79C7FF] font-bold">
               {"// WEBGL ACTIVE"}
             </span>
           </div>
@@ -572,10 +572,10 @@ export default function Vehicle3DViewer({
           {webGLSupported && (
             <button
               onClick={() => setMode(mode === "3d" ? "2d" : "3d")}
-              className="px-2.5 py-1 rounded-full bg-[#151D28]/80 hover:bg-[#1B2636] border border-white/10 text-[10px] font-mono text-[#8794A6] hover:text-[#F4F7FB] transition-colors flex items-center space-x-1.5 cursor-pointer"
+              className="px-2.5 py-1 rounded-full bg-[#152437]/80 hover:bg-[#1E314B] border border-[#293C51] text-[10px] font-mono text-[#A5B5C8] hover:text-[#F5F8FC] transition-colors flex items-center space-x-1.5 cursor-pointer"
               title="Toggle between 3D WebGL orbit & 2D studio photography"
             >
-              <Layers className="w-3 h-3 text-[#D6F45A]" />
+              <Layers className="w-3 h-3 text-[#79C7FF]" />
               <span>{mode === "3d" ? "SWITCH TO 2D STUDIO" : "LAUNCH 3D TWIN"}</span>
             </button>
           )}
@@ -583,7 +583,7 @@ export default function Vehicle3DViewer({
 
         {/* Camera Views & Turntable Toggle (Only visible in 3D mode) */}
         {mode === "3d" && (
-          <div className="flex items-center space-x-1.5 bg-[#151D28]/90 p-1 rounded-xl border border-white/10 backdrop-blur-md">
+          <div className="flex items-center space-x-1.5 bg-[#152437]/90 p-1 rounded-xl border border-[#293C51] backdrop-blur-md">
             {["3/4 Showroom", "Front", "Side (Left)", "Rear", "Top View"].map(
               (preset) => (
                 <button
@@ -591,8 +591,8 @@ export default function Vehicle3DViewer({
                   onClick={() => applyCameraPreset(preset)}
                   className={`px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold transition-all cursor-pointer ${
                     activePreset === preset
-                      ? "bg-[#D6F45A] text-[#0B1018] shadow-sm"
-                      : "text-[#8794A6] hover:text-[#F4F7FB]"
+                      ? "bg-[#79C7FF] text-[#091321] shadow-sm font-semibold"
+                      : "text-[#A5B5C8] hover:text-[#F5F8FC]"
                   }`}
                 >
                   {preset.toUpperCase()}
@@ -610,8 +610,8 @@ export default function Vehicle3DViewer({
               }}
               className={`p-1.5 rounded-lg border transition-all cursor-pointer ${
                 isRotating
-                  ? "border-[#D6F45A] text-[#D6F45A] bg-[#D6F45A]/10"
-                  : "border-white/10 text-[#8794A6] hover:text-[#F4F7FB]"
+                  ? "border-[#79C7FF] text-[#79C7FF] bg-[#79C7FF]/10"
+                  : "border-[#293C51] text-[#A5B5C8] hover:text-[#F5F8FC]"
               }`}
               title="Toggle Auto-Rotation Turntable"
             >
@@ -647,12 +647,12 @@ export default function Vehicle3DViewer({
                   aria-label={`Inspect ${hs.label}`}
                   className={`relative group p-1 rounded-full transition-transform hover:scale-125 focus:outline-none cursor-pointer ${
                     isCrit
-                      ? "bg-red-500 shadow-[0_0_16px_rgba(239,68,68,0.9)] animate-bounce"
+                      ? "bg-[#F16D78] shadow-[0_0_16px_rgba(241,109,120,0.8)] animate-bounce"
                       : isWarn
-                      ? "bg-amber-400 shadow-[0_0_14px_rgba(251,191,36,0.8)]"
+                      ? "bg-[#F2B65B] shadow-[0_0_14px_rgba(242,182,91,0.8)]"
                       : isSelected
-                      ? "bg-[#D6F45A] shadow-[0_0_14px_rgba(214,244,90,0.8)]"
-                      : "bg-[#151D28] border-2 border-[#D6F45A]/80 hover:bg-[#D6F45A]"
+                      ? "bg-[#79C7FF] shadow-[0_0_14px_rgba(121,199,255,0.8)]"
+                      : "bg-[#152437] border-2 border-[#79C7FF]/80 hover:bg-[#79C7FF]"
                   }`}
                 >
                   <span
@@ -660,15 +660,15 @@ export default function Vehicle3DViewer({
                       isCrit
                         ? "bg-white"
                         : isWarn
-                        ? "bg-[#0B1018]"
+                        ? "bg-[#091321]"
                         : isSelected
-                        ? "bg-[#0B1018]"
-                        : "bg-[#D6F45A]"
+                        ? "bg-[#091321]"
+                        : "bg-[#79C7FF]"
                     }`}
                   />
 
                   {/* Hotspot Hover Tooltip Label */}
-                  <span className="absolute left-1/2 -top-7 -translate-x-1/2 hidden group-hover:block whitespace-nowrap px-2 py-0.5 rounded bg-[#0B1018] border border-white/20 text-[9px] font-mono text-[#F4F7FB] shadow-lg pointer-events-none">
+                  <span className="absolute left-1/2 -top-7 -translate-x-1/2 hidden group-hover:block whitespace-nowrap px-2 py-0.5 rounded bg-[#091321] border border-[#293C51] text-[9px] font-mono text-[#F5F8FC] shadow-lg pointer-events-none">
                     {hs.label}
                   </span>
                 </button>
@@ -689,7 +689,7 @@ export default function Vehicle3DViewer({
             />
           </div>
 
-          <div className="absolute bottom-4 left-4 text-xs font-mono text-[#8794A6]">
+          <div className="absolute bottom-4 left-4 text-xs font-mono text-[#A5B5C8]">
             Showing 4K Studio Render (High Fidelity Fallback)
           </div>
         </div>
@@ -697,27 +697,27 @@ export default function Vehicle3DViewer({
 
       {/* Selected Hotspot Inspection Modal / Card */}
       {activeHotspot && (
-        <div className="absolute top-16 right-4 sm:right-6 w-80 p-4 rounded-xl bg-[#151D28]/95 border border-white/15 backdrop-blur-xl shadow-2xl z-30 font-mono animate-in fade-in duration-200">
+        <div className="absolute top-16 right-4 sm:right-6 w-80 p-4 rounded-xl bg-[#152437]/95 border border-[#293C51] backdrop-blur-xl shadow-2xl z-30 font-mono animate-in fade-in duration-200">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-2">
               {activeHotspot.status === "critical" ? (
-                <div className="w-7 h-7 rounded-lg bg-red-500/20 border border-red-500/40 flex items-center justify-center text-red-400">
+                <div className="w-7 h-7 rounded-lg bg-[#F16D78]/20 border border-[#F16D78]/40 flex items-center justify-center text-[#F16D78]">
                   <AlertTriangle className="w-4 h-4 animate-pulse" />
                 </div>
               ) : activeHotspot.status === "warning" ? (
-                <div className="w-7 h-7 rounded-lg bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
+                <div className="w-7 h-7 rounded-lg bg-[#F2B65B]/20 border border-[#F2B65B]/40 flex items-center justify-center text-[#F2B65B]">
                   <Thermometer className="w-4 h-4" />
                 </div>
               ) : (
-                <div className="w-7 h-7 rounded-lg bg-[#43D9A3]/20 border border-[#43D9A3]/40 flex items-center justify-center text-[#43D9A3]">
+                <div className="w-7 h-7 rounded-lg bg-[#35C99A]/20 border border-[#35C99A]/40 flex items-center justify-center text-[#35C99A]">
                   <CheckCircle2 className="w-4 h-4" />
                 </div>
               )}
               <div>
-                <span className="text-[9px] uppercase text-[#8794A6] block">
+                <span className="text-[9px] uppercase text-[#A5B5C8] block">
                   {activeHotspot.subsystem}
                 </span>
-                <h4 className="font-bold text-xs text-[#F4F7FB]">
+                <h4 className="font-bold text-xs text-[#F5F8FC]">
                   {activeHotspot.label}
                 </h4>
               </div>
@@ -725,22 +725,22 @@ export default function Vehicle3DViewer({
 
             <button
               onClick={() => setActiveHotspot(null)}
-              className="p-1 rounded-lg text-[#8794A6] hover:text-[#F4F7FB] hover:bg-white/10 transition-colors"
+              className="p-1 rounded-lg text-[#A5B5C8] hover:text-[#F5F8FC] hover:bg-white/10 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
 
-          <div className="mt-3 pt-3 border-t border-white/10 space-y-2">
+          <div className="mt-3 pt-3 border-t border-[#293C51] space-y-2">
             <div className="flex items-center justify-between text-xs">
-              <span className="text-[#8794A6]">LIVE TELEMETRY:</span>
+              <span className="text-[#A5B5C8]">LIVE TELEMETRY:</span>
               <span
                 className={`font-bold font-mono-numbers ${
                   activeHotspot.status === "critical"
-                    ? "text-red-400"
+                    ? "text-[#F16D78]"
                     : activeHotspot.status === "warning"
-                    ? "text-amber-400"
-                    : "text-[#D6F45A]"
+                    ? "text-[#F2B65B]"
+                    : "text-[#79C7FF]"
                 }`}
               >
                 {activeHotspot.reading}
@@ -748,14 +748,14 @@ export default function Vehicle3DViewer({
             </div>
 
             <div className="flex items-center justify-between text-[11px]">
-              <span className="text-[#8794A6]">STATE HEALTH:</span>
+              <span className="text-[#A5B5C8]">STATE HEALTH:</span>
               <span
                 className={`font-bold uppercase ${
                   activeHotspot.status === "critical"
-                    ? "text-red-400"
+                    ? "text-[#F16D78]"
                     : activeHotspot.status === "warning"
-                    ? "text-amber-400"
-                    : "text-[#43D9A3]"
+                    ? "text-[#F2B65B]"
+                    : "text-[#35C99A]"
                 }`}
               >
                 {activeHotspot.status === "critical"
@@ -767,7 +767,7 @@ export default function Vehicle3DViewer({
             </div>
 
             {activeHotspot.id === "rr_tyre" && isRrTyreCrit && (
-              <div className="p-2 rounded bg-red-500/10 border border-red-500/30 text-[10px] text-red-300 leading-tight">
+              <div className="p-2 rounded bg-[#F16D78]/10 border border-[#F16D78]/30 text-[10px] text-[#F16D78] leading-tight">
                 <strong>VIVA SCENARIO 2 TRIGGERED:</strong> Rapid puncture detected on CAN-ID 0x2A1. Recommend pit stop calibration.
               </div>
             )}
@@ -778,9 +778,9 @@ export default function Vehicle3DViewer({
       {/* Bottom Controls Bar: Paint Customizer & Interaction Hints */}
       <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-3 pointer-events-auto">
         {/* Paint Swatches */}
-        <div className="flex items-center space-x-2 bg-[#151D28]/90 px-3 py-1.5 rounded-xl border border-white/10 backdrop-blur-md">
-          <span className="text-[9px] font-mono text-[#8794A6] uppercase font-bold flex items-center space-x-1">
-            <Sparkles className="w-3 h-3 text-[#D6F45A]" />
+        <div className="flex items-center space-x-2 bg-[#152437]/90 px-3 py-1.5 rounded-xl border border-[#293C51] backdrop-blur-md">
+          <span className="text-[9px] font-mono text-[#A5B5C8] uppercase font-bold flex items-center space-x-1">
+            <Sparkles className="w-3 h-3 text-[#79C7FF]" />
             <span className="hidden sm:inline">BODY FINISH:</span>
           </span>
 
@@ -800,13 +800,13 @@ export default function Vehicle3DViewer({
             ))}
           </div>
 
-          <span className="text-[10px] font-mono text-[#F4F7FB] ml-1 hidden md:inline">
+          <span className="text-[10px] font-mono text-[#F5F8FC] ml-1 hidden md:inline">
             {selectedColor.name}
           </span>
         </div>
 
         {/* Orbit Helper Tip */}
-        <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#151D28]/80 border border-white/10 text-[10px] font-mono text-[#8794A6]">
+        <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#152437]/80 border border-[#293C51] text-[10px] font-mono text-[#A5B5C8]">
           <span>ORBIT: Left Click + Drag</span>
           <span>•</span>
           <span>ZOOM: Scroll / Pinch</span>

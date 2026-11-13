@@ -137,21 +137,21 @@ export default function AnalyticsPage() {
   };
 
   return (
-    <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col space-y-6 sm:space-y-8 select-none">
+    <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col space-y-6 sm:space-y-8 select-none text-[#F5F8FC]">
       {/* Header */}
       <div className="flex flex-col space-y-2">
-        <div className="flex items-center space-x-2 text-xs font-mono text-[#8794A6]">
-          <Link href="/dashboard" className="hover:text-[#D6F45A]">Dashboard</Link>
+        <div className="flex items-center space-x-2 text-xs font-mono text-[#A5B5C8]">
+          <Link href="/dashboard" className="hover:text-[#79C7FF]">Dashboard</Link>
           <span>/</span>
           <span>Analytics & Reports</span>
         </div>
 
         <div className="flex flex-wrap items-baseline justify-between gap-4">
           <div>
-            <h1 className="font-display font-black text-2xl sm:text-3xl text-[#F4F7FB]">
+            <h1 className="font-display font-extrabold text-2xl sm:text-3xl text-[#F5F8FC]">
               Fleet Driving Analytics & Reports
             </h1>
-            <p className="text-xs font-mono text-[#8794A6] mt-0.5">
+            <p className="text-xs font-mono text-[#A5B5C8] mt-0.5">
               Historical energy consumption curves, driving efficiency, component degradation tracking, and verified report export.
             </p>
           </div>
@@ -160,15 +160,15 @@ export default function AnalyticsPage() {
           <div className="flex items-center space-x-2">
             <button
               onClick={exportCSV}
-              className="px-3.5 py-2 rounded-xl bg-[#1B2636] hover:bg-[#253347] border border-white/10 text-xs font-mono font-bold text-[#F4F7FB] flex items-center space-x-1.5 transition-colors cursor-pointer"
+              className="px-3.5 py-2 rounded-xl bg-[#1E314B] hover:bg-[#152437] border border-[#293C51] text-xs font-mono font-bold text-[#F5F8FC] flex items-center space-x-1.5 transition-colors cursor-pointer"
             >
-              <FileSpreadsheet className="w-3.5 h-3.5 text-[#43D9A3]" />
+              <FileSpreadsheet className="w-3.5 h-3.5 text-[#35C99A]" />
               <span>EXPORT CSV</span>
             </button>
 
             <button
               onClick={exportPDFReport}
-              className="px-4 py-2 rounded-xl bg-[#D6F45A] hover:bg-[#c2df47] text-[#0B1018] font-mono font-bold text-xs flex items-center space-x-1.5 transition-colors cursor-pointer shadow-sm"
+              className="px-4 py-2 rounded-xl bg-[#79C7FF] hover:bg-[#68b5ea] text-[#091321] font-mono font-bold text-xs flex items-center space-x-1.5 transition-colors cursor-pointer shadow-sm"
             >
               <FileText className="w-3.5 h-3.5" />
               <span>DOWNLOAD PDF REPORT</span>
@@ -176,11 +176,11 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
-        <div className="h-[1px] w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+        <div className="h-[1px] w-full bg-gradient-to-r from-[#293C51] via-[#293C51]/50 to-transparent" />
       </div>
 
       {downloadSuccess && (
-        <div className="p-3 rounded-xl bg-[#43D9A3]/15 border border-[#43D9A3]/30 text-xs font-mono text-[#43D9A3] flex items-center space-x-2">
+        <div className="p-3 rounded-xl bg-[#35C99A]/15 border border-[#35C99A]/30 text-xs font-mono text-[#35C99A] flex items-center space-x-2">
           <CheckCircle2 className="w-4 h-4" />
           <span>{downloadSuccess}</span>
         </div>
@@ -193,23 +193,23 @@ export default function AnalyticsPage() {
           <div>
             <div className="flex items-center justify-between mb-4">
               <div>
-                <span className="text-[10px] font-mono uppercase text-[#8794A6] font-bold">
+                <span className="text-[10px] font-mono uppercase text-[#A5B5C8] font-bold">
                   ENERGY EFFICIENCY TREND
                 </span>
-                <h3 className="font-display font-bold text-lg text-[#F4F7FB]">
+                <h3 className="font-display font-bold text-lg text-[#F5F8FC]">
                   Daily Energy Consumption (kWh)
                 </h3>
               </div>
 
-              <div className="flex items-center space-x-1 bg-[#0B1018] p-1 rounded-lg border border-white/10 text-xs font-mono">
+              <div className="flex items-center space-x-1 bg-[#091321] p-1 rounded-lg border border-[#293C51] text-xs font-mono">
                 {(["7D", "30D", "YTD"] as const).map((r) => (
                   <button
                     key={r}
                     onClick={() => setDateRange(r)}
-                    className={`px-2.5 py-1 rounded transition-colors ${
+                    className={`px-2.5 py-1 rounded transition-colors cursor-pointer ${
                       dateRange === r
-                        ? "bg-[#D6F45A] text-[#0B1018] font-bold"
-                        : "text-[#8794A6] hover:text-[#F4F7FB]"
+                        ? "bg-[#79C7FF] text-[#091321] font-bold"
+                        : "text-[#A5B5C8] hover:text-[#F5F8FC]"
                     }`}
                   >
                     {r}
@@ -224,69 +224,69 @@ export default function AnalyticsPage() {
                 const heightPct = (d.kwh / 25) * 100;
                 return (
                   <div key={d.day} className="flex-1 flex flex-col items-center justify-end h-full group mx-1">
-                    <span className="text-[10px] font-mono text-[#8794A6] mb-1 font-mono-numbers opacity-0 group-hover:opacity-100 transition-opacity">
+                    <span className="text-[10px] font-mono text-[#A5B5C8] mb-1 font-mono-numbers opacity-0 group-hover:opacity-100 transition-opacity">
                       {d.kwh} kWh
                     </span>
-                    <div className="w-full max-w-[36px] bg-white/10 hover:bg-[#D6F45A] rounded-t-lg transition-all duration-300 relative flex items-end justify-center" style={{ height: `${heightPct}%` }}>
-                      <div className="w-full bg-[#D6F45A]/25 rounded-t-lg h-full" />
+                    <div className="w-full max-w-[36px] bg-[#1E314B] hover:bg-[#79C7FF] rounded-t-lg transition-all duration-300 relative flex items-end justify-center" style={{ height: `${heightPct}%` }}>
+                      <div className="w-full bg-[#79C7FF]/25 rounded-t-lg h-full" />
                     </div>
-                    <span className="text-xs font-mono text-[#8794A6] mt-2 font-bold">{d.day}</span>
+                    <span className="text-xs font-mono text-[#A5B5C8] mt-2 font-bold">{d.day}</span>
                   </div>
                 );
               })}
             </div>
           </div>
 
-          <div className="flex items-center justify-between pt-4 border-t border-white/8 text-xs font-mono text-[#8794A6]">
+          <div className="flex items-center justify-between pt-4 border-t border-[#293C51] text-xs font-mono text-[#A5B5C8]">
             <span>Average: 15.4 kWh / day</span>
             <span>Total Fleet Miles: 620 km</span>
-            <span className="text-[#43D9A3]">Efficiency Score: 94%</span>
+            <span className="text-[#35C99A]">Efficiency Score: 94%</span>
           </div>
         </div>
 
         {/* Chart 2: Battery Degradation & Capacity Index */}
         <div className="nebula-card p-6 flex flex-col justify-between min-h-[380px]">
           <div>
-            <span className="text-[10px] font-mono uppercase text-[#8794A6] font-bold">
+            <span className="text-[10px] font-mono uppercase text-[#A5B5C8] font-bold">
               LIFECYCLE DEGRADATION
             </span>
-            <h3 className="font-display font-bold text-lg text-[#F4F7FB] mt-0.5">
+            <h3 className="font-display font-bold text-lg text-[#F5F8FC] mt-0.5">
               Battery Health Index
             </h3>
 
             <div className="my-6 space-y-4">
               <div className="flex items-baseline justify-between">
-                <span className="text-xs font-mono text-[#8794A6]">HEALTH RETENTION</span>
-                <span className="font-display font-black text-3xl text-[#43D9A3] font-mono-numbers">
+                <span className="text-xs font-mono text-[#A5B5C8]">HEALTH RETENTION</span>
+                <span className="font-display font-black text-3xl text-[#35C99A] font-mono-numbers">
                   {activeVehicle.batteryHealthPct}%
                 </span>
               </div>
 
-              <div className="h-2.5 w-full bg-black/40 rounded-full overflow-hidden p-[1px] border border-white/10">
+              <div className="h-2.5 w-full bg-[#091321] rounded-full overflow-hidden p-[1px] border border-[#293C51]">
                 <div
-                  className="h-full bg-gradient-to-r from-[#D6F45A] to-[#43D9A3] rounded-full"
+                  className="h-full bg-gradient-to-r from-[#79C7FF] to-[#35C99A] rounded-full"
                   style={{ width: `${activeVehicle.batteryHealthPct}%` }}
                 />
               </div>
 
-              <div className="space-y-2 text-xs font-mono text-[#8794A6] pt-2">
+              <div className="space-y-2 text-xs font-mono text-[#A5B5C8] pt-2">
                 <div className="flex justify-between">
                   <span>Cycle Count:</span>
-                  <span className="text-[#F4F7FB] font-bold">142 Equivalent Full Cycles</span>
+                  <span className="text-[#F5F8FC] font-bold">142 Equivalent Full Cycles</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Degradation Rate:</span>
-                  <span className="text-[#43D9A3] font-bold">&lt; 0.2% / year</span>
+                  <span className="text-[#35C99A] font-bold">&lt; 0.2% / year</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Estimated Life:</span>
-                  <span className="text-[#F4F7FB] font-bold">8.4 Years Remaining</span>
+                  <span className="text-[#F5F8FC] font-bold">8.4 Years Remaining</span>
                 </div>
               </div>
             </div>
           </div>
 
-          <div className="pt-3 border-t border-white/8 text-[10px] font-mono text-[#8794A6]">
+          <div className="pt-3 border-t border-[#293C51] text-[10px] font-mono text-[#A5B5C8]">
             Based on IEEE 1451 smart transducer telemetry standard simulation.
           </div>
         </div>
