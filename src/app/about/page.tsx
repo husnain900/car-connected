@@ -59,12 +59,32 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Note on Report Registration ID Clarification */}
-        <div className="mt-6 pt-4 border-t border-white/10 text-xs font-mono text-[#8794A6] space-y-1">
-          <div className="text-[#D6F45A] font-bold">Academic Registry Clarification Note:</div>
-          <p className="leading-relaxed">
-            Project documentation references primary Roll Number <strong>M245008</strong>. The candidate certificate registry references index <strong>M245036</strong>. Both identifiers correspond to Zainab Amanat within the university departmental ledger.
-          </p>
+        {/* Note on Report Registration ID Clarification & Repository Deployment */}
+        <div className="mt-6 pt-4 border-t border-white/10 text-xs font-mono text-[#8794A6] space-y-3">
+          <div className="space-y-1">
+            <div className="text-[#D6F45A] font-bold">Academic Registry Clarification Note:</div>
+            <p className="leading-relaxed">
+              Project documentation references primary Roll Number <strong>M245008</strong>. The candidate certificate registry references index <strong>M245036</strong>. Both identifiers correspond to Zainab Amanat within the university departmental ledger.
+            </p>
+          </div>
+
+          <div className="p-3 rounded-xl bg-black/40 border border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
+            <div className="flex items-center space-x-2">
+              <span className="text-[#8794A6]">Deployment & Repo Lead:</span>
+              <strong className="text-[#F4F7FB]">Husnain Tanveer</strong>
+              <span className="text-[#D6F45A]">(@husnain900)</span>
+            </div>
+            <div className="flex items-center space-x-3 text-[11px]">
+              <a
+                href="https://github.com/husnain900/car-connected"
+                target="_blank"
+                rel="noreferrer"
+                className="text-[#43D9A3] hover:underline"
+              >
+                github.com/husnain900/car-connected ↗
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -1,8 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import {
   Activity,
   Camera,
@@ -12,10 +11,10 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useSimulationStore } from "@/lib/simulationStore";
+import Vehicle3DViewer from "@/components/Vehicle3DViewer";
 
 export default function VehicleDetailPage() {
   const { activeVehicle } = useSimulationStore();
-  const [activeView, setActiveView] = useState<"side" | "angle">("side");
 
   const submodules = [
     {
@@ -82,54 +81,8 @@ export default function VehicleDetailPage() {
         <div className="h-[1px] w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
       </div>
 
-      {/* Hero Visualizer */}
-      <div className="relative w-full h-[400px] rounded-2xl nebula-card p-6 flex flex-col justify-between overflow-hidden">
-        <div className="z-10 flex items-center justify-between">
-          <span className="text-[10px] font-mono uppercase text-[#8794A6] font-bold">
-            SHOWROOM MULTI-ANGLE PERSPECTIVE
-          </span>
-          <div className="flex items-center space-x-2 bg-[#0B1018]/80 p-1 rounded-lg border border-white/10">
-            <button
-              onClick={() => setActiveView("side")}
-              className={`px-3 py-1 rounded text-xs font-mono font-bold transition-all ${
-                activeView === "side" ? "bg-[#D6F45A] text-[#0B1018]" : "text-[#8794A6] hover:text-[#F4F7FB]"
-              }`}
-            >
-              PROFILE
-            </button>
-            <button
-              onClick={() => setActiveView("angle")}
-              className={`px-3 py-1 rounded text-xs font-mono font-bold transition-all ${
-                activeView === "angle" ? "bg-[#D6F45A] text-[#0B1018]" : "text-[#8794A6] hover:text-[#F4F7FB]"
-              }`}
-            >
-              3/4 ANGLE
-            </button>
-          </div>
-        </div>
-
-        <div className="relative w-full h-full flex items-center justify-center my-2">
-          <div className="relative w-[85%] h-[80%]">
-            <Image
-              src={
-                activeView === "side"
-                  ? "/assets/images/hyperion-gt-hero.jpg"
-                  : "/assets/images/hyperion-gt-angle.jpg"
-              }
-              alt={activeVehicle.name}
-              fill
-              className="object-contain drop-shadow-[0_20px_35px_rgba(0,0,0,0.9)]"
-              priority
-            />
-          </div>
-        </div>
-
-        <div className="z-10 flex items-center justify-between pt-3 border-t border-white/8 text-xs font-mono text-[#8794A6]">
-          <span>State of Charge: <strong className="text-[#43D9A3]">{activeVehicle.batteryLevelPct}%</strong></span>
-          <span>Est. Range: <strong className="text-[#D6F45A]">{activeVehicle.estRangeKm} KM</strong></span>
-          <span>Drive Mode: <strong className="text-[#F4F7FB]">{activeVehicle.driveMode}</strong></span>
-        </div>
-      </div>
+      {/* Interactive 3D Digital Twin Showroom */}
+      <Vehicle3DViewer vehicle={activeVehicle} />
 
       {/* Technical Specifications Grid */}
       <div className="nebula-card p-6">

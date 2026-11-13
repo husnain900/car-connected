@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
+import React from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   Shield,
   Lock,
@@ -13,6 +11,7 @@ import {
   ArrowRight,
 } from "lucide-react";
 import { useSimulationStore } from "@/lib/simulationStore";
+import Vehicle3DViewer from "@/components/Vehicle3DViewer";
 
 export default function DashboardPage() {
   const {
@@ -21,57 +20,6 @@ export default function DashboardPage() {
     setClimateTemp,
     clearAllFaults,
   } = useSimulationStore();
-
-  const [activeView, setActiveView] = useState<"side" | "angle">("side");
-  const [selectedHotspot, setSelectedHotspot] = useState<string | null>(null);
-
-  const hotspots = [
-    {
-      id: "tyre-fl",
-      label: "FL Tyre",
-      x: "24%",
-      y: "68%",
-      details: `${activeVehicle.tires[0]?.psi || 35.0} PSI • ${activeVehicle.tires[0]?.tempC || 26}°C • Status: ${activeVehicle.tires[0]?.status.toUpperCase()}`,
-      href: `/vehicle/${activeVehicle.id}/diagnostics`,
-      status: activeVehicle.tires[0]?.status || "optimal",
-    },
-    {
-      id: "tyre-rr",
-      label: "RR Tyre",
-      x: "78%",
-      y: "68%",
-      details: `${activeVehicle.tires[3]?.psi || 35.0} PSI • ${activeVehicle.tires[3]?.tempC || 27}°C • Status: ${activeVehicle.tires[3]?.status.toUpperCase()}`,
-      href: `/vehicle/${activeVehicle.id}/diagnostics`,
-      status: activeVehicle.tires[3]?.status || "optimal",
-    },
-    {
-      id: "battery-pack",
-      label: "HV Battery",
-      x: "52%",
-      y: "74%",
-      details: `${activeVehicle.batteryLevelPct}% State of Charge • ${activeVehicle.cellVoltage}V • ${activeVehicle.packTempC}°C Pack Temp`,
-      href: `/vehicle/${activeVehicle.id}/diagnostics`,
-      status: activeVehicle.packTempC > 45 ? "critical" : "optimal",
-    },
-    {
-      id: "charge-port",
-      label: "DC Port",
-      x: "82%",
-      y: "48%",
-      details: "CCS Combo 2 High-Power Port (350 kW Ready)",
-      href: `/vehicle/${activeVehicle.id}/location`,
-      status: "optimal",
-    },
-    {
-      id: "cabin-lock",
-      label: "Lock Status",
-      x: "48%",
-      y: "40%",
-      details: activeVehicle.isLocked ? "Perimeter Secured (Doors Locked)" : "Vehicle Unlocked (Ready to Drive)",
-      href: `/vehicle/${activeVehicle.id}/controls`,
-      status: activeVehicle.isLocked ? "optimal" : "warning",
-    },
-  ];
 
   return (
     <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col space-y-6 sm:space-y-8 select-none">
@@ -166,129 +114,12 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* Digital Twin Visualizer with Interactive Hotspots */}
-      <div className="relative w-full h-[460px] md:h-[500px] rounded-2xl nebula-card overflow-hidden flex flex-col justify-between p-5 sm:p-7 select-none border border-white/10">
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none opacity-40" />
+      {/* Digital Twin Interactive 3D WebGL Cockpit with Hotspots */}
+      <div className="space-y-3">
+        <Vehicle3DViewer vehicle={activeVehicle} />
 
-        <div className="z-10 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center space-x-2">
-            <span className="text-[10px] font-mono text-[#8794A6] uppercase font-bold">
-              DIGITAL TWIN TELEMETRY
-            </span>
-            <span className="text-[9px] font-mono bg-white/10 px-2 py-0.5 rounded text-[#D6F45A]">
-              TOUCH/CLICK HOTSPOTS TO INSPECT
-            </span>
-          </div>
-
-          <div className="flex items-center space-x-2 bg-[#0B1018]/80 p-1 rounded-lg border border-white/10">
-            <button
-              onClick={() => setActiveView("side")}
-              className={`px-3 py-1 rounded text-xs font-mono font-bold transition-all ${
-                activeView === "side"
-                  ? "bg-[#D6F45A] text-[#0B1018]"
-                  : "text-[#8794A6] hover:text-[#F4F7FB]"
-              }`}
-            >
-              SIDE PROFILE
-            </button>
-            <button
-              onClick={() => setActiveView("angle")}
-              className={`px-3 py-1 rounded text-xs font-mono font-bold transition-all ${
-                activeView === "angle"
-                  ? "bg-[#D6F45A] text-[#0B1018]"
-                  : "text-[#8794A6] hover:text-[#F4F7FB]"
-              }`}
-            >
-              3/4 SHOWROOM
-            </button>
-          </div>
-        </div>
-
-        {/* Central Vehicle Image & Interactive Hotspots */}
-        <div className="relative w-full h-full flex items-center justify-center my-2">
-          <div className="relative w-[90%] sm:w-[80%] h-[75%] flex items-center justify-center">
-            <Image
-              src={
-                activeView === "side"
-                  ? "/assets/images/hyperion-gt-hero.jpg"
-                  : "/assets/images/hyperion-gt-angle.jpg"
-              }
-              alt="Nebula Hyperion GT Digital Twin"
-              fill
-              className="object-contain filter contrast-110 drop-shadow-[0_20px_35px_rgba(0,0,0,0.85)]"
-              priority
-            />
-
-            {/* Clickable Interactive Hotspots (Accessible by tap/hover/keyboard) */}
-            {hotspots.map((hs) => {
-              const isSelected = selectedHotspot === hs.id;
-              const isCrit = hs.status === "critical";
-              return (
-                <div
-                  key={hs.id}
-                  style={{ left: hs.x, top: hs.y }}
-                  className="absolute -translate-x-1/2 -translate-y-1/2 z-20"
-                >
-                  <button
-                    onClick={() => setSelectedHotspot(isSelected ? null : hs.id)}
-                    aria-label={`Inspect ${hs.label}`}
-                    className={`relative w-6 h-6 rounded-full flex items-center justify-center transition-transform hover:scale-125 focus:outline-none cursor-pointer ${
-                      isCrit
-                        ? "bg-red-500 shadow-[0_0_15px_rgba(239,68,68,0.8)] animate-bounce"
-                        : isSelected
-                        ? "bg-[#D6F45A] shadow-[0_0_15px_rgba(214,244,90,0.8)]"
-                        : "bg-[#151D28] border-2 border-[#D6F45A] hover:bg-[#D6F45A]"
-                    }`}
-                  >
-                    <span
-                      className={`w-2 h-2 rounded-full ${
-                        isCrit ? "bg-white" : isSelected ? "bg-[#0B1018]" : "bg-[#D6F45A]"
-                      }`}
-                    />
-                  </button>
-
-                  {/* Hotspot Popover Card */}
-                  <AnimatePresence>
-                    {isSelected && (
-                      <motion.div
-                        initial={{ opacity: 0, scale: 0.9, y: 8 }}
-                        animate={{ opacity: 1, scale: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.9, y: 8 }}
-                        className="absolute left-1/2 -translate-x-1/2 bottom-full mb-2 w-64 p-3 rounded-xl bg-[#1B2636] border border-white/20 shadow-2xl z-30"
-                      >
-                        <div className="flex items-center justify-between pb-1.5 border-b border-white/10">
-                          <span className="font-mono text-xs font-bold text-[#F4F7FB]">{hs.label}</span>
-                          <span
-                            className={`text-[8px] font-mono px-1.5 py-0.5 rounded uppercase font-bold ${
-                              isCrit ? "bg-red-500/20 text-red-400" : "bg-[#43D9A3]/20 text-[#43D9A3]"
-                            }`}
-                          >
-                            {hs.status}
-                          </span>
-                        </div>
-                        <div className="text-[10px] font-mono text-[#8794A6] mt-2 leading-relaxed">
-                          {hs.details}
-                        </div>
-                        <div className="mt-2.5 pt-1.5 border-t border-white/8 flex justify-end">
-                          <Link
-                            href={hs.href}
-                            className="text-[10px] font-mono text-[#D6F45A] hover:underline flex items-center space-x-1"
-                          >
-                            <span>Open Diagnostics</span>
-                            <ArrowRight className="w-2.5 h-2.5" />
-                          </Link>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Bottom Metrics Bar */}
-        <div className="z-10 flex flex-wrap items-center justify-between gap-4 pt-3 border-t border-white/8 text-xs font-mono text-[#8794A6]">
+        {/* Quick Subsystem Status Bar */}
+        <div className="nebula-card px-5 py-3 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#8794A6]">
           <div className="flex items-center space-x-6">
             <div>
               <span className="text-[9px] uppercase text-[#8794A6] block">ODOMETER</span>
@@ -316,7 +147,7 @@ export default function DashboardPage() {
               href={`/vehicle/${activeVehicle.id}/diagnostics`}
               className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-mono text-[#F4F7FB] transition-colors"
             >
-              Full Telemetry Matrix
+              Full Telemetry Matrix →
             </Link>
           </div>
         </div>

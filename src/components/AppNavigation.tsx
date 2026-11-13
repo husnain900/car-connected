@@ -24,6 +24,7 @@ import {
   Menu,
   X,
   ExternalLink,
+  Terminal,
 } from "lucide-react";
 import { useSimulationStore } from "@/lib/simulationStore";
 
@@ -56,6 +57,7 @@ export default function AppNavigation() {
     { href: "/analytics", label: "Analytics & Reports", icon: BarChart3 },
     { href: "/alerts", label: "Alerts Center", icon: Bell, badge: unreadAlertsCount },
     { href: "/settings", label: "Settings", icon: Settings },
+    { href: "/admin", label: "Simulator Bench", icon: Terminal },
     { href: "/about", label: "About & Architecture", icon: Info },
   ];
 
@@ -378,3 +380,4 @@ export default function AppNavigation() {
     </>
   );
 }
+
