@@ -148,6 +148,46 @@ body {
   padding-top: max(0.5rem, env(safe-area-inset-top));
 }
 
+/* Aurora Studio Striped Progress Bars & Equalizers */
+.stripe-teal {
+  background-image: repeating-linear-gradient(
+    45deg,
+    #00C2B2,
+    #00C2B2 4px,
+    #0D9488 4px,
+    #0D9488 8px
+  );
+}
+
+.stripe-overdue {
+  background-image: repeating-linear-gradient(
+    45deg,
+    #94A3B8,
+    #94A3B8 4px,
+    #CBD5E1 4px,
+    #CBD5E1 8px
+  );
+}
+
+.car-stage-shadow {
+  background: radial-gradient(ellipse at 50% 60%, rgba(15, 23, 42, 0.22) 0%, rgba(15, 23, 42, 0.08) 45%, transparent 72%);
+}
+
+@keyframes dotPulse {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+.animate-dot-pulse {
+  animation: dotPulse 2s infinite ease-in-out;
+}
+
 /* Reduced Motion Accessibility */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {

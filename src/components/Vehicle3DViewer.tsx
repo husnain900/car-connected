@@ -7,7 +7,6 @@ import Image from "next/image";
 import {
   RotateCcw,
   Layers,
-  Sparkles,
   CheckCircle2,
   AlertTriangle,
   X,
@@ -21,6 +20,9 @@ interface Vehicle3DViewerProps {
   vehicle: Vehicle;
   onHotspotClick?: (hotspotId: string) => void;
   className?: string;
+  selectedColorHex?: string;
+  onColorChange?: (colorHex: string) => void;
+  hidePresetBar?: boolean;
 }
 
 interface Hotspot3D {
@@ -33,12 +35,12 @@ interface Hotspot3D {
   screenPos: { x: number; y: number; visible: boolean };
 }
 
-const CAR_COLORS = [
-  { name: "Liquid Silver", hex: "#D4DCE5", roughness: 0.12, metalness: 0.95 },
-  { name: "Nordic Teal", hex: "#2E8B8B", roughness: 0.18, metalness: 0.85 },
-  { name: "Pearl White", hex: "#F4F7FA", roughness: 0.15, metalness: 0.9 },
-  { name: "Mineral Slate", hex: "#475569", roughness: 0.25, metalness: 0.75 },
+export const CAR_COLORS = [
   { name: "Obsidian Ink", hex: "#1A222D", roughness: 0.12, metalness: 0.95 },
+  { name: "Pearl White", hex: "#F8FAFC", roughness: 0.15, metalness: 0.9 },
+  { name: "Radiant Crimson", hex: "#F43F5E", roughness: 0.18, metalness: 0.85 },
+  { name: "Aurora Teal", hex: "#00C2B2", roughness: 0.18, metalness: 0.85 },
+  { name: "Liquid Silver", hex: "#D4DCE5", roughness: 0.12, metalness: 0.95 },
 ];
 
 /**
@@ -70,13 +72,27 @@ function createRadialShadowTexture(): THREE.CanvasTexture | null {
 export default function Vehicle3DViewer({
   vehicle,
   className = "",
+  selectedColorHex,
+  onColorChange,
+  hidePresetBar = false,
 }: Vehicle3DViewerProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const [mode, setMode] = useState<"3d" | "2d">("3d");
   const [dragMode, setDragMode] = useState<"orbit" | "pan">("orbit");
-  const [selectedColor, setSelectedColor] = useState(CAR_COLORS[0]);
+  const [internalColor, setInternalColor] = useState(CAR_COLORS[0]);
+
+  const selectedColor = useMemo(() => {
+    if (selectedColorHex) {
+      const match = CAR_COLORS.find(
+        (c) => c.hex.toLowerCase() === selectedColorHex.toLowerCase()
+      );
+      if (match) return match;
+    }
+    return internalColor;
+  }, [selectedColorHex, internalColor]);
+
   const [activePreset, setActivePreset] = useState<string>("3/4 Showroom");
   const [isRotating, setIsRotating] = useState<boolean>(true);
   const [activeHotspot, setActiveHotspot] = useState<Hotspot3D | null>(null);
@@ -974,7 +990,7 @@ export default function Vehicle3DViewer({
         </div>
 
         {/* Camera Views & Reset Controls (Only visible in 3D mode) */}
-        {mode === "3d" && (
+        {mode === "3d" && !hidePresetBar && (
           <div className="flex items-center space-x-1 bg-[#FFFFFF]/95 p-1 rounded-xl border border-[#D8E0E7] backdrop-blur-md max-w-full overflow-x-auto scrollbar-none shadow-xs">
             {[
               { id: "3/4 Showroom", label: "3/4", fullLabel: "3/4 Showroom" },
@@ -1182,44 +1198,37 @@ export default function Vehicle3DViewer({
         </div>
       )}
 
-      {/* Bottom Controls Bar: Paint Customizer & Interaction Guidance */}
-      <div className="absolute bottom-2.5 sm:bottom-4 left-2.5 sm:left-4 right-2.5 sm:right-4 z-20 flex items-center justify-between gap-2 pointer-events-auto">
-        {/* Paint Swatches */}
-        <div className="flex items-center space-x-1.5 sm:space-x-2 bg-[#FFFFFF]/95 px-2.5 sm:px-3 py-1.5 rounded-xl border border-[#D8E0E7] backdrop-blur-md max-w-full overflow-x-auto scrollbar-none shadow-xs">
-          <span className="text-[9px] font-mono text-[#5B6675] uppercase font-bold flex items-center space-x-1 shrink-0">
-            <Sparkles className="w-3 h-3 text-[#2E8B8B]" />
-            <span className="hidden xs:inline">FINISH:</span>
-          </span>
-
-          <div className="flex items-center space-x-1.5">
-            {CAR_COLORS.map((c) => (
-              <button
-                key={c.name}
-                onClick={() => setSelectedColor(c)}
-                className={`w-5 h-5 rounded-full border-2 transition-transform cursor-pointer hover:scale-110 shrink-0 ${
-                  selectedColor.name === c.name
-                    ? "border-[#2E8B8B] scale-110 shadow-[0_0_8px_rgba(46,139,139,0.5)]"
-                    : "border-[#D8E0E7] opacity-80 hover:opacity-100"
-                }`}
-                style={{ backgroundColor: c.hex }}
-                title={c.name}
-              />
-            ))}
-          </div>
-
-          <span className="text-[10px] font-mono text-[#1F2A37] ml-1 hidden md:inline">
-            {selectedColor.name}
-          </span>
+      {/* Floating Color Capsule Pill (Aurora Reference Specification) */}
+      <div className="absolute bottom-3 sm:bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center space-x-3.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-2xl bg-[#18202A]/92 border border-white/10 shadow-2xl backdrop-blur-md pointer-events-auto select-none">
+        <span className="text-xs sm:text-sm font-medium text-[#E2E8F0]">Color</span>
+        <div className="flex items-center space-x-2 sm:space-x-2.5">
+          {CAR_COLORS.slice(0, 4).map((c) => (
+            <button
+              key={c.name}
+              onClick={() => {
+                setInternalColor(c);
+                onColorChange?.(c.hex);
+              }}
+              className={`w-5 h-5 sm:w-6 sm:h-6 rounded-full transition-all cursor-pointer hover:scale-110 ${
+                selectedColor.hex === c.hex
+                  ? "ring-2 ring-white ring-offset-2 ring-offset-[#18202A] scale-110 shadow-[0_0_10px_rgba(255,255,255,0.7)]"
+                  : "opacity-80 hover:opacity-100"
+              }`}
+              style={{ backgroundColor: c.hex }}
+              title={c.name}
+              aria-label={`Select ${c.name} finish`}
+            />
+          ))}
         </div>
+      </div>
 
-        {/* Dynamic Interaction Guidance HUD */}
-        <div className="hidden lg:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#FFFFFF]/90 border border-[#D8E0E7] text-[10px] font-mono text-[#5B6675] backdrop-blur-md shadow-xs">
-          <span>{dragMode === "pan" ? "DRAG: Move Car" : "DRAG: Rotate 360°"}</span>
-          <span>•</span>
-          <span>RIGHT-CLICK / 2-FINGER: Move</span>
-          <span>•</span>
-          <span>ZOOM: Scroll / Pinch</span>
-        </div>
+      {/* Dynamic Interaction Guidance HUD (Desktop Only) */}
+      <div className="hidden xl:flex items-center space-x-2 absolute bottom-4 right-4 z-20 px-3 py-1.5 rounded-xl bg-[#FFFFFF]/90 border border-[#D8E0E7] text-[10px] font-mono text-[#5B6675] backdrop-blur-md shadow-xs pointer-events-none select-none">
+        <span>{dragMode === "pan" ? "DRAG: Move Car" : "DRAG: Rotate 360°"}</span>
+        <span>•</span>
+        <span>RIGHT-CLICK: Move</span>
+        <span>•</span>
+        <span>SCROLL: Zoom</span>
       </div>
     </div>
   );

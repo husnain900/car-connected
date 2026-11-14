@@ -47,6 +47,7 @@ export interface Vehicle {
   currentSpeedKmH: number;
   driveMode: "SPORT" | "TRACK" | "ENDURANCE" | "ECO";
   torqueSplitFrontPct: number;
+  powerKw?: number;
   tires: TyreReading[];
   activeFaults: DiagnosticCode[];
   lastUpdated: string;
