@@ -1,6 +1,6 @@
 "use client";
 
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore, useEffect } from "react";
 import {
   Vehicle,
   AlertNotification,
@@ -288,8 +288,12 @@ function emitChange() {
   }
 }
 
-// Load initial state from localStorage if available in browser
-if (typeof window !== "undefined") {
+// Safe hydration flag for zero SSR mismatch
+let hasHydrated = false;
+
+export function hydrateFromStorage() {
+  if (hasHydrated || typeof window === "undefined") return;
+  hasHydrated = true;
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
@@ -298,17 +302,30 @@ if (typeof window !== "undefined") {
         parsed &&
         Array.isArray(parsed.vehicles) &&
         parsed.vehicles.length > 0 &&
-        parsed.vehicles[0].tires &&
+        parsed.vehicles[0]?.tires &&
         Array.isArray(parsed.vehicles[0].tires)
       ) {
-        currentState = { ...DEFAULT_STATE, ...parsed };
+        currentState = {
+          ...DEFAULT_STATE,
+          ...parsed,
+          vehicles: parsed.vehicles.map((v: Vehicle, i: number) => ({
+            ...(DEFAULT_STATE.vehicles[i] || DEFAULT_STATE.vehicles[0]),
+            ...v,
+            tires: (v.tires && v.tires.length > 0) ? v.tires : DEFAULT_STATE.vehicles[0].tires,
+            activeFaults: Array.isArray(v.activeFaults) ? v.activeFaults : [],
+          })),
+        };
+        emitChange();
       } else {
         localStorage.removeItem(STORAGE_KEY);
-        currentState = DEFAULT_STATE;
       }
     }
   } catch {
-    currentState = DEFAULT_STATE;
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      // Ignore
+    }
   }
 }
 
@@ -604,6 +621,10 @@ export const simulationStore = {
 
 // React hook for convenient reactive access
 export function useSimulationStore() {
+  useEffect(() => {
+    hydrateFromStorage();
+  }, []);
+
   const store = useSyncExternalStore(
     simulationStore.subscribe,
     simulationStore.getState,

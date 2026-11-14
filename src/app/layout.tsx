@@ -24,10 +24,10 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: "/icon.svg", type: "image/svg+xml" },
-      { url: "/assets/images/nebula-logo.png", type: "image/png" },
+      { url: "/favicon.svg", type: "image/svg+xml" },
     ],
     shortcut: "/icon.svg",
-    apple: "/assets/images/nebula-logo.png",
+    apple: "/icon.svg",
   },
 };
 
@@ -35,7 +35,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#091321",
+  themeColor: "#F6F8FA",
   viewportFit: "cover",
 };
 
@@ -45,12 +45,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased dark" suppressHydrationWarning>
+    <html lang="en" className="h-full antialiased bg-[#F6F8FA] text-[#1F2A37]" suppressHydrationWarning>
       <head>
         <meta name="author" content="Zainab Amanat - Roll No: M245008" />
         <meta name="developer" content="Zainab Amanat (Roll No: M245008)" />
       </head>
-      <body className="min-h-full flex flex-col bg-[#091321] text-[#F5F8FC] selection:bg-[#79C7FF]/20 selection:text-[#79C7FF] overflow-x-hidden pb-20 md:pb-0">
+      <body className="min-h-full flex flex-col bg-[#F6F8FA] text-[#1F2A37] selection:bg-[#E7F3F1] selection:text-[#2E8B8B] overflow-x-hidden pb-20 md:pb-0 font-sans">
         <SimulationProvider>
           <AppNavigation />
           <div className="flex-1 flex flex-col w-full max-w-full overflow-x-hidden">{children}</div>

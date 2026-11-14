@@ -208,36 +208,36 @@ export default function InspectionPage() {
   }, []);
 
   return (
-    <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col space-y-6 sm:space-y-8 select-none text-[#F5F8FC]">
+    <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col space-y-6 sm:space-y-8 select-none text-[#1F2A37]">
       {/* Header */}
       <div className="flex flex-col space-y-2">
-        <div className="flex items-center space-x-2 text-xs font-mono text-[#A5B5C8]">
-          <Link href="/dashboard" className="hover:text-[#79C7FF]">Dashboard</Link>
+        <div className="flex items-center space-x-2 text-xs font-mono text-[#5B6675]">
+          <Link href="/dashboard" className="hover:text-[#2E8B8B]">Dashboard</Link>
           <span>/</span>
           <span>Vehicles</span>
           <span>/</span>
-          <span className="text-[#F5F8FC]">{activeVehicle.name}</span>
+          <span className="text-[#1F2A37] font-semibold">{activeVehicle.name}</span>
           <span>/</span>
-          <span className="text-[#79C7FF]">AI Camera Inspection</span>
+          <span className="text-[#2E8B8B] font-bold">AI Camera Inspection</span>
         </div>
 
         <div className="flex flex-wrap items-baseline justify-between gap-4">
           <div>
-            <h1 className="font-display font-extrabold text-2xl sm:text-3xl text-[#F5F8FC]">
+            <h1 className="font-display font-bold text-2xl sm:text-3xl text-[#1F2A37]">
               AI Vehicle Visual Inspection
             </h1>
-            <p className="text-xs font-mono text-[#A5B5C8] mt-0.5">
+            <p className="text-xs font-mono text-[#5B6675] mt-0.5">
               Live webcam feed, photo upload, and computer vision classification for surface scratches, panel gaps, and exterior cosmetic condition.
             </p>
           </div>
         </div>
 
-        <div className="h-[1px] w-full bg-gradient-to-r from-[#293C51] via-[#293C51]/50 to-transparent" />
+        <div className="h-[1px] w-full bg-[#D8E0E7]" />
       </div>
 
       {/* Mandatory Technical Disclaimer Banner */}
-      <div className="p-4 rounded-xl bg-[#F2B65B]/10 border border-[#F2B65B]/30 flex items-start space-x-3 text-xs font-mono text-[#F2B65B]">
-        <AlertTriangle className="w-5 h-5 flex-shrink-0 mt-0.5 text-[#F2B65B]" />
+      <div className="p-4 rounded-xl bg-[#FFFBEB] border border-[#FDE68A] flex items-start space-x-3 text-xs font-mono text-[#B98121] shadow-xs">
+        <AlertTriangle className="w-5 h-5 shrink-0 mt-0.5 text-[#B98121]" />
         <div className="leading-relaxed">
           <strong>ACADEMIC & TECHNICAL ACCURACY NOTICE:</strong> This AI vision pipeline performs visual observation of visible photographic pixels only. It does <em>not</em> claim to measure exact internal tyre pressure, internal brake pad thickness, ECU diagnostic codes, or battery chemistry degradation from a photo.
         </div>
@@ -249,23 +249,23 @@ export default function InspectionPage() {
         <div className="nebula-card p-6 flex flex-col justify-between min-h-[460px]">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <span className="text-[10px] font-mono uppercase text-[#A5B5C8] font-bold">
+              <span className="text-[10px] font-mono uppercase text-[#2E8B8B] font-bold">
                 CAPTURE STATION
               </span>
-              <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-[#1E314B] border border-[#293C51] text-[#79C7FF]">
+              <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-[#EEF2F5] border border-[#D8E0E7] text-[#2E8B8B]">
                 WEBCAM / FILE UPLOAD
               </span>
             </div>
 
             {/* Error Message if camera failed */}
             {cameraError && (
-              <div className="p-3 mb-4 rounded-xl bg-[#F16D78]/15 border border-[#F16D78]/30 text-xs font-mono text-[#F16D78]">
+              <div className="p-3 mb-4 rounded-xl bg-[#FFF1F2] border border-[#FECDD3] text-xs font-mono text-[#C74E58]">
                 {cameraError}
               </div>
             )}
 
             {/* Viewport Box */}
-            <div className="relative w-full h-72 rounded-xl bg-[#091321] border border-[#293C51] overflow-hidden flex items-center justify-center">
+            <div className="relative w-full h-72 rounded-xl bg-[#EEF2F5] border border-[#D8E0E7] overflow-hidden flex items-center justify-center">
               {streamActive ? (
                 <video
                   ref={videoRef}
@@ -286,12 +286,12 @@ export default function InspectionPage() {
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center p-6 text-center space-y-3">
-                  <div className="w-12 h-12 rounded-full bg-[#1E314B] border border-[#293C51] flex items-center justify-center text-[#A5B5C8]">
+                  <div className="w-12 h-12 rounded-full bg-[#FFFFFF] border border-[#D8E0E7] flex items-center justify-center text-[#5B6675]">
                     <Camera className="w-6 h-6" />
                   </div>
                   <div>
-                    <div className="text-xs font-mono font-bold text-[#F5F8FC]">NO CAR PHOTO LOADED</div>
-                    <p className="text-[10px] font-mono text-[#A5B5C8] mt-1">
+                    <div className="text-xs font-mono font-bold text-[#1F2A37]">NO CAR PHOTO LOADED</div>
+                    <p className="text-[10px] font-mono text-[#5B6675] mt-1">
                       Start your camera, upload an image file, or select a sample preset below.
                     </p>
                   </div>
@@ -300,8 +300,8 @@ export default function InspectionPage() {
 
               {/* Viewfinder Overlay Lines when active */}
               {streamActive && (
-                <div className="absolute inset-4 pointer-events-none border border-dashed border-[#79C7FF]/50 rounded-lg flex items-center justify-center">
-                  <span className="text-[10px] font-mono bg-[#091321]/80 px-2 py-0.5 rounded text-[#79C7FF] border border-[#293C51]">
+                <div className="absolute inset-4 pointer-events-none border border-dashed border-[#2E8B8B]/60 rounded-lg flex items-center justify-center">
+                  <span className="text-[10px] font-mono bg-[#FFFFFF]/90 px-2 py-0.5 rounded text-[#2E8B8B] border border-[#D8E0E7] shadow-xs">
                     ALIGN VEHICLE BODY IN RETICLE
                   </span>
                 </div>
@@ -315,7 +315,7 @@ export default function InspectionPage() {
               {!streamActive ? (
                 <button
                   onClick={startCamera}
-                  className="flex-1 min-h-[44px] py-2.5 px-4 rounded-xl bg-[#79C7FF] hover:bg-[#68b5ea] text-[#091321] font-mono font-bold text-xs flex items-center justify-center space-x-2 transition-colors cursor-pointer"
+                  className="flex-1 min-h-[44px] py-2.5 px-4 rounded-xl bg-[#2E8B8B] hover:bg-[#236F70] text-white font-mono font-bold text-xs flex items-center justify-center space-x-2 transition-colors cursor-pointer shadow-xs"
                 >
                   <Camera className="w-4 h-4" />
                   <span>START WEBCAM FEED</span>
@@ -323,7 +323,7 @@ export default function InspectionPage() {
               ) : (
                 <button
                   onClick={captureFrame}
-                  className="flex-1 min-h-[44px] py-2.5 px-4 rounded-xl bg-[#35C99A] hover:bg-[#2fb288] text-[#091321] font-mono font-bold text-xs flex items-center justify-center space-x-2 transition-colors cursor-pointer animate-pulse"
+                  className="flex-1 min-h-[44px] py-2.5 px-4 rounded-xl bg-[#2FA36B] hover:bg-[#268958] text-white font-mono font-bold text-xs flex items-center justify-center space-x-2 transition-colors cursor-pointer animate-pulse shadow-xs"
                 >
                   <Eye className="w-4 h-4" />
                   <span>SNAP & ANALYZE FRAME</span>
@@ -332,9 +332,9 @@ export default function InspectionPage() {
 
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="min-h-[44px] py-2.5 px-4 rounded-xl bg-[#1E314B] hover:bg-[#152437] border border-[#293C51] text-xs font-mono font-bold text-[#F5F8FC] flex items-center space-x-2 transition-colors cursor-pointer"
+                className="min-h-[44px] py-2.5 px-4 rounded-xl bg-[#EEF2F5] hover:bg-[#D8E0E7] border border-[#D8E0E7] text-xs font-mono font-bold text-[#1F2A37] flex items-center space-x-2 transition-colors cursor-pointer"
               >
-                <Upload className="w-4 h-4 text-[#A5B5C8]" />
+                <Upload className="w-4 h-4 text-[#5B6675]" />
                 <span>UPLOAD FILE</span>
               </button>
 
@@ -350,7 +350,7 @@ export default function InspectionPage() {
               {capturedImage && (
                 <button
                   onClick={resetAll}
-                  className="py-2.5 px-3 rounded-xl bg-white/5 hover:bg-[#F16D78]/20 text-[#A5B5C8] hover:text-[#F16D78] border border-[#293C51] transition-colors min-h-[44px] flex items-center justify-center cursor-pointer"
+                  className="py-2.5 px-3 rounded-xl bg-[#EEF2F5] hover:bg-[#FFF1F2] text-[#5B6675] hover:text-[#C74E58] border border-[#D8E0E7] transition-colors min-h-[44px] flex items-center justify-center cursor-pointer"
                   title="Clear Captured Image"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -359,8 +359,8 @@ export default function InspectionPage() {
             </div>
 
             {/* Presets for Viva Evaluators */}
-            <div className="pt-3 border-t border-[#293C51]">
-              <span className="text-[9px] font-mono text-[#A5B5C8] uppercase font-bold block mb-2">
+            <div className="pt-3 border-t border-[#D8E0E7]">
+              <span className="text-[9px] font-mono text-[#5B6675] uppercase font-bold block mb-2">
                 EXAMINER PRESETS (CLICK TO TEST WITHOUT A REAL CAR):
               </span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -368,7 +368,7 @@ export default function InspectionPage() {
                   <button
                     key={preset.name}
                     onClick={() => loadPreset(preset)}
-                    className="p-2.5 rounded-lg bg-[#1E314B]/70 hover:bg-[#1E314B] border border-[#293C51] text-left text-[10px] font-mono text-[#F5F8FC] transition-colors min-h-[40px] flex items-center"
+                    className="p-2.5 rounded-lg bg-[#EEF2F5] hover:bg-[#E7F3F1] border border-[#D8E0E7] hover:border-[#2E8B8B] text-left text-[10px] font-mono text-[#1F2A37] transition-colors min-h-[40px] flex items-center cursor-pointer"
                   >
                     <span className="truncate">{preset.name}</span>
                   </button>
@@ -382,79 +382,79 @@ export default function InspectionPage() {
         <div className="nebula-card p-6 flex flex-col justify-between min-h-[460px]">
           <div>
             <div className="flex items-center justify-between mb-4">
-              <span className="text-[10px] font-mono uppercase text-[#A5B5C8] font-bold">
+              <span className="text-[10px] font-mono uppercase text-[#2E8B8B] font-bold">
                 ANALYSIS INFERENCE ENGINE
               </span>
               {cosmeticScore !== null && (
-                <span className="text-xs font-mono font-bold text-[#79C7FF] bg-[#79C7FF]/15 px-2.5 py-1 rounded border border-[#79C7FF]/30">
+                <span className="text-xs font-mono font-bold text-[#2E8B8B] bg-[#E7F3F1] px-2.5 py-1 rounded border border-[#86B6B2]/40">
                   COSMETIC SCORE: {cosmeticScore}/100
                 </span>
               )}
             </div>
 
             {isAnalyzing ? (
-              <div className="p-8 rounded-xl bg-[#1E314B] border border-[#293C51] flex flex-col items-center justify-center space-y-4 text-center min-h-[280px]">
-                <RefreshCw className="w-8 h-8 text-[#79C7FF] animate-spin" />
+              <div className="p-8 rounded-xl bg-[#EEF2F5] border border-[#D8E0E7] flex flex-col items-center justify-center space-y-4 text-center min-h-[280px]">
+                <RefreshCw className="w-8 h-8 text-[#2E8B8B] animate-spin" />
                 <div>
-                  <div className="text-xs font-mono font-bold text-[#F5F8FC]">
+                  <div className="text-xs font-mono font-bold text-[#1F2A37]">
                     NEURAL VISION INFERENCE RUNNING
                   </div>
-                  <p className="text-[11px] font-mono text-[#79C7FF] mt-2 animate-pulse">
+                  <p className="text-[11px] font-mono text-[#2E8B8B] mt-2 animate-pulse">
                     {analysisStep}
                   </p>
                 </div>
               </div>
             ) : findings ? (
               <div className="flex flex-col space-y-3">
-                <div className="p-3.5 rounded-xl bg-[#1E314B] border border-[#293C51] flex items-center justify-between text-xs font-mono">
-                  <span className="text-[#A5B5C8]">Detected Observations:</span>
-                  <span className="font-bold text-[#F5F8FC]">{findings.length} Regions Inspected</span>
+                <div className="p-3.5 rounded-xl bg-[#EEF2F5] border border-[#D8E0E7] flex items-center justify-between text-xs font-mono">
+                  <span className="text-[#5B6675]">Detected Observations:</span>
+                  <span className="font-bold text-[#1F2A37]">{findings.length} Regions Inspected</span>
                 </div>
 
                 {findings.map((item) => (
                   <div
                     key={item.id}
-                    className="p-3.5 rounded-xl bg-[#1E314B] border border-[#293C51] flex flex-col space-y-1.5"
+                    className="p-3.5 rounded-xl bg-[#FFFFFF] border border-[#D8E0E7] flex flex-col space-y-1.5 shadow-xs"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="text-xs font-mono font-bold text-[#F5F8FC]">{item.area}</span>
+                      <span className="text-xs font-mono font-bold text-[#1F2A37]">{item.area}</span>
                       <div className="flex items-center space-x-2">
-                        <span className="text-[9px] font-mono text-[#A5B5C8]">
+                        <span className="text-[9px] font-mono text-[#5B6675]">
                           Confidence: {item.confidencePct}%
                         </span>
                         <span
                           className={`text-[9px] font-mono px-2 py-0.5 rounded font-bold uppercase ${
                             item.severity === "HIGH"
-                              ? "bg-[#F16D78] text-white"
+                              ? "bg-[#FFF1F2] text-[#C74E58] border border-[#FECDD3]"
                               : item.severity === "MEDIUM"
-                              ? "bg-[#F2B65B] text-[#091321] font-bold"
+                              ? "bg-[#FFFBEB] text-[#B98121] border border-[#FDE68A]"
                               : item.severity === "LOW"
-                              ? "bg-[#79C7FF]/20 text-[#79C7FF]"
-                              : "bg-[#35C99A]/15 text-[#35C99A]"
+                              ? "bg-[#E7F3F1] text-[#2E8B8B] border border-[#86B6B2]/40"
+                              : "bg-[#F0FDF4] text-[#2FA36B] border border-[#BBF7D0]"
                           }`}
                         >
                           {item.defectType}
                         </span>
                       </div>
                     </div>
-                    <p className="text-[11px] font-mono text-[#A5B5C8]">{item.notes}</p>
+                    <p className="text-[11px] font-mono text-[#5B6675]">{item.notes}</p>
                   </div>
                 ))}
               </div>
             ) : (
-              <div className="p-8 rounded-xl bg-[#1E314B] border border-[#293C51] text-center flex flex-col items-center justify-center space-y-3 min-h-[280px]">
-                <Sparkles className="w-8 h-8 text-[#A5B5C8]" />
-                <div className="text-xs font-mono font-bold text-[#F5F8FC]">
+              <div className="p-8 rounded-xl bg-[#EEF2F5] border border-[#D8E0E7] text-center flex flex-col items-center justify-center space-y-3 min-h-[280px]">
+                <Sparkles className="w-8 h-8 text-[#5B6675]" />
+                <div className="text-xs font-mono font-bold text-[#1F2A37]">
                   WAITING FOR VEHICLE CAPTURE
                 </div>
-                <p className="text-[10px] font-mono text-[#A5B5C8] max-w-sm">
+                <p className="text-[10px] font-mono text-[#5B6675] max-w-sm">
                   Snap a photo using your camera or click one of the examiner presets to run automated cosmetic analysis.
                 </p>
               </div>
             )}
           </div>
 
-          <div className="mt-6 pt-4 border-t border-[#293C51] flex items-center justify-between text-[10px] font-mono text-[#A5B5C8]">
+          <div className="mt-6 pt-4 border-t border-[#D8E0E7] flex items-center justify-between text-[10px] font-mono text-[#5B6675]">
             <span>Model: MobileNet-V3 / Vision-Transformer (Simulated)</span>
             <span>Ephemerally Processed</span>
           </div>

@@ -21,21 +21,21 @@ export default function AlertsPage() {
   });
 
   return (
-    <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col space-y-6 sm:space-y-8 select-none text-[#F5F8FC]">
+    <div className="max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-8 flex flex-col space-y-6 sm:space-y-8 select-none text-[#1F2A37]">
       {/* Header */}
       <div className="flex flex-col space-y-2">
-        <div className="flex items-center space-x-2 text-xs font-mono text-[#A5B5C8]">
-          <Link href="/dashboard" className="hover:text-[#79C7FF]">Dashboard</Link>
+        <div className="flex items-center space-x-2 text-xs font-mono text-[#5B6675]">
+          <Link href="/dashboard" className="hover:text-[#2E8B8B] transition-colors">Dashboard</Link>
           <span>/</span>
-          <span>Alerts & Notifications</span>
+          <span className="text-[#2E8B8B] font-bold">Alerts & Notifications</span>
         </div>
 
         <div className="flex flex-wrap items-baseline justify-between gap-4">
           <div>
-            <h1 className="font-display font-extrabold text-2xl sm:text-3xl text-[#F5F8FC]">
+            <h1 className="font-display font-bold text-2xl sm:text-3xl text-[#1F2A37] tracking-tight">
               Notification Center & Telemetry Alerts
             </h1>
-            <p className="text-xs font-mono text-[#A5B5C8] mt-0.5">
+            <p className="text-xs font-mono text-[#5B6675] mt-1">
               Live event stream for TPMS threshold triggers, battery thermal warnings, and controller faults.
             </p>
           </div>
@@ -43,7 +43,7 @@ export default function AlertsPage() {
           <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
             <button
               onClick={() => injectScenario("TPMS_PUNCTURE_RR")}
-              className="flex-1 sm:flex-initial min-h-[40px] px-3 py-1.5 rounded-xl bg-[#F16D78]/15 hover:bg-[#F16D78]/25 border border-[#F16D78]/30 text-[#F16D78] text-xs font-mono font-bold transition-colors flex items-center justify-center space-x-1 cursor-pointer"
+              className="flex-1 sm:flex-initial min-h-[40px] px-3.5 py-1.5 rounded-xl bg-[#FFF1F2] hover:bg-[#FFE4E6] border border-[#FECDD3] text-[#C74E58] text-xs font-mono font-bold transition-colors flex items-center justify-center space-x-1.5 cursor-pointer shadow-xs"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Simulate Critical Alert</span>
@@ -51,27 +51,27 @@ export default function AlertsPage() {
 
             <button
               onClick={markAllAlertsRead}
-              className="flex-1 sm:flex-initial min-h-[40px] px-3.5 py-1.5 rounded-xl bg-[#1E314B] hover:bg-[#152437] border border-[#293C51] text-xs font-mono font-bold text-[#F5F8FC] flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
+              className="flex-1 sm:flex-initial min-h-[40px] px-3.5 py-1.5 rounded-xl bg-[#FFFFFF] hover:bg-[#F6F8FA] border border-[#D8E0E7] text-xs font-mono font-bold text-[#1F2A37] flex items-center justify-center space-x-1.5 transition-colors cursor-pointer shadow-xs"
             >
-              <CheckCheck className="w-4 h-4 text-[#35C99A]" />
+              <CheckCheck className="w-4 h-4 text-[#2FA36B]" />
               <span>MARK ALL AS READ</span>
             </button>
           </div>
         </div>
 
-        <div className="h-[1px] w-full bg-gradient-to-r from-[#293C51] via-[#293C51]/50 to-transparent" />
+        <div className="h-[1px] w-full bg-[#D8E0E7]" />
       </div>
 
       {/* Filter Bar */}
-      <div className="flex items-center space-x-2 bg-[#152437] p-1.5 rounded-xl border border-[#293C51] self-start text-xs font-mono">
+      <div className="flex items-center space-x-2 bg-[#EEF2F5] p-1.5 rounded-xl border border-[#D8E0E7] self-start text-xs font-mono">
         {["ALL", "CRITICAL", "WARNING", "INFO"].map((sev) => (
           <button
             key={sev}
             onClick={() => setSeverityFilter(sev)}
-            className={`px-3 py-1.5 rounded-lg transition-colors cursor-pointer ${
+            className={`px-3 py-1.5 rounded-lg transition-all cursor-pointer font-bold ${
               severityFilter === sev
-                ? "bg-[#79C7FF] text-[#091321] font-bold"
-                : "text-[#A5B5C8] hover:text-[#F5F8FC]"
+                ? "bg-[#2E8B8B] text-white shadow-xs"
+                : "text-[#5B6675] hover:text-[#1F2A37]"
             }`}
           >
             {sev}
@@ -82,7 +82,7 @@ export default function AlertsPage() {
       {/* Alerts Stream */}
       <div className="nebula-card p-6">
         {filtered.length === 0 ? (
-          <div className="p-12 text-center text-xs font-mono text-[#A5B5C8] italic">
+          <div className="p-12 text-center text-xs font-mono text-[#5B6675] italic">
             No notification events matching the selected severity filter.
           </div>
         ) : (
@@ -96,21 +96,21 @@ export default function AlertsPage() {
                   className={`p-4 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors ${
                     !alert.read
                       ? isCrit
-                        ? "bg-[#F16D78]/15 border-[#F16D78]/40"
+                        ? "bg-[#FFF1F2] border-[#FECDD3]"
                         : isWarn
-                        ? "bg-[#F2B65B]/15 border-[#F2B65B]/40"
-                        : "bg-[#1E314B] border-[#79C7FF]/40"
-                      : "bg-[#1E314B]/60 border-[#293C51] opacity-75"
+                        ? "bg-[#FFFBEB] border-[#FDE68A]"
+                        : "bg-[#E7F3F1] border-[#86B6B2]/40"
+                      : "bg-[#FFFFFF] border-[#D8E0E7] opacity-80"
                   }`}
                 >
                   <div className="flex items-start space-x-3">
                     <div
                       className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5 ${
                         isCrit
-                          ? "bg-[#F16D78]/20 text-[#F16D78]"
+                          ? "bg-[#FFE4E6] text-[#C74E58]"
                           : isWarn
-                          ? "bg-[#F2B65B]/20 text-[#F2B65B]"
-                          : "bg-[#79C7FF]/20 text-[#79C7FF]"
+                          ? "bg-[#FEF3C7] text-[#B98121]"
+                          : "bg-[#E7F3F1] text-[#2E8B8B]"
                       }`}
                     >
                       {isCrit ? (
@@ -127,36 +127,36 @@ export default function AlertsPage() {
                         <span
                           className={`text-[9px] font-mono px-2 py-0.5 rounded font-bold uppercase ${
                             isCrit
-                              ? "bg-[#F16D78] text-white"
+                              ? "bg-[#C74E58] text-white"
                               : isWarn
-                              ? "bg-[#F2B65B] text-[#091321] font-bold"
-                              : "bg-[#79C7FF]/20 text-[#79C7FF]"
+                              ? "bg-[#B98121] text-white"
+                              : "bg-[#2E8B8B] text-white"
                           }`}
                         >
                           {alert.severity}
                         </span>
-                        <span className="text-[10px] font-mono text-[#A5B5C8]">
+                        <span className="text-[10px] font-mono text-[#5B6675]">
                           Source: {alert.source}
                         </span>
                         {!alert.read && (
-                          <span className="w-2 h-2 rounded-full bg-[#79C7FF] animate-pulse" />
+                          <span className="w-2 h-2 rounded-full bg-[#2E8B8B] animate-pulse" />
                         )}
                       </div>
 
-                      <h3 className="font-mono font-bold text-sm text-[#F5F8FC] mt-1">{alert.title}</h3>
-                      <p className="text-xs font-mono text-[#A5B5C8] mt-0.5 leading-relaxed">{alert.message}</p>
+                      <h3 className="font-sans font-bold text-sm text-[#1F2A37] mt-1">{alert.title}</h3>
+                      <p className="text-xs font-mono text-[#5B6675] mt-0.5 leading-relaxed">{alert.message}</p>
                     </div>
                   </div>
 
                   <div className="flex items-center space-x-3 self-end sm:self-auto flex-shrink-0">
-                    <span className="text-[10px] font-mono text-[#A5B5C8]">
+                    <span className="text-[10px] font-mono text-[#5B6675]">
                       {new Date(alert.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
                     </span>
 
                     {!alert.read && (
                       <button
                         onClick={() => markAlertRead(alert.id)}
-                        className="px-2.5 py-1 rounded bg-[#1E314B] hover:bg-[#253956] border border-[#293C51] text-[10px] font-mono text-[#F5F8FC] transition-colors cursor-pointer"
+                        className="px-3 py-1 rounded-lg bg-[#FFFFFF] hover:bg-[#EEF2F5] border border-[#D8E0E7] text-[10px] font-mono text-[#1F2A37] font-bold transition-colors cursor-pointer shadow-xs"
                       >
                         Acknowledge
                       </button>

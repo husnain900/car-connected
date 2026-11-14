@@ -1,86 +1,118 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Sora:wght@600;700;800&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --color-bg-base: #091321;
-  --color-surface-card: #152437;
-  --color-surface-elevated: #1E314B;
-  --color-border-subtle: #293C51;
-  --color-border-focus: #79C7FF;
+  --color-canvas: #F6F8FA;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #EEF2F5;
+  --color-brand-teal: #2E8B8B;
+  --color-brand-teal-hover: #236F70;
+  --color-brand-teal-pale: #E7F3F1;
+  --color-supporting-sage: #86B6B2;
+  --color-headline-ink: #1F2A37;
+  --color-body-graphite: #5B6675;
+  --color-border-card: #D8E0E7;
+  --color-semantic-success: #2FA36B;
+  --color-semantic-warning: #B98121;
+  --color-semantic-critical: #C74E58;
+  --color-focus-ring: #127D83;
 
-  --color-accent-primary: #79C7FF;
-  --color-accent-primary-dim: rgba(121, 199, 255, 0.12);
+  /* Backward compatible aliases */
+  --color-bg-base: #F6F8FA;
+  --color-surface-card: #FFFFFF;
+  --color-surface-elevated: #EEF2F5;
+  --color-border-subtle: #D8E0E7;
+  --color-border-focus: #127D83;
 
-  --color-text-main: #F5F8FC;
-  --color-text-muted: #A5B5C8;
-  --color-text-dim: #647B95;
+  --color-accent-primary: #2E8B8B;
+  --color-accent-primary-dim: #E7F3F1;
 
-  --color-semantic-success: #35C99A;
-  --color-semantic-warning: #F2B65B;
-  --color-semantic-danger: #F16D78;
+  --color-text-main: #1F2A37;
+  --color-text-muted: #5B6675;
+  --color-text-dim: #8896A6;
 
   --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-  --font-display: 'Manrope', 'Inter', system-ui, sans-serif;
+  --font-display: 'Sora', 'Inter', system-ui, sans-serif;
 }
 
 :root {
-  --bg-base: #091321;
-  --surface-card: #152437;
-  --surface-elevated: #1E314B;
-  --border-subtle: #293C51;
-  --border-focus: #79C7FF;
+  --canvas: #F6F8FA;
+  --surface: #FFFFFF;
+  --surface-soft: #EEF2F5;
+  --brand-teal: #2E8B8B;
+  --hover-teal: #236F70;
+  --pale-teal: #E7F3F1;
+  --supporting-sage: #86B6B2;
+  --headline-ink: #1F2A37;
+  --body-graphite: #5B6675;
+  --border: #D8E0E7;
+  --success: #2FA36B;
+  --warning: #B98121;
+  --critical: #C74E58;
+  --focus-ring: #127D83;
 
-  --accent-primary: #79C7FF;
-  --accent-primary-dim: rgba(121, 199, 255, 0.12);
+  --bg-base: #F6F8FA;
+  --surface-card: #FFFFFF;
+  --surface-elevated: #EEF2F5;
+  --border-subtle: #D8E0E7;
+  --border-focus: #127D83;
 
-  --text-main: #F5F8FC;
-  --text-muted: #A5B5C8;
-  --text-dim: #647B95;
+  --accent-primary: #2E8B8B;
+  --accent-primary-dim: #E7F3F1;
 
-  --semantic-success: #35C99A;
-  --semantic-warning: #F2B65B;
-  --semantic-danger: #F16D78;
+  --text-main: #1F2A37;
+  --text-muted: #5B6675;
+  --text-dim: #8896A6;
+
+  --semantic-success: #2FA36B;
+  --semantic-warning: #B98121;
+  --semantic-danger: #C74E58;
 }
 
-/* Luxury Automotive Precision Scrollbar */
+/* Scandinavian Automotive Studio Precision Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #091321;
+  background: #F6F8FA;
 }
 ::-webkit-scrollbar-thumb {
-  background: #203349;
+  background: #D8E0E7;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #2E4766;
+  background: #B4C3D0;
 }
 
-/* Base surface card styling - Dark Navy Luxury Automotive */
+/* Base surface card styling - Aurora Light Theme Precision Surfaces */
 .nebula-card {
-  background-color: #152437;
-  border: 1px solid #293C51;
-  border-radius: 0.875rem;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+  background-color: #FFFFFF;
+  border: 1px solid #D8E0E7;
+  border-radius: 1rem;
+  box-shadow: 0 5px 24px rgba(31, 42, 55, 0.055);
+  transition: border-color 0.18s ease, box-shadow 0.18s ease, transform 0.18s ease;
 }
 
-.nebula-card:hover {
-  border-color: rgba(121, 199, 255, 0.35);
+@media (min-width: 1024px) {
+  .nebula-card:hover {
+    border-color: #2E8B8B;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 28px rgba(31, 42, 55, 0.08);
+  }
 }
 
 .nebula-card-elevated {
-  background-color: #1E314B;
-  border: 1px solid #293C51;
-  border-radius: 0.875rem;
+  background-color: #EEF2F5;
+  border: 1px solid #D8E0E7;
+  border-radius: 1rem;
 }
 
-/* Refined electric blue accent highlight */
-.accent-border-blue {
-  border-color: #79C7FF;
-  box-shadow: 0 0 16px rgba(121, 199, 255, 0.12);
+/* Subtle refined teal accent highlight */
+.accent-border-teal {
+  border-color: #2E8B8B;
+  box-shadow: 0 0 0 1px #2E8B8B, 0 4px 16px rgba(46, 139, 139, 0.12);
 }
 
 /* Numeric text monospace formatting */
@@ -91,14 +123,20 @@
 
 html,
 body {
-  background-color: #091321;
-  color: #F5F8FC;
+  background-color: #F6F8FA;
+  color: #1F2A37;
   font-family: var(--font-sans);
   overflow-x: hidden;
   max-width: 100vw;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+}
+
+/* Visible Accessibility Focus Rings */
+:focus-visible {
+  outline: 2px solid #127D83;
+  outline-offset: 2px;
 }
 
 /* Mobile Safe Area Inset Support */

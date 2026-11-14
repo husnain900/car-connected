@@ -103,16 +103,16 @@ export default function AppNavigation() {
     return false;
   };
 
-  const isVehicleActive = pathname.startsWith("/vehicle/") && !pathname.includes("/inspection") && !pathname.includes("/location") && !pathname.includes("/diagnostics") && !pathname.includes("/controls") && !pathname.includes("/maintenance") || pathname === "/vehicles";
+  const isVehicleActive = (pathname.startsWith("/vehicle/") && !pathname.includes("/inspection") && !pathname.includes("/location") && !pathname.includes("/diagnostics") && !pathname.includes("/controls") && !pathname.includes("/maintenance")) || pathname === "/vehicles";
   const isScanActive = pathname.includes("/inspection");
   const isTripsActive = pathname.includes("/location") || pathname === "/tracking";
 
   return (
     <>
       {/* ========================================================= */}
-      {/* TOP HEADER BAR (Responsive: Mobile 320px to 4K Desktop)    */}
+      {/* TOP HEADER BAR (Aurora Light Theme: Mobile 320px to 4K)   */}
       {/* ========================================================= */}
-      <header className="sticky top-0 z-40 w-full bg-[#091321]/95 backdrop-blur-md border-b border-[#293C51] select-none">
+      <header className="sticky top-0 z-40 w-full bg-[#FFFFFF]/95 backdrop-blur-md border-b border-[#D8E0E7] select-none shadow-[0_1px_8px_rgba(31,42,55,0.04)]">
         <div className="max-w-7xl mx-auto px-3 sm:px-6 h-14 sm:h-16 flex items-center justify-between gap-2">
           {/* Brand Left */}
           <div className="flex items-center space-x-2 sm:space-x-3 min-w-0">
@@ -120,14 +120,14 @@ export default function AppNavigation() {
               <NebulaLogo size="sm" showText={false} />
               <div className="flex flex-col">
                 <div className="flex items-center space-x-1.5">
-                  <span className="font-display font-extrabold text-xs sm:text-sm tracking-wider text-[#F5F8FC]">
+                  <span className="font-display font-extrabold text-xs sm:text-sm tracking-wider text-[#1F2A37]">
                     NEBULA DRIVE
                   </span>
-                  <span className="text-[8px] sm:text-[9px] font-mono font-bold text-[#79C7FF] bg-[#79C7FF]/10 px-1 sm:px-1.5 py-0.5 rounded border border-[#79C7FF]/25">
-                    v4.2
+                  <span className="text-[8px] sm:text-[9px] font-mono font-bold text-[#2E8B8B] bg-[#E7F3F1] px-1 sm:px-1.5 py-0.5 rounded border border-[#86B6B2]/40">
+                    AURORA
                   </span>
                 </div>
-                <span className="text-[8px] sm:text-[9px] font-mono text-[#A5B5C8] tracking-widest hidden sm:inline uppercase">
+                <span className="text-[8px] sm:text-[9px] font-mono text-[#5B6675] tracking-widest hidden sm:inline uppercase">
                   INTELLIGENCE IN MOTION
                 </span>
               </div>
@@ -137,12 +137,12 @@ export default function AppNavigation() {
             <div className="relative hidden md:block">
               <button
                 onClick={() => setVehicleSelectorOpen(!vehicleSelectorOpen)}
-                className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-[#152437] border border-[#293C51] hover:border-[#79C7FF]/40 text-xs font-mono text-[#F5F8FC] transition-colors cursor-pointer min-h-[36px]"
+                className="flex items-center space-x-2 px-3 py-1.5 rounded-lg bg-[#FFFFFF] border border-[#D8E0E7] hover:border-[#2E8B8B] text-xs font-mono text-[#1F2A37] transition-colors cursor-pointer min-h-[36px] shadow-xs"
               >
-                <Car className="w-3.5 h-3.5 text-[#79C7FF]" />
+                <Car className="w-3.5 h-3.5 text-[#2E8B8B]" />
                 <span className="font-bold">{activeVehicle.name}</span>
-                <span className="text-[#A5B5C8] text-[10px]">({activeVehicle.licensePlate})</span>
-                <ChevronDown className="w-3 h-3 text-[#A5B5C8]" />
+                <span className="text-[#5B6675] text-[10px]">({activeVehicle.licensePlate})</span>
+                <ChevronDown className="w-3 h-3 text-[#5B6675]" />
               </button>
 
               <AnimatePresence>
@@ -151,9 +151,9 @@ export default function AppNavigation() {
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
-                    className="absolute left-0 top-full mt-2 w-72 rounded-xl bg-[#152437] border border-[#293C51] p-2 shadow-2xl z-50 flex flex-col space-y-1"
+                    className="absolute left-0 top-full mt-2 w-72 rounded-xl bg-[#FFFFFF] border border-[#D8E0E7] p-2 shadow-xl z-50 flex flex-col space-y-1"
                   >
-                    <div className="px-3 py-1.5 text-[9px] font-mono uppercase text-[#A5B5C8] font-bold">
+                    <div className="px-3 py-1.5 text-[9px] font-mono uppercase text-[#5B6675] font-bold">
                       SELECT ACTIVE VEHICLE
                     </div>
                     {vehicles.map((v) => (
@@ -165,24 +165,24 @@ export default function AppNavigation() {
                         }}
                         className={`w-full text-left px-3 py-2 rounded-lg text-xs font-mono transition-colors flex items-center justify-between cursor-pointer ${
                           v.id === activeVehicle.id
-                            ? "bg-[#79C7FF]/15 text-[#79C7FF] border border-[#79C7FF]/30 font-bold"
-                            : "text-[#F5F8FC] hover:bg-white/5"
+                            ? "bg-[#E7F3F1] text-[#2E8B8B] border border-[#2E8B8B]/40 font-bold"
+                            : "text-[#1F2A37] hover:bg-[#EEF2F5]"
                         }`}
                       >
                         <div>
-                          <div>{v.name}</div>
-                          <div className="text-[9px] text-[#A5B5C8]">{v.licensePlate} • {v.model}</div>
+                          <div className="font-bold">{v.name}</div>
+                          <div className="text-[9px] text-[#5B6675]">{v.licensePlate} • {v.model}</div>
                         </div>
-                        <span className="text-[8px] bg-white/10 px-1.5 py-0.5 rounded text-[#A5B5C8]">
+                        <span className="text-[8px] bg-[#EEF2F5] px-1.5 py-0.5 rounded text-[#5B6675] border border-[#D8E0E7]">
                           {v.status}
                         </span>
                       </button>
                     ))}
-                    <div className="pt-2 border-t border-[#293C51] mt-1">
+                    <div className="pt-2 border-t border-[#D8E0E7] mt-1">
                       <Link
                         href="/vehicles"
                         onClick={() => setVehicleSelectorOpen(false)}
-                        className="w-full flex items-center justify-center space-x-1 py-1.5 text-[10px] font-mono text-[#79C7FF] hover:underline"
+                        className="w-full flex items-center justify-center space-x-1 py-1.5 text-[10px] font-mono text-[#2E8B8B] hover:underline"
                       >
                         <span>Manage Fleet & Pair Hardware</span>
                         <ExternalLink className="w-3 h-3" />
@@ -197,11 +197,11 @@ export default function AppNavigation() {
           {/* Right Header Actions */}
           <div className="flex items-center space-x-1.5 sm:space-x-2.5 shrink-0">
             {/* Prominent Demo Simulation Indicator (Desktop) */}
-            <div className="hidden lg:flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#F2B65B]/10 border border-[#F2B65B]/30 text-[#F2B65B] font-mono text-[10px] font-bold">
-              <span className="w-2 h-2 rounded-full bg-[#F2B65B] animate-pulse" />
+            <div className="hidden lg:flex items-center space-x-2 px-3 py-1.5 rounded-full bg-[#FFFBEB] border border-[#FDE68A] text-[#B98121] font-mono text-[10px] font-bold shadow-xs">
+              <span className="w-2 h-2 rounded-full bg-[#B98121] animate-pulse" />
               <span>DEMO SIMULATION</span>
-              <span className="text-[#F2B65B]/40 font-normal">|</span>
-              <span className="text-[#F5F8FC]/90 font-mono-numbers">
+              <span className="text-[#B98121]/40 font-normal">|</span>
+              <span className="text-[#1F2A37] font-mono-numbers">
                 {new Date(activeVehicle.lastUpdated).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })}
               </span>
             </div>
@@ -210,11 +210,11 @@ export default function AppNavigation() {
             <div className="relative">
               <button
                 onClick={() => setScenarioOpen(!scenarioOpen)}
-                className="flex items-center space-x-1 sm:space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#79C7FF]/10 hover:bg-[#79C7FF]/20 border border-[#79C7FF]/30 text-[#79C7FF] text-xs font-mono font-bold transition-all cursor-pointer min-h-[36px]"
+                className="flex items-center space-x-1 sm:space-x-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#E7F3F1] hover:bg-[#D4EAE7] border border-[#86B6B2]/40 text-[#2E8B8B] text-xs font-mono font-bold transition-all cursor-pointer min-h-[36px]"
                 title="Inject Simulated Telemetry Scenarios for University Viva"
                 aria-label="Viva Test Scenarios"
               >
-                <AlertTriangle className="w-3.5 h-3.5 text-[#F2B65B]" />
+                <AlertTriangle className="w-3.5 h-3.5 text-[#B98121]" />
                 <span className="hidden sm:inline">VIVA SCENARIOS</span>
                 <span className="sm:hidden text-[10px]">SCENARIOS</span>
                 <ChevronDown className="w-3 h-3" />
@@ -226,23 +226,23 @@ export default function AppNavigation() {
                     initial={{ opacity: 0, scale: 0.95, y: 8 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.95, y: 8 }}
-                    className="absolute right-0 top-full mt-2 w-[calc(100vw-1.5rem)] sm:w-80 max-w-sm rounded-xl bg-[#152437] border border-[#293C51] p-3 shadow-2xl z-50 flex flex-col space-y-2"
+                    className="absolute right-0 top-full mt-2 w-[calc(100vw-1.5rem)] sm:w-80 max-w-sm rounded-xl bg-[#FFFFFF] border border-[#D8E0E7] p-3 shadow-2xl z-50 flex flex-col space-y-2"
                   >
-                    <div className="flex items-center justify-between pb-2 border-b border-[#293C51]">
-                      <span className="text-[10px] font-mono uppercase text-[#F5F8FC] font-bold flex items-center space-x-1">
-                        <AlertTriangle className="w-3.5 h-3.5 text-[#F2B65B]" />
+                    <div className="flex items-center justify-between pb-2 border-b border-[#D8E0E7]">
+                      <span className="text-[10px] font-mono uppercase text-[#1F2A37] font-bold flex items-center space-x-1">
+                        <AlertTriangle className="w-3.5 h-3.5 text-[#B98121]" />
                         <span>Viva Simulation Controls</span>
                       </span>
                       <button
                         onClick={toggleSimulation}
-                        className="text-[9px] font-mono px-2 py-1 rounded bg-white/10 hover:bg-white/20 text-[#F5F8FC] flex items-center space-x-1 cursor-pointer min-h-[28px]"
+                        className="text-[9px] font-mono px-2 py-1 rounded bg-[#EEF2F5] hover:bg-[#D8E0E7] text-[#1F2A37] flex items-center space-x-1 cursor-pointer min-h-[28px]"
                       >
-                        {isSimulating ? <Pause className="w-2.5 h-2.5 text-[#F2B65B]" /> : <Play className="w-2.5 h-2.5 text-[#79C7FF]" />}
+                        {isSimulating ? <Pause className="w-2.5 h-2.5 text-[#B98121]" /> : <Play className="w-2.5 h-2.5 text-[#2E8B8B]" />}
                         <span>{isSimulating ? "PAUSE TICKER" : "START TICKER"}</span>
                       </button>
                     </div>
 
-                    <div className="text-[10px] font-mono text-[#A5B5C8] leading-relaxed">
+                    <div className="text-[10px] font-mono text-[#5B6675] leading-relaxed">
                       Inject deterministic fault conditions to demonstrate real-time alerts and TPMS cascades during evaluation:
                     </div>
 
@@ -252,10 +252,10 @@ export default function AppNavigation() {
                           injectScenario("TPMS_PUNCTURE_RR");
                           setScenarioOpen(false);
                         }}
-                        className="w-full text-left p-2.5 rounded-lg bg-[#F16D78]/10 hover:bg-[#F16D78]/20 border border-[#F16D78]/30 text-xs font-mono text-[#F16D78] transition-colors cursor-pointer min-h-[44px]"
+                        className="w-full text-left p-2.5 rounded-lg bg-[#FFF1F2] hover:bg-[#FFE4E6] border border-[#FECDD3] text-xs font-mono text-[#C74E58] transition-colors cursor-pointer min-h-[44px]"
                       >
                         <div className="font-bold">1. TPMS Puncture Event (RR 22 PSI)</div>
-                        <div className="text-[9px] text-[#A5B5C8]">Triggers low pressure code C0077 & dashboard warning</div>
+                        <div className="text-[9px] text-[#5B6675]">Triggers low pressure code C0077 & dashboard warning</div>
                       </button>
 
                       <button
@@ -263,10 +263,10 @@ export default function AppNavigation() {
                           injectScenario("BATTERY_THERMAL_ALERT");
                           setScenarioOpen(false);
                         }}
-                        className="w-full text-left p-2.5 rounded-lg bg-[#F2B65B]/10 hover:bg-[#F2B65B]/20 border border-[#F2B65B]/30 text-xs font-mono text-[#F2B65B] transition-colors cursor-pointer min-h-[44px]"
+                        className="w-full text-left p-2.5 rounded-lg bg-[#FFFBEB] hover:bg-[#FEF3C7] border border-[#FDE68A] text-xs font-mono text-[#B98121] transition-colors cursor-pointer min-h-[44px]"
                       >
                         <div className="font-bold">2. High Battery Temp Alert (48.6°C)</div>
-                        <div className="text-[9px] text-[#A5B5C8]">Triggers code P0A7F & cooling pump advisory</div>
+                        <div className="text-[9px] text-[#5B6675]">Triggers code P0A7F & cooling pump advisory</div>
                       </button>
 
                       <button
@@ -274,10 +274,10 @@ export default function AppNavigation() {
                           injectScenario("BRAKE_PAD_WEAR");
                           setScenarioOpen(false);
                         }}
-                        className="w-full text-left p-2.5 rounded-lg bg-[#79C7FF]/10 hover:bg-[#79C7FF]/20 border border-[#79C7FF]/30 text-xs font-mono text-[#79C7FF] transition-colors cursor-pointer min-h-[44px]"
+                        className="w-full text-left p-2.5 rounded-lg bg-[#E7F3F1] hover:bg-[#D5EAE7] border border-[#86B6B2]/40 text-xs font-mono text-[#2E8B8B] transition-colors cursor-pointer min-h-[44px]"
                       >
                         <div className="font-bold">3. Brake Wear Warning (ISO-14229)</div>
-                        <div className="text-[9px] text-[#A5B5C8]">Triggers code C1120 & friction pad reminder</div>
+                        <div className="text-[9px] text-[#5B6675]">Triggers code C1120 & friction pad reminder</div>
                       </button>
 
                       <button
@@ -285,7 +285,7 @@ export default function AppNavigation() {
                           clearAllFaults();
                           setScenarioOpen(false);
                         }}
-                        className="w-full text-left p-2.5 rounded-lg bg-[#35C99A]/10 hover:bg-[#35C99A]/20 border border-[#35C99A]/30 text-xs font-mono text-[#35C99A] transition-colors flex items-center justify-between cursor-pointer min-h-[44px]"
+                        className="w-full text-left p-2.5 rounded-lg bg-[#F0FDF4] hover:bg-[#DCFCE7] border border-[#BBF7D0] text-xs font-mono text-[#2FA36B] transition-colors flex items-center justify-between cursor-pointer min-h-[44px]"
                       >
                         <div className="font-bold">Reset to 100% Nominal State</div>
                         <RotateCcw className="w-3.5 h-3.5" />
@@ -299,13 +299,13 @@ export default function AppNavigation() {
             {/* Notification Bell with Badge */}
             <Link
               href="/alerts"
-              className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#152437] border border-[#293C51] flex items-center justify-center text-[#A5B5C8] hover:text-[#F5F8FC] hover:border-[#79C7FF]/40 transition-colors min-h-[36px] min-w-[36px]"
+              className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#FFFFFF] border border-[#D8E0E7] flex items-center justify-center text-[#5B6675] hover:text-[#1F2A37] hover:border-[#2E8B8B] transition-colors min-h-[36px] min-w-[36px] shadow-xs"
               title="Alert Notifications"
               aria-label="Alerts"
             >
               <Bell className="w-4 h-4" />
               {unreadAlertsCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#F16D78] text-[9px] font-bold text-white flex items-center justify-center font-mono-numbers animate-pulse">
+                <span className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-[#C74E58] text-[9px] font-bold text-white flex items-center justify-center font-mono-numbers">
                   {unreadAlertsCount}
                 </span>
               )}
@@ -314,22 +314,22 @@ export default function AppNavigation() {
             {/* Student Attribution Chip (Desktop) */}
             <Link
               href="/about"
-              className="hidden xl:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#152437] border border-[#293C51] hover:border-[#79C7FF]/40 transition-colors text-xs font-mono text-[#F5F8FC]"
+              className="hidden xl:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#FFFFFF] border border-[#D8E0E7] hover:border-[#2E8B8B] transition-colors text-xs font-mono text-[#1F2A37] shadow-xs"
               title="Student Lead & Engineering Specifications"
             >
-              <div className="w-6 h-6 rounded-lg bg-[#79C7FF]/15 border border-[#79C7FF]/30 flex items-center justify-center text-[10px] text-[#79C7FF] font-bold">
+              <div className="w-6 h-6 rounded-lg bg-[#E7F3F1] border border-[#86B6B2]/40 flex items-center justify-center text-[10px] text-[#2E8B8B] font-bold">
                 ZA
               </div>
               <div className="flex flex-col text-left">
                 <span className="text-[10px] font-bold leading-tight">{user?.name || "Zainab Amanat"}</span>
-                <span className="text-[8px] text-[#A5B5C8] leading-tight">M245008</span>
+                <span className="text-[8px] text-[#5B6675] leading-tight">M245008</span>
               </div>
             </Link>
           </div>
         </div>
 
         {/* Secondary Navigation Ribbon (Desktop / Tablet Landscape) */}
-        <div className="hidden md:block border-t border-[#293C51] bg-[#091321]/80 overflow-x-auto scrollbar-none">
+        <div className="hidden md:block border-t border-[#D8E0E7] bg-[#FFFFFF] overflow-x-auto scrollbar-none">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center space-x-1 py-1.5">
             {navLinks.map((item) => {
               const Icon = item.icon;
@@ -340,14 +340,14 @@ export default function AppNavigation() {
                   href={item.href}
                   className={`relative px-3 py-1.5 rounded-lg flex items-center space-x-2 text-xs font-mono font-medium tracking-wide transition-all whitespace-nowrap cursor-pointer min-h-[36px] ${
                     active
-                      ? "bg-[#152437] text-[#79C7FF] border border-[#79C7FF]/30 shadow-sm font-bold"
-                      : "text-[#A5B5C8] hover:text-[#F5F8FC] hover:bg-[#152437]/60 border border-transparent"
+                      ? "bg-[#E7F3F1] text-[#2E8B8B] border border-[#2E8B8B]/40 font-bold shadow-xs"
+                      : "text-[#5B6675] hover:text-[#1F2A37] hover:bg-[#EEF2F5] border border-transparent"
                   }`}
                 >
-                  <Icon className={`w-3.5 h-3.5 ${active ? "text-[#79C7FF]" : "text-[#A5B5C8]"}`} />
+                  <Icon className={`w-3.5 h-3.5 ${active ? "text-[#2E8B8B]" : "text-[#5B6675]"}`} />
                   <span>{item.label}</span>
                   {item.badge !== undefined && item.badge > 0 && (
-                    <span className="ml-1 px-1.5 py-0.2 rounded-full text-[9px] bg-[#F16D78] text-white font-bold font-mono-numbers">
+                    <span className="ml-1 px-1.5 py-0.2 rounded-full text-[9px] bg-[#C74E58] text-white font-bold font-mono-numbers">
                       {item.badge}
                     </span>
                   )}
@@ -364,7 +364,7 @@ export default function AppNavigation() {
       {/* ========================================================= */}
       <nav
         aria-label="Mobile Navigation"
-        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#091321]/95 backdrop-blur-xl border-t border-[#293C51] shadow-[0_-8px_25px_rgba(0,0,0,0.6)] safe-area-bottom select-none"
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#FFFFFF]/98 backdrop-blur-xl border-t border-[#D8E0E7] shadow-[0_-4px_20px_rgba(31,42,55,0.06)] safe-area-bottom select-none"
       >
         <div className="flex items-center justify-around h-16 max-w-lg mx-auto px-2">
           {/* 1. Dashboard */}
@@ -372,8 +372,8 @@ export default function AppNavigation() {
             href="/dashboard"
             className={`flex-1 flex flex-col items-center justify-center h-full min-h-[48px] py-1 transition-all ${
               pathname === "/dashboard"
-                ? "text-[#79C7FF]"
-                : "text-[#A5B5C8] hover:text-[#F5F8FC]"
+                ? "text-[#2E8B8B]"
+                : "text-[#5B6675] hover:text-[#1F2A37]"
             }`}
           >
             <div className={`p-1 rounded-lg transition-transform ${pathname === "/dashboard" ? "scale-110" : ""}`}>
@@ -389,8 +389,8 @@ export default function AppNavigation() {
             href={`/vehicle/${activeVehicle.id}`}
             className={`flex-1 flex flex-col items-center justify-center h-full min-h-[48px] py-1 transition-all ${
               isVehicleActive
-                ? "text-[#79C7FF]"
-                : "text-[#A5B5C8] hover:text-[#F5F8FC]"
+                ? "text-[#2E8B8B]"
+                : "text-[#5B6675] hover:text-[#1F2A37]"
             }`}
           >
             <div className={`p-1 rounded-lg transition-transform ${isVehicleActive ? "scale-110" : ""}`}>
@@ -408,17 +408,17 @@ export default function AppNavigation() {
             className="flex-1 flex flex-col items-center justify-center h-full min-h-[48px] -mt-5 group"
           >
             <div
-              className={`w-13 h-13 rounded-2xl flex items-center justify-center border transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.6)] ${
+              className={`w-13 h-13 rounded-2xl flex items-center justify-center border transition-all duration-300 shadow-[0_4px_16px_rgba(31,42,55,0.12)] ${
                 isScanActive
-                  ? "bg-[#79C7FF] text-[#091321] border-[#79C7FF] shadow-[0_0_24px_rgba(121,199,255,0.4)] scale-105"
-                  : "bg-gradient-to-b from-[#1E314B] to-[#152437] text-[#79C7FF] border-[#293C51] group-hover:border-[#79C7FF]/50"
+                  ? "bg-[#2E8B8B] text-[#FFFFFF] border-[#2E8B8B] shadow-[0_4px_20px_rgba(46,139,139,0.3)] scale-105"
+                  : "bg-gradient-to-b from-[#FFFFFF] to-[#EEF2F5] text-[#2E8B8B] border-[#D8E0E7] group-hover:border-[#2E8B8B]"
               }`}
             >
               <Camera className="w-6 h-6 transition-transform group-hover:scale-110" />
             </div>
             <span
               className={`text-[10px] font-mono font-bold tracking-tight mt-1 ${
-                isScanActive ? "text-[#79C7FF]" : "text-[#A5B5C8]"
+                isScanActive ? "text-[#2E8B8B]" : "text-[#5B6675]"
               }`}
             >
               Scan
@@ -430,8 +430,8 @@ export default function AppNavigation() {
             href={`/vehicle/${activeVehicle.id}/location`}
             className={`flex-1 flex flex-col items-center justify-center h-full min-h-[48px] py-1 transition-all ${
               isTripsActive
-                ? "text-[#79C7FF]"
-                : "text-[#A5B5C8] hover:text-[#F5F8FC]"
+                ? "text-[#2E8B8B]"
+                : "text-[#5B6675] hover:text-[#1F2A37]"
             }`}
           >
             <div className={`p-1 rounded-lg transition-transform ${isTripsActive ? "scale-110" : ""}`}>
@@ -447,13 +447,13 @@ export default function AppNavigation() {
             onClick={() => setMoreDrawerOpen(true)}
             aria-label="Open More Menu"
             className={`flex-1 flex flex-col items-center justify-center h-full min-h-[48px] py-1 transition-all cursor-pointer relative ${
-              moreDrawerOpen ? "text-[#79C7FF]" : "text-[#A5B5C8] hover:text-[#F5F8FC]"
+              moreDrawerOpen ? "text-[#2E8B8B]" : "text-[#5B6675] hover:text-[#1F2A37]"
             }`}
           >
             <div className="p-1 rounded-lg relative">
               <MoreHorizontal className="w-5 h-5" />
               {unreadAlertsCount > 0 && (
-                <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#F16D78] ring-2 ring-[#091321]" />
+                <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-[#C74E58] ring-2 ring-[#FFFFFF]" />
               )}
             </div>
             <span className="text-[10px] font-mono tracking-tight font-medium mt-0.5">
@@ -475,7 +475,7 @@ export default function AppNavigation() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMoreDrawerOpen(false)}
-              className="absolute inset-0 bg-[#091321]/80 backdrop-blur-md"
+              className="absolute inset-0 bg-[#1F2A37]/50 backdrop-blur-xs"
             />
 
             {/* Bottom Sheet Modal Container */}
@@ -484,17 +484,17 @@ export default function AppNavigation() {
               animate={{ y: 0 }}
               exit={{ y: "100%" }}
               transition={{ type: "spring", damping: 28, stiffness: 300 }}
-              className="absolute bottom-0 left-0 right-0 max-h-[85vh] bg-[#152437] border-t border-[#293C51] rounded-t-3xl shadow-[0_-10px_40px_rgba(0,0,0,0.8)] flex flex-col overflow-hidden safe-area-bottom"
+              className="absolute bottom-0 left-0 right-0 max-h-[85vh] bg-[#FFFFFF] border-t border-[#D8E0E7] rounded-t-3xl shadow-[0_-10px_40px_rgba(31,42,55,0.2)] flex flex-col overflow-hidden safe-area-bottom"
             >
               {/* Sheet Drag Handle & Header */}
-              <div className="p-4 pb-2 border-b border-[#293C51] flex items-center justify-between shrink-0">
+              <div className="p-4 pb-2 border-b border-[#D8E0E7] flex items-center justify-between shrink-0">
                 <div className="flex items-center space-x-2.5">
                   <NebulaLogo size="sm" showText={false} />
                   <div>
-                    <h3 className="font-display font-extrabold text-sm text-[#F5F8FC]">
+                    <h3 className="font-display font-extrabold text-sm text-[#1F2A37]">
                       NEBULA CONNECTED MENU
                     </h3>
-                    <span className="text-[9px] font-mono text-[#A5B5C8] uppercase">
+                    <span className="text-[9px] font-mono text-[#5B6675] uppercase">
                       Fleet Operations & Telemetry OS
                     </span>
                   </div>
@@ -502,7 +502,7 @@ export default function AppNavigation() {
 
                 <button
                   onClick={() => setMoreDrawerOpen(false)}
-                  className="w-10 h-10 rounded-xl bg-[#1E314B] border border-[#293C51] flex items-center justify-center text-[#A5B5C8] hover:text-[#F5F8FC] cursor-pointer min-h-[44px] min-w-[44px]"
+                  className="w-10 h-10 rounded-xl bg-[#EEF2F5] border border-[#D8E0E7] flex items-center justify-center text-[#5B6675] hover:text-[#1F2A37] cursor-pointer min-h-[44px] min-w-[44px]"
                   aria-label="Close menu"
                 >
                   <X className="w-5 h-5" />
@@ -512,16 +512,16 @@ export default function AppNavigation() {
               {/* Scrollable Sheet Content */}
               <div className="overflow-y-auto px-4 py-4 space-y-4">
                 {/* Active Vehicle Card */}
-                <div className="p-3.5 rounded-2xl bg-[#1E314B] border border-[#293C51] flex items-center justify-between">
+                <div className="p-3.5 rounded-2xl bg-[#EEF2F5] border border-[#D8E0E7] flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-10 h-10 rounded-xl bg-[#79C7FF]/15 border border-[#79C7FF]/30 flex items-center justify-center text-[#79C7FF]">
+                    <div className="w-10 h-10 rounded-xl bg-[#E7F3F1] border border-[#86B6B2]/40 flex items-center justify-center text-[#2E8B8B]">
                       <Car className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="text-xs font-mono font-bold text-[#F5F8FC]">
+                      <div className="text-xs font-mono font-bold text-[#1F2A37]">
                         {activeVehicle.name}
                       </div>
-                      <div className="text-[10px] font-mono text-[#A5B5C8]">
+                      <div className="text-[10px] font-mono text-[#5B6675]">
                         Plate: {activeVehicle.licensePlate} • SoC: {activeVehicle.batteryLevelPct}%
                       </div>
                     </div>
@@ -530,7 +530,7 @@ export default function AppNavigation() {
                   <Link
                     href="/vehicles"
                     onClick={() => setMoreDrawerOpen(false)}
-                    className="px-3 py-2 rounded-xl bg-[#79C7FF] text-[#091321] text-xs font-mono font-bold min-h-[44px] flex items-center"
+                    className="px-3 py-2 rounded-xl bg-[#2E8B8B] hover:bg-[#236F70] text-[#FFFFFF] text-xs font-mono font-bold min-h-[44px] flex items-center shadow-xs"
                   >
                     Switch
                   </Link>
@@ -538,7 +538,7 @@ export default function AppNavigation() {
 
                 {/* Secondary Navigation Links */}
                 <div className="space-y-1">
-                  <span className="text-[10px] font-mono uppercase text-[#A5B5C8] font-bold px-1 block mb-1">
+                  <span className="text-[10px] font-mono uppercase text-[#5B6675] font-bold px-1 block mb-1">
                     ALL APPLICATION MODULES
                   </span>
 
@@ -553,19 +553,19 @@ export default function AppNavigation() {
                           onClick={() => setMoreDrawerOpen(false)}
                           className={`p-3 rounded-xl flex items-center justify-between min-h-[48px] transition-all ${
                             active
-                              ? "bg-[#79C7FF]/15 border border-[#79C7FF]/40 text-[#79C7FF]"
-                              : "bg-[#1E314B]/60 hover:bg-[#1E314B] border border-[#293C51] text-[#F5F8FC]"
+                              ? "bg-[#E7F3F1] border border-[#2E8B8B]/40 text-[#2E8B8B]"
+                              : "bg-[#FFFFFF] hover:bg-[#EEF2F5] border border-[#D8E0E7] text-[#1F2A37]"
                           }`}
                         >
                           <div className="flex items-center space-x-3">
-                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${active ? "bg-[#79C7FF]/20 text-[#79C7FF]" : "bg-[#152437] text-[#A5B5C8]"}`}>
+                            <div className={`w-8 h-8 rounded-lg flex items-center justify-center ${active ? "bg-[#2E8B8B]/10 text-[#2E8B8B]" : "bg-[#EEF2F5] text-[#5B6675]"}`}>
                               <Icon className="w-4 h-4" />
                             </div>
                             <div>
                               <div className="text-xs font-mono font-bold leading-tight">
                                 {item.label}
                               </div>
-                              <div className="text-[9px] font-mono text-[#A5B5C8] mt-0.5">
+                              <div className="text-[9px] font-mono text-[#5B6675] mt-0.5">
                                 {item.desc}
                               </div>
                             </div>
@@ -573,11 +573,11 @@ export default function AppNavigation() {
 
                           <div className="flex items-center space-x-2">
                             {item.badge !== undefined && item.badge > 0 && (
-                              <span className="px-2 py-0.5 rounded-full text-[10px] bg-[#F16D78] text-white font-bold font-mono-numbers">
+                              <span className="px-2 py-0.5 rounded-full text-[10px] bg-[#C74E58] text-white font-bold font-mono-numbers">
                                 {item.badge}
                               </span>
                             )}
-                            <ChevronRight className="w-4 h-4 text-[#A5B5C8]" />
+                            <ChevronRight className="w-4 h-4 text-[#5B6675]" />
                           </div>
                         </Link>
                       );
@@ -586,9 +586,9 @@ export default function AppNavigation() {
                 </div>
 
                 {/* Academic Attribution Footer inside Drawer */}
-                <div className="pt-3 border-t border-[#293C51] flex items-center justify-between text-xs font-mono text-[#A5B5C8]">
+                <div className="pt-3 border-t border-[#D8E0E7] flex items-center justify-between text-xs font-mono text-[#5B6675]">
                   <div className="flex items-center space-x-2">
-                    <ShieldCheck className="w-4 h-4 text-[#35C99A]" />
+                    <ShieldCheck className="w-4 h-4 text-[#2FA36B]" />
                     <span>Zainab Amanat (M245008)</span>
                   </div>
                   <span className="text-[10px]">Session 2026</span>

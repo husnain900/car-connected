@@ -39,100 +39,105 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex-1 flex items-center justify-center p-4 sm:p-6 py-12 select-none text-[#F5F8FC]">
-      <div className="w-full max-w-md p-6 sm:p-8 rounded-2xl nebula-card border border-[#293C51] space-y-6">
+    <div className="flex-1 flex items-center justify-center p-4 sm:p-6 py-12 select-none text-[#1F2A37]">
+      <div className="w-full max-w-md p-6 sm:p-8 rounded-2xl nebula-card border border-[#D8E0E7] space-y-6 shadow-sm">
         <div className="text-center space-y-2">
           <div className="flex justify-center mb-3">
             <NebulaLogo size="lg" showText={false} />
           </div>
-          <h1 className="font-display font-extrabold text-2xl text-[#F5F8FC]">
+          <h1 className="font-display font-bold text-2xl text-[#1F2A37] tracking-tight">
             Nebula Drive Cockpit Login
           </h1>
-          <p className="text-xs font-mono text-[#A5B5C8]">
+          <p className="text-xs font-mono text-[#5B6675]">
             Secure session access for connected fleet operations
           </p>
         </div>
 
         {/* Viva Quick Login Profiles */}
-        <div className="p-3.5 rounded-xl bg-[#1E314B] border border-[#293C51] space-y-2">
-          <span className="text-[10px] font-mono text-[#A5B5C8] uppercase font-bold block">
+        <div className="p-3.5 rounded-xl bg-[#F6F8FA] border border-[#D8E0E7] space-y-2">
+          <span className="text-[10px] font-mono text-[#5B6675] uppercase font-bold block">
             ONE-CLICK VIVA EVALUATION ACCESS:
           </span>
-          <div className="flex flex-col space-y-1.5">
+          <div className="grid grid-cols-3 gap-2">
             <button
+              type="button"
               onClick={() => loginAsDemo("STUDENT_LEAD")}
-              className="w-full p-2 rounded-lg bg-[#79C7FF]/10 hover:bg-[#79C7FF]/20 border border-[#79C7FF]/30 text-left text-xs font-mono text-[#79C7FF] font-bold transition-colors flex items-center justify-between cursor-pointer"
+              className="px-2 py-1.5 rounded-lg bg-[#E7F3F1] border border-[#86B6B2]/40 text-[#2E8B8B] hover:bg-[#2E8B8B] hover:text-white transition-colors text-[10px] font-mono font-bold cursor-pointer"
             >
-              <span>1. Student Lead (Zainab Amanat // M245008)</span>
-              <ArrowRight className="w-3 h-3" />
+              Student (Zainab)
             </button>
             <button
+              type="button"
               onClick={() => loginAsDemo("EVALUATOR")}
-              className="w-full p-2 rounded-lg bg-[#152437] hover:bg-[#1E314B] border border-[#293C51] text-left text-xs font-mono text-[#F5F8FC] transition-colors flex items-center justify-between cursor-pointer"
+              className="px-2 py-1.5 rounded-lg bg-[#FFFFFF] border border-[#D8E0E7] text-[#1F2A37] hover:bg-[#2E8B8B] hover:text-white transition-colors text-[10px] font-mono font-bold cursor-pointer"
             >
-              <span>2. Academic Examiner / Evaluator</span>
-              <ArrowRight className="w-3 h-3" />
+              Examiner Viva
             </button>
             <button
+              type="button"
               onClick={() => loginAsDemo("FLEET_MANAGER")}
-              className="w-full p-2 rounded-lg bg-[#152437] hover:bg-[#1E314B] border border-[#293C51] text-left text-xs font-mono text-[#F5F8FC] transition-colors flex items-center justify-between cursor-pointer"
+              className="px-2 py-1.5 rounded-lg bg-[#FFFFFF] border border-[#D8E0E7] text-[#1F2A37] hover:bg-[#2E8B8B] hover:text-white transition-colors text-[10px] font-mono font-bold cursor-pointer"
             >
-              <span>3. Fleet Operations Admin</span>
-              <ArrowRight className="w-3 h-3" />
+              Fleet Manager
             </button>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-1.5">
-            <label className="text-[10px] font-mono uppercase text-[#A5B5C8] font-bold block">
-              EMAIL ADDRESS
+            <label className="text-[10px] font-mono uppercase text-[#5B6675] font-bold block">
+              Driver / Operator Email
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 text-[#A5B5C8] absolute left-3.5 top-3" />
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#5B6675]">
+                <Mail className="w-4 h-4" />
+              </div>
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full bg-[#091321] border border-[#293C51] focus:border-[#79C7FF] rounded-xl py-2.5 pl-10 pr-4 text-xs font-mono text-[#F5F8FC] outline-none transition-colors"
+                className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-[#F6F8FA] border border-[#D8E0E7] text-xs font-mono text-[#1F2A37] focus:border-[#2E8B8B] focus:outline-none"
               />
             </div>
           </div>
 
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <label className="text-[10px] font-mono uppercase text-[#A5B5C8] font-bold block">
-                PASSWORD
+              <label className="text-[10px] font-mono uppercase text-[#5B6675] font-bold">
+                Master Security Key
               </label>
-              <Link href="/forgot-password" className="text-[10px] font-mono text-[#79C7FF] hover:underline">
-                Forgot password?
+              <Link href="/forgot-password" className="text-[10px] font-mono text-[#2E8B8B] hover:underline">
+                Forgot key?
               </Link>
             </div>
             <div className="relative">
-              <Lock className="w-4 h-4 text-[#A5B5C8] absolute left-3.5 top-3" />
+              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-[#5B6675]">
+                <Lock className="w-4 h-4" />
+              </div>
               <input
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full bg-[#091321] border border-[#293C51] focus:border-[#79C7FF] rounded-xl py-2.5 pl-10 pr-4 text-xs font-mono text-[#F5F8FC] outline-none transition-colors"
+                className="w-full pl-9 pr-3 py-2.5 rounded-xl bg-[#F6F8FA] border border-[#D8E0E7] text-xs font-mono text-[#1F2A37] focus:border-[#2E8B8B] focus:outline-none"
               />
             </div>
           </div>
 
           <button
             type="submit"
-            className="w-full py-3 rounded-xl bg-[#79C7FF] hover:bg-[#68b5ea] text-[#091321] font-mono font-bold text-xs tracking-wider transition-colors shadow-sm cursor-pointer"
+            className="w-full py-3 rounded-xl bg-[#2E8B8B] hover:bg-[#236F70] text-white font-mono font-bold text-xs flex items-center justify-center space-x-2 transition-colors cursor-pointer shadow-sm mt-2"
           >
-            SIGN IN TO TELEMETRY COCKPIT
+            <span>AUTHENTICATE &amp; ENTER COCKPIT</span>
+            <ArrowRight className="w-4 h-4" />
           </button>
         </form>
 
-        <div className="pt-2 text-center text-xs font-mono text-[#A5B5C8]">
-          Need an account?{" "}
-          <Link href="/register" className="text-[#79C7FF] hover:underline font-bold">
-            Register new driver profile
+        <div className="pt-2 text-center text-xs font-mono text-[#5B6675]">
+          New student pilot?{" "}
+          <Link href="/register" className="text-[#2E8B8B] font-bold hover:underline">
+            Register vehicle twin
           </Link>
         </div>
       </div>

@@ -1,15 +1,20 @@
-# Start Next.js server on port 3000
+# Modern Automotive Screenshot Automation Suite (Car Connected M245008)
 $chrome = "C:\Program Files\Google\Chrome\Application\chrome.exe"
 $outDir = "d:\car-connected\docs\screenshots"
+$port = 3005
 
-Write-Host "Starting Next.js production server on port 3000..."
-$serverProcess = Start-Process -FilePath "npm.cmd" -ArgumentList "run start -- -p 3000" -PassThru -NoNewWindow
+if (-not (Test-Path $outDir)) {
+    New-Item -ItemType Directory -Path $outDir -Force | Out-Null
+}
+
+Write-Host "Starting Next.js production server on port $port..."
+$serverProcess = Start-Process -FilePath "npm.cmd" -ArgumentList "run start -- -p $port" -PassThru -NoNewWindow
 
 # Wait for server to boot
 $ready = $false
 for ($i = 0; $i -lt 30; $i++) {
     try {
-        $res = Invoke-WebRequest -Uri "http://localhost:3000/dashboard" -UseBasicParsing -TimeoutSec 2
+        $res = Invoke-WebRequest -Uri "http://localhost:$port/dashboard" -UseBasicParsing -TimeoutSec 2
         if ($res.StatusCode -eq 200) {
             $ready = $true
             break
@@ -21,7 +26,7 @@ for ($i = 0; $i -lt 30; $i++) {
 
 if (-not $ready) {
     Write-Host "Server failed to start in time."
-    Stop-Process -Id $serverProcess.Id -Force
+    Stop-Process -Id $serverProcess.Id -Force -ErrorAction SilentlyContinue
     exit 1
 }
 
@@ -42,7 +47,8 @@ $viewports = @(
 $routes = @(
     @{ slug = "dashboard"; path = "/dashboard" },
     @{ slug = "maintenance"; path = "/vehicle/nebula-hyperion-01/maintenance" },
-    @{ slug = "inspection"; path = "/vehicle/nebula-hyperion-01/inspection" }
+    @{ slug = "inspection"; path = "/vehicle/nebula-hyperion-01/inspection" },
+    @{ slug = "diagnostics"; path = "/vehicle/nebula-hyperion-01/diagnostics" }
 )
 
 foreach ($vp in $viewports) {
@@ -53,17 +59,21 @@ foreach ($vp in $viewports) {
 
     foreach ($r in $routes) {
         $slug = $r.slug
-        $url = "http://localhost:3000$($r.path)"
-        $outFile = Join-Path $outDir "${vpName}_${slug}.png"
+        $url = "http://localhost:$port$($r.path)"
+        $tmpScreenshot = Join-Path $env:TEMP "scr_${vpName}_${slug}.png"
+        $finalFile = Join-Path $outDir "${vpName}_${slug}.png"
 
-        # Capture using Chrome headless
-        & $chrome --headless=new --disable-gpu --hide-scrollbars --window-size="$w,$h" --screenshot="$outFile" "$url"
+        # Capture using Chrome headless via TEMP directory
+        cmd.exe /c "`"$chrome`" --headless=new --disable-gpu --hide-scrollbars --window-size=$w,$h `"--screenshot=$tmpScreenshot`" $url" | Out-Null
+        
+        if (Test-Path $tmpScreenshot) {
+            Move-Item -Path $tmpScreenshot -Destination $finalFile -Force
+        }
     }
 }
 
 Write-Host "Screenshots captured successfully in $outDir!"
 
 # Shutdown server
-Stop-Process -Id $serverProcess.Id -Force
-Get-Process -Name "node" -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -like "*next-server*" -or $_.CommandLine -like "*car-connected*" } | Stop-Process -Force -ErrorAction SilentlyContinue
-
+Stop-Process -Id $serverProcess.Id -Force -ErrorAction SilentlyContinue
+Get-Process -Name "node" -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -like "*next-server*3005*" -or $_.CommandLine -like "*-p 3005*" } | Stop-Process -Force -ErrorAction SilentlyContinue
