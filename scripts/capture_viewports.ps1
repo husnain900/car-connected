@@ -66,3 +66,4 @@ Write-Host "Screenshots captured successfully in $outDir!"
 # Shutdown server
 Stop-Process -Id $serverProcess.Id -Force
 Get-Process -Name "node" -ErrorAction SilentlyContinue | Where-Object { $_.CommandLine -like "*next-server*" -or $_.CommandLine -like "*car-connected*" } | Stop-Process -Force -ErrorAction SilentlyContinue
+
