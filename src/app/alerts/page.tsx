@@ -40,10 +40,10 @@ export default function AlertsPage() {
             </p>
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
             <button
               onClick={() => injectScenario("TPMS_PUNCTURE_RR")}
-              className="px-3 py-1.5 rounded-xl bg-[#F16D78]/15 hover:bg-[#F16D78]/25 border border-[#F16D78]/30 text-[#F16D78] text-xs font-mono font-bold transition-colors flex items-center space-x-1 cursor-pointer"
+              className="flex-1 sm:flex-initial min-h-[40px] px-3 py-1.5 rounded-xl bg-[#F16D78]/15 hover:bg-[#F16D78]/25 border border-[#F16D78]/30 text-[#F16D78] text-xs font-mono font-bold transition-colors flex items-center justify-center space-x-1 cursor-pointer"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Simulate Critical Alert</span>
@@ -51,7 +51,7 @@ export default function AlertsPage() {
 
             <button
               onClick={markAllAlertsRead}
-              className="px-3.5 py-1.5 rounded-xl bg-[#1E314B] hover:bg-[#152437] border border-[#293C51] text-xs font-mono font-bold text-[#F5F8FC] flex items-center space-x-1.5 transition-colors cursor-pointer"
+              className="flex-1 sm:flex-initial min-h-[40px] px-3.5 py-1.5 rounded-xl bg-[#1E314B] hover:bg-[#152437] border border-[#293C51] text-xs font-mono font-bold text-[#F5F8FC] flex items-center justify-center space-x-1.5 transition-colors cursor-pointer"
             >
               <CheckCheck className="w-4 h-4 text-[#35C99A]" />
               <span>MARK ALL AS READ</span>

@@ -76,7 +76,7 @@ export default function MaintenancePage() {
             Vehicle Service Roster
           </h2>
 
-          <div className="flex items-center space-x-1.5 bg-[#091321] p-1 rounded-lg border border-[#293C51] text-xs font-mono">
+          <div className="flex items-center space-x-1.5 bg-[#091321] p-1 rounded-lg border border-[#293C51] text-xs font-mono max-w-full overflow-x-auto scrollbar-none">
             {["ALL", "BRAKES", "TYRES", "HV_COOLANT", "CABIN_AIR"].map((cat) => (
               <button
                 key={cat}

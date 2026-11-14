@@ -45,7 +45,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-baseline justify-between gap-4">
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 sm:gap-4">
           <div>
             <h1 className="font-display font-black text-2xl sm:text-3xl tracking-wide text-[#F5F8FC]">
               {activeVehicle.name}
@@ -53,24 +53,24 @@ export default function DashboardPage() {
             <p className="text-xs font-mono text-[#A5B5C8] mt-0.5">{activeVehicle.model}</p>
           </div>
 
-          <div className="flex items-center space-x-3">
-            <div className="nebula-card px-3.5 py-1.5 flex flex-col items-end">
-              <span className="text-[9px] font-mono text-[#A5B5C8]">EST. RANGE</span>
-              <span className="font-display font-black text-base text-[#F5F8FC] font-mono-numbers">
-                {activeVehicle.estRangeKm} <span className="text-[10px] text-[#79C7FF]">KM</span>
+          <div className="grid grid-cols-3 gap-2 w-full sm:w-auto sm:flex sm:items-center sm:space-x-3">
+            <div className="nebula-card px-2 sm:px-3.5 py-1.5 flex flex-col items-center sm:items-end text-center sm:text-right">
+              <span className="text-[8px] sm:text-[9px] font-mono text-[#A5B5C8]">EST. RANGE</span>
+              <span className="font-display font-black text-sm sm:text-base text-[#F5F8FC] font-mono-numbers">
+                {activeVehicle.estRangeKm} <span className="text-[9px] sm:text-[10px] text-[#79C7FF]">KM</span>
               </span>
             </div>
 
-            <div className="nebula-card px-3.5 py-1.5 flex flex-col items-end">
-              <span className="text-[9px] font-mono text-[#A5B5C8]">BATTERY SOC</span>
-              <span className="font-display font-black text-base text-[#35C99A] font-mono-numbers">
+            <div className="nebula-card px-2 sm:px-3.5 py-1.5 flex flex-col items-center sm:items-end text-center sm:text-right">
+              <span className="text-[8px] sm:text-[9px] font-mono text-[#A5B5C8]">BATTERY SOC</span>
+              <span className="font-display font-black text-sm sm:text-base text-[#35C99A] font-mono-numbers">
                 {activeVehicle.batteryLevelPct}%
               </span>
             </div>
 
-            <div className="nebula-card px-3.5 py-1.5 flex flex-col items-end">
-              <span className="text-[9px] font-mono text-[#A5B5C8]">DRIVE MODE</span>
-              <span className="font-display font-extrabold text-xs text-[#79C7FF] tracking-wider mt-0.5">
+            <div className="nebula-card px-2 sm:px-3.5 py-1.5 flex flex-col items-center sm:items-end text-center sm:text-right">
+              <span className="text-[8px] sm:text-[9px] font-mono text-[#A5B5C8]">DRIVE MODE</span>
+              <span className="font-display font-extrabold text-[11px] sm:text-xs text-[#79C7FF] tracking-wider mt-0.5">
                 {activeVehicle.driveMode}
               </span>
             </div>
@@ -119,8 +119,8 @@ export default function DashboardPage() {
         <Vehicle3DViewer vehicle={activeVehicle} />
 
         {/* Quick Subsystem Status Bar */}
-        <div className="nebula-card px-5 py-3 flex flex-wrap items-center justify-between gap-4 text-xs font-mono text-[#A5B5C8]">
-          <div className="flex items-center space-x-6">
+        <div className="nebula-card p-3.5 sm:px-5 sm:py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs font-mono text-[#A5B5C8]">
+          <div className="grid grid-cols-2 sm:flex sm:items-center gap-3 sm:gap-6 w-full sm:w-auto">
             <div>
               <span className="text-[9px] uppercase text-[#A5B5C8] block">ODOMETER</span>
               <span className="text-xs font-bold text-[#F5F8FC] font-mono-numbers">
@@ -133,7 +133,7 @@ export default function DashboardPage() {
                 {activeVehicle.cellVoltage} V
               </span>
             </div>
-            <div>
+            <div className="col-span-2 sm:col-span-1">
               <span className="text-[9px] uppercase text-[#A5B5C8] block">SECURITY STATE</span>
               <span className="text-xs font-bold text-[#35C99A] flex items-center space-x-1">
                 <Shield className="w-3.5 h-3.5" />
@@ -142,10 +142,10 @@ export default function DashboardPage() {
             </div>
           </div>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 w-full sm:w-auto justify-end pt-2 sm:pt-0 border-t sm:border-t-0 border-[#293C51]/60">
             <Link
               href={`/vehicle/${activeVehicle.id}/diagnostics`}
-              className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-mono text-[#F5F8FC] hover:text-[#79C7FF] transition-colors"
+              className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs font-mono text-[#F5F8FC] hover:text-[#79C7FF] transition-colors min-h-[36px] flex items-center"
             >
               Full Telemetry Matrix →
             </Link>

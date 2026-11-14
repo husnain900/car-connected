@@ -287,11 +287,18 @@ export default function Vehicle3DViewer({
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.minDistance = 2.5;
-    controls.maxDistance = 8.0;
+    controls.minDistance = 2.2;
+    controls.maxDistance = 8.5;
     controls.maxPolarAngle = Math.PI / 2 - 0.05; // Prevent flipping below floor
     controls.autoRotate = true;
     controls.autoRotateSpeed = 0.8;
+    controls.enableZoom = true;
+    controls.enableRotate = true;
+    controls.enablePan = false;
+    controls.touches = {
+      ONE: THREE.TOUCH.ROTATE,
+      TWO: THREE.TOUCH.DOLLY_PAN,
+    };
     controls.target.set(0, 0.5, 0);
     controlsRef.current = controls;
 
@@ -547,23 +554,32 @@ export default function Vehicle3DViewer({
     };
   }, [mode, selectedColor.hex, selectedColor.metalness, selectedColor.roughness]);
 
+  // Reset View to default 3/4 Showroom
+  const resetView = () => {
+    applyCameraPreset("3/4 Showroom");
+    if (controlsRef.current) {
+      controlsRef.current.target.set(0, 0.5, 0);
+      controlsRef.current.update();
+    }
+  };
+
   return (
     <div
       ref={containerRef}
-      className={`relative w-full h-[480px] sm:h-[540px] rounded-2xl nebula-card overflow-hidden border border-[#293C51] select-none bg-[#091321] ${className}`}
+      className={`relative w-full h-[340px] xs:h-[380px] sm:h-[460px] md:h-[520px] rounded-2xl nebula-card overflow-hidden border border-[#293C51] select-none bg-[#091321] ${className}`}
     >
       {/* Background Grid Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(rgba(121,199,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
       {/* Top HUD Controls Bar */}
-      <div className="absolute top-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-3 pointer-events-auto">
-        <div className="flex items-center space-x-2">
-          <div className="flex items-center space-x-2 px-3 py-1 rounded-full bg-[#152437]/90 border border-[#293C51] backdrop-blur-md">
+      <div className="absolute top-2.5 sm:top-4 left-2.5 sm:left-4 right-2.5 sm:right-4 z-20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 pointer-events-auto">
+        <div className="flex items-center space-x-2 max-w-full overflow-x-auto scrollbar-none">
+          <div className="flex items-center space-x-1.5 px-2.5 py-1 rounded-full bg-[#152437]/90 border border-[#293C51] backdrop-blur-md shrink-0">
             <span className="w-2 h-2 rounded-full bg-[#79C7FF] animate-pulse" />
-            <span className="text-[10px] font-mono uppercase text-[#A5B5C8] font-bold">
+            <span className="text-[9px] sm:text-[10px] font-mono uppercase text-[#A5B5C8] font-bold">
               3D DIGITAL TWIN
             </span>
-            <span className="text-[10px] font-mono text-[#79C7FF] font-bold">
+            <span className="text-[9px] sm:text-[10px] font-mono text-[#79C7FF] font-bold hidden xs:inline">
               {"// WEBGL ACTIVE"}
             </span>
           </div>
@@ -572,33 +588,39 @@ export default function Vehicle3DViewer({
           {webGLSupported && (
             <button
               onClick={() => setMode(mode === "3d" ? "2d" : "3d")}
-              className="px-2.5 py-1 rounded-full bg-[#152437]/80 hover:bg-[#1E314B] border border-[#293C51] text-[10px] font-mono text-[#A5B5C8] hover:text-[#F5F8FC] transition-colors flex items-center space-x-1.5 cursor-pointer"
+              className="px-2.5 py-1 rounded-full bg-[#152437]/80 hover:bg-[#1E314B] border border-[#293C51] text-[9px] sm:text-[10px] font-mono text-[#A5B5C8] hover:text-[#F5F8FC] transition-colors flex items-center space-x-1.5 cursor-pointer shrink-0 min-h-[32px]"
               title="Toggle between 3D WebGL orbit & 2D studio photography"
             >
               <Layers className="w-3 h-3 text-[#79C7FF]" />
-              <span>{mode === "3d" ? "SWITCH TO 2D STUDIO" : "LAUNCH 3D TWIN"}</span>
+              <span>{mode === "3d" ? "2D STUDIO" : "3D TWIN"}</span>
             </button>
           )}
         </div>
 
-        {/* Camera Views & Turntable Toggle (Only visible in 3D mode) */}
+        {/* Camera Views & Reset Controls (Only visible in 3D mode) */}
         {mode === "3d" && (
-          <div className="flex items-center space-x-1.5 bg-[#152437]/90 p-1 rounded-xl border border-[#293C51] backdrop-blur-md">
-            {["3/4 Showroom", "Front", "Side (Left)", "Rear", "Top View"].map(
-              (preset) => (
-                <button
-                  key={preset}
-                  onClick={() => applyCameraPreset(preset)}
-                  className={`px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold transition-all cursor-pointer ${
-                    activePreset === preset
-                      ? "bg-[#79C7FF] text-[#091321] shadow-sm font-semibold"
-                      : "text-[#A5B5C8] hover:text-[#F5F8FC]"
-                  }`}
-                >
-                  {preset.toUpperCase()}
-                </button>
-              )
-            )}
+          <div className="flex items-center space-x-1 bg-[#152437]/90 p-1 rounded-xl border border-[#293C51] backdrop-blur-md max-w-full overflow-x-auto scrollbar-none">
+            {[
+              { id: "3/4 Showroom", label: "3/4", fullLabel: "3/4 Showroom" },
+              { id: "Front", label: "Front", fullLabel: "Front" },
+              { id: "Side (Left)", label: "Side", fullLabel: "Side" },
+              { id: "Rear", label: "Rear", fullLabel: "Rear" },
+              { id: "Top View", label: "Top", fullLabel: "Top" },
+            ].map((p) => (
+              <button
+                key={p.id}
+                onClick={() => applyCameraPreset(p.id)}
+                className={`px-2 py-1 rounded-lg text-[9px] sm:text-[10px] font-mono font-bold transition-all cursor-pointer whitespace-nowrap min-h-[30px] ${
+                  activePreset === p.id
+                    ? "bg-[#79C7FF] text-[#091321] shadow-sm font-semibold"
+                    : "text-[#A5B5C8] hover:text-[#F5F8FC]"
+                }`}
+                title={p.fullLabel}
+              >
+                <span className="sm:hidden">{p.label}</span>
+                <span className="hidden sm:inline">{p.fullLabel.toUpperCase()}</span>
+              </button>
+            ))}
 
             <button
               onClick={() => {
@@ -608,7 +630,7 @@ export default function Vehicle3DViewer({
                   controlsRef.current.autoRotate = nextState;
                 }
               }}
-              className={`p-1.5 rounded-lg border transition-all cursor-pointer ${
+              className={`p-1.5 rounded-lg border transition-all cursor-pointer shrink-0 min-h-[30px] min-w-[30px] flex items-center justify-center ${
                 isRotating
                   ? "border-[#79C7FF] text-[#79C7FF] bg-[#79C7FF]/10"
                   : "border-[#293C51] text-[#A5B5C8] hover:text-[#F5F8FC]"
@@ -616,6 +638,15 @@ export default function Vehicle3DViewer({
               title="Toggle Auto-Rotation Turntable"
             >
               <RotateCcw className={`w-3.5 h-3.5 ${isRotating ? "animate-spin" : ""}`} />
+            </button>
+
+            {/* Reset View Button */}
+            <button
+              onClick={resetView}
+              className="px-2 py-1 rounded-lg border border-[#293C51] hover:border-[#79C7FF]/40 text-[9px] sm:text-[10px] font-mono font-bold text-[#A5B5C8] hover:text-[#79C7FF] transition-all cursor-pointer whitespace-nowrap min-h-[30px]"
+              title="Reset View and Camera to default"
+            >
+              RESET
             </button>
           </div>
         )}
@@ -697,7 +728,7 @@ export default function Vehicle3DViewer({
 
       {/* Selected Hotspot Inspection Modal / Card */}
       {activeHotspot && (
-        <div className="absolute top-16 right-4 sm:right-6 w-80 p-4 rounded-xl bg-[#152437]/95 border border-[#293C51] backdrop-blur-xl shadow-2xl z-30 font-mono animate-in fade-in duration-200">
+        <div className="absolute bottom-16 sm:top-16 left-3 right-3 sm:left-auto sm:right-6 sm:w-80 max-w-[calc(100vw-1.5rem)] p-3.5 sm:p-4 rounded-xl bg-[#152437]/95 border border-[#293C51] backdrop-blur-xl shadow-2xl z-30 font-mono animate-in fade-in duration-200">
           <div className="flex items-start justify-between">
             <div className="flex items-center space-x-2">
               {activeHotspot.status === "critical" ? (
@@ -776,12 +807,12 @@ export default function Vehicle3DViewer({
       )}
 
       {/* Bottom Controls Bar: Paint Customizer & Interaction Hints */}
-      <div className="absolute bottom-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-3 pointer-events-auto">
+      <div className="absolute bottom-2.5 sm:bottom-4 left-2.5 sm:left-4 right-2.5 sm:right-4 z-20 flex items-center justify-between gap-2 pointer-events-auto">
         {/* Paint Swatches */}
-        <div className="flex items-center space-x-2 bg-[#152437]/90 px-3 py-1.5 rounded-xl border border-[#293C51] backdrop-blur-md">
-          <span className="text-[9px] font-mono text-[#A5B5C8] uppercase font-bold flex items-center space-x-1">
+        <div className="flex items-center space-x-1.5 sm:space-x-2 bg-[#152437]/90 px-2.5 sm:px-3 py-1.5 rounded-xl border border-[#293C51] backdrop-blur-md max-w-full overflow-x-auto scrollbar-none">
+          <span className="text-[9px] font-mono text-[#A5B5C8] uppercase font-bold flex items-center space-x-1 shrink-0">
             <Sparkles className="w-3 h-3 text-[#79C7FF]" />
-            <span className="hidden sm:inline">BODY FINISH:</span>
+            <span className="hidden xs:inline">FINISH:</span>
           </span>
 
           <div className="flex items-center space-x-1.5">
@@ -789,7 +820,7 @@ export default function Vehicle3DViewer({
               <button
                 key={c.name}
                 onClick={() => setSelectedColor(c)}
-                className={`w-5 h-5 rounded-full border-2 transition-transform cursor-pointer hover:scale-110 ${
+                className={`w-5 h-5 rounded-full border-2 transition-transform cursor-pointer hover:scale-110 shrink-0 ${
                   selectedColor.name === c.name
                     ? "border-white scale-110 shadow-[0_0_8px_rgba(255,255,255,0.5)]"
                     : "border-white/20 opacity-70 hover:opacity-100"
@@ -806,12 +837,10 @@ export default function Vehicle3DViewer({
         </div>
 
         {/* Orbit Helper Tip */}
-        <div className="hidden sm:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#152437]/80 border border-[#293C51] text-[10px] font-mono text-[#A5B5C8]">
-          <span>ORBIT: Left Click + Drag</span>
+        <div className="hidden lg:flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#152437]/80 border border-[#293C51] text-[10px] font-mono text-[#A5B5C8]">
+          <span>ORBIT: Touch / Drag</span>
           <span>•</span>
-          <span>ZOOM: Scroll / Pinch</span>
-          <span>•</span>
-          <span>INSPECT: Click Pins</span>
+          <span>ZOOM: Pinch / Scroll</span>
         </div>
       </div>
     </div>

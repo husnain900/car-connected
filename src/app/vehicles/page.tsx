@@ -141,8 +141,8 @@ export default function VehiclesPage() {
 
       {/* Pairing Wizard Modal */}
       {pairingModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#091321]/85 backdrop-blur-md select-none">
-          <div className="w-full max-w-xl p-6 sm:p-8 rounded-2xl bg-[#152437] border border-[#293C51] shadow-2xl space-y-5">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-[#091321]/85 backdrop-blur-md select-none">
+          <div className="w-full max-w-xl max-h-[90vh] overflow-y-auto p-4 sm:p-8 rounded-2xl bg-[#152437] border border-[#293C51] shadow-2xl space-y-5">
             <div className="flex items-center justify-between pb-4 border-b border-[#293C51]">
               <div className="flex items-center space-x-3">
                 <div className="w-10 h-10 rounded-xl bg-[#79C7FF]/15 border border-[#79C7FF]/30 flex items-center justify-center text-[#79C7FF]">

@@ -95,4 +95,25 @@ body {
   font-family: var(--font-sans);
   overflow-x: hidden;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Mobile Safe Area Inset Support */
+.safe-area-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+.safe-area-top {
+  padding-top: max(0.5rem, env(safe-area-inset-top));
+}
+
+/* Reduced Motion Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

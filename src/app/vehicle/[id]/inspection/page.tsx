@@ -315,7 +315,7 @@ export default function InspectionPage() {
               {!streamActive ? (
                 <button
                   onClick={startCamera}
-                  className="flex-1 py-2.5 px-4 rounded-xl bg-[#79C7FF] hover:bg-[#68b5ea] text-[#091321] font-mono font-bold text-xs flex items-center justify-center space-x-2 transition-colors cursor-pointer"
+                  className="flex-1 min-h-[44px] py-2.5 px-4 rounded-xl bg-[#79C7FF] hover:bg-[#68b5ea] text-[#091321] font-mono font-bold text-xs flex items-center justify-center space-x-2 transition-colors cursor-pointer"
                 >
                   <Camera className="w-4 h-4" />
                   <span>START WEBCAM FEED</span>
@@ -323,7 +323,7 @@ export default function InspectionPage() {
               ) : (
                 <button
                   onClick={captureFrame}
-                  className="flex-1 py-2.5 px-4 rounded-xl bg-[#35C99A] hover:bg-[#2fb288] text-[#091321] font-mono font-bold text-xs flex items-center justify-center space-x-2 transition-colors cursor-pointer animate-pulse"
+                  className="flex-1 min-h-[44px] py-2.5 px-4 rounded-xl bg-[#35C99A] hover:bg-[#2fb288] text-[#091321] font-mono font-bold text-xs flex items-center justify-center space-x-2 transition-colors cursor-pointer animate-pulse"
                 >
                   <Eye className="w-4 h-4" />
                   <span>SNAP & ANALYZE FRAME</span>
@@ -332,7 +332,7 @@ export default function InspectionPage() {
 
               <button
                 onClick={() => fileInputRef.current?.click()}
-                className="py-2.5 px-4 rounded-xl bg-[#1E314B] hover:bg-[#152437] border border-[#293C51] text-xs font-mono font-bold text-[#F5F8FC] flex items-center space-x-2 transition-colors cursor-pointer"
+                className="min-h-[44px] py-2.5 px-4 rounded-xl bg-[#1E314B] hover:bg-[#152437] border border-[#293C51] text-xs font-mono font-bold text-[#F5F8FC] flex items-center space-x-2 transition-colors cursor-pointer"
               >
                 <Upload className="w-4 h-4 text-[#A5B5C8]" />
                 <span>UPLOAD FILE</span>
@@ -342,6 +342,7 @@ export default function InspectionPage() {
                 ref={fileInputRef}
                 type="file"
                 accept="image/*"
+                capture="environment"
                 onChange={handleFileUpload}
                 className="hidden"
               />
@@ -349,7 +350,7 @@ export default function InspectionPage() {
               {capturedImage && (
                 <button
                   onClick={resetAll}
-                  className="py-2.5 px-3 rounded-xl bg-white/5 hover:bg-red-500/20 text-[#8794A6] hover:text-red-400 border border-white/10 transition-colors"
+                  className="py-2.5 px-3 rounded-xl bg-white/5 hover:bg-[#F16D78]/20 text-[#A5B5C8] hover:text-[#F16D78] border border-[#293C51] transition-colors min-h-[44px] flex items-center justify-center cursor-pointer"
                   title="Clear Captured Image"
                 >
                   <Trash2 className="w-4 h-4" />
@@ -358,18 +359,18 @@ export default function InspectionPage() {
             </div>
 
             {/* Presets for Viva Evaluators */}
-            <div className="pt-3 border-t border-white/8">
-              <span className="text-[9px] font-mono text-[#8794A6] uppercase font-bold block mb-2">
+            <div className="pt-3 border-t border-[#293C51]">
+              <span className="text-[9px] font-mono text-[#A5B5C8] uppercase font-bold block mb-2">
                 EXAMINER PRESETS (CLICK TO TEST WITHOUT A REAL CAR):
               </span>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {samplePresets.map((preset) => (
                   <button
                     key={preset.name}
                     onClick={() => loadPreset(preset)}
-                    className="p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-left text-[10px] font-mono text-[#F4F7FB] transition-colors truncate"
+                    className="p-2.5 rounded-lg bg-[#1E314B]/70 hover:bg-[#1E314B] border border-[#293C51] text-left text-[10px] font-mono text-[#F5F8FC] transition-colors min-h-[40px] flex items-center"
                   >
-                    {preset.name}
+                    <span className="truncate">{preset.name}</span>
                   </button>
                 ))}
               </div>

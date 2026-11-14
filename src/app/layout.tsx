@@ -33,6 +33,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   themeColor: "#091321",
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
@@ -46,10 +47,10 @@ export default function RootLayout({
         <meta name="author" content="Zainab Amanat - Roll No: M245008" />
         <meta name="developer" content="Zainab Amanat (Roll No: M245008)" />
       </head>
-      <body className="min-h-full flex flex-col bg-[#091321] text-[#F5F8FC] selection:bg-[#79C7FF]/20 selection:text-[#79C7FF]">
+      <body className="min-h-full flex flex-col bg-[#091321] text-[#F5F8FC] selection:bg-[#79C7FF]/20 selection:text-[#79C7FF] overflow-x-hidden pb-20 md:pb-0">
         <SimulationProvider>
           <AppNavigation />
-          <div className="flex-1 flex flex-col">{children}</div>
+          <div className="flex-1 flex flex-col w-full max-w-full overflow-x-hidden">{children}</div>
           <AppFooter />
         </SimulationProvider>
       </body>
