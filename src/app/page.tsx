@@ -133,12 +133,12 @@ export default function LandingPage() {
               <span>DIGITAL TWIN // HYPERION GT (SIMULATED PROTOTYPE)</span>
             </div>
 
-            <div className="relative w-full h-full">
+            <div className="relative w-full h-full flex items-center justify-center">
               <Image
-                src="/assets/images/hyperion-gt-hero.jpg"
-                alt="Nebula Hyperion GT Luxury Electric Hypercar"
+                src="/assets/images/tesla-roadster-transparent.png"
+                alt="Latest 2026 Tesla Hypercar Studio Render"
                 fill
-                className="object-contain filter contrast-105 drop-shadow-[0_15px_30px_rgba(31,42,55,0.25)]"
+                className="object-contain filter contrast-105 drop-shadow-[0_20px_45px_rgba(46,139,139,0.22)] transition-transform duration-500 hover:scale-[1.02]"
                 priority
               />
             </div>

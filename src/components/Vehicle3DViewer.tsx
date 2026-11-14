@@ -1084,20 +1084,20 @@ export default function Vehicle3DViewer({
           })}
         </div>
       ) : (
-        /* 2D Studio Photography Fallback View */
-        <div className="relative w-full h-full flex items-center justify-center p-6">
-          <div className="relative w-[90%] sm:w-[82%] h-[78%] flex items-center justify-center">
+        /* 2D Studio Photography Fallback View with Transparent Tesla Hypercar */
+        <div className="relative w-full h-full flex items-center justify-center p-4 sm:p-6 bg-gradient-to-b from-[#FFFFFF] via-[#F6F8FA] to-[#EEF2F5]">
+          <div className="relative w-[92%] sm:w-[86%] h-[82%] flex items-center justify-center">
             <Image
-              src="/assets/images/hyperion-gt-angle.jpg"
-              alt="Nebula Hyperion GT Studio Photography"
+              src="/assets/images/tesla-roadster-transparent.png"
+              alt="Latest 2026 Tesla Hypercar Studio Render"
               fill
-              className="object-contain filter contrast-105 drop-shadow-[0_15px_30px_rgba(31,42,55,0.2)]"
+              className="object-contain filter contrast-105 drop-shadow-[0_20px_45px_rgba(46,139,139,0.22)] transition-transform duration-500 hover:scale-[1.02]"
               priority
             />
           </div>
 
-          <div className="absolute bottom-4 left-4 text-xs font-mono text-[#5B6675]">
-            Showing 4K Studio Render (Scandinavian Studio Fallback)
+          <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4 text-[10px] sm:text-xs font-mono text-[#5B6675] bg-[#FFFFFF]/90 px-2.5 py-1 rounded-lg border border-[#D8E0E7] shadow-xs">
+            Latest 2026 Tesla Flagship Hypercar // Transparent Studio Isolation
           </div>
         </div>
       )}

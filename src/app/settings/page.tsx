@@ -11,6 +11,7 @@ import {
   VolumeX,
 } from "lucide-react";
 import { useSimulationStore } from "@/lib/simulationStore";
+import { cockpitAudio } from "@/lib/audioManager";
 
 export default function SettingsPage() {
   const { settings, updateSettings, user } = useSimulationStore();
@@ -23,7 +24,13 @@ export default function SettingsPage() {
   };
 
   const handleSoundToggle = () => {
-    updateSettings({ soundFeedback: !settings.soundFeedback });
+    const nextVal = !settings.soundFeedback;
+    updateSettings({ soundFeedback: nextVal });
+    if (nextVal) {
+      cockpitAudio.start();
+    } else {
+      cockpitAudio.stop();
+    }
     triggerSave();
   };
 

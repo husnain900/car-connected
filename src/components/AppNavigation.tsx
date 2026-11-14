@@ -28,8 +28,11 @@ import {
   MoreHorizontal,
   ChevronRight,
   ShieldCheck,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import { useSimulationStore } from "@/lib/simulationStore";
+import { cockpitAudio } from "@/lib/audioManager";
 
 export default function AppNavigation() {
   const pathname = usePathname();
@@ -48,6 +51,44 @@ export default function AppNavigation() {
   const [moreDrawerOpen, setMoreDrawerOpen] = useState(false);
   const [scenarioOpen, setScenarioOpen] = useState(false);
   const [vehicleSelectorOpen, setVehicleSelectorOpen] = useState(false);
+  const [isAudioPlaying, setIsAudioPlaying] = useState(false);
+
+  // Sync with Cockpit Audio State
+  useEffect(() => {
+    const unsub = cockpitAudio.subscribe((playing) => setIsAudioPlaying(playing));
+    return unsub;
+  }, []);
+
+  // Modulate engine pitch with active vehicle telemetry speed
+  useEffect(() => {
+    if (activeVehicle?.currentSpeedKmH !== undefined) {
+      cockpitAudio.updateSpeed(activeVehicle.currentSpeedKmH);
+    }
+  }, [activeVehicle?.currentSpeedKmH]);
+
+  // Auto-play ambient theme sound on first user gesture anywhere
+  useEffect(() => {
+    const handleFirstGesture = () => {
+      cockpitAudio.start();
+      window.removeEventListener("click", handleFirstGesture);
+      window.removeEventListener("keydown", handleFirstGesture);
+      window.removeEventListener("touchstart", handleFirstGesture);
+    };
+
+    window.addEventListener("click", handleFirstGesture, { once: true });
+    window.addEventListener("keydown", handleFirstGesture, { once: true });
+    window.addEventListener("touchstart", handleFirstGesture, { once: true });
+
+    return () => {
+      window.removeEventListener("click", handleFirstGesture);
+      window.removeEventListener("keydown", handleFirstGesture);
+      window.removeEventListener("touchstart", handleFirstGesture);
+    };
+  }, []);
+
+  const toggleCockpitAudio = () => {
+    cockpitAudio.toggle();
+  };
 
   // Close drawers and menus on route change safely via async microtask
   useEffect(() => {
@@ -295,6 +336,35 @@ export default function AppNavigation() {
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Ambient Cockpit Theme Audio Synthesizer */}
+            <button
+              onClick={toggleCockpitAudio}
+              className={`relative px-2.5 sm:px-3 h-9 sm:h-10 rounded-xl border flex items-center space-x-1.5 transition-all cursor-pointer shadow-xs min-h-[36px] ${
+                isAudioPlaying
+                  ? "bg-[#E7F3F1] border-[#2E8B8B] text-[#2E8B8B]"
+                  : "bg-[#FFFFFF] border-[#D8E0E7] text-[#5B6675] hover:text-[#1F2A37] hover:border-[#86B6B2]"
+              }`}
+              title={isAudioPlaying ? "Mute Continuous Cockpit Theme Sound" : "Play Continuous Cockpit Theme Sound"}
+              aria-label="Toggle Cockpit Audio"
+            >
+              {isAudioPlaying ? (
+                <>
+                  <Volume2 className="w-4 h-4 text-[#2E8B8B] animate-pulse" />
+                  <span className="flex items-end space-x-0.5 h-3.5 pb-0.5">
+                    <span className="w-0.5 bg-[#2E8B8B] rounded-full animate-bounce h-2" style={{ animationDelay: "0ms" }} />
+                    <span className="w-0.5 bg-[#2E8B8B] rounded-full animate-bounce h-3.5" style={{ animationDelay: "150ms" }} />
+                    <span className="w-0.5 bg-[#2E8B8B] rounded-full animate-bounce h-2" style={{ animationDelay: "300ms" }} />
+                  </span>
+                  <span className="hidden xl:inline text-[10px] font-mono font-bold tracking-wider">SOUND ON</span>
+                </>
+              ) : (
+                <>
+                  <VolumeX className="w-4 h-4 text-[#5B6675]" />
+                  <span className="hidden xl:inline text-[10px] font-mono font-bold tracking-wider">SOUND OFF</span>
+                </>
+              )}
+            </button>
 
             {/* Notification Bell with Badge */}
             <Link
