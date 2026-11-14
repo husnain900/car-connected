@@ -154,15 +154,15 @@ export default function DashboardPage() {
       </div>
 
       {/* Grid: 4-Corner TPMS & Remote Controls */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 w-full">
         {/* Module 1: TPMS Mesh Quick Status */}
-        <div className="nebula-card p-6 flex flex-col justify-between min-h-[340px]">
+        <div className="nebula-card p-4 sm:p-6 flex flex-col justify-between min-h-[340px]">
           <div className="flex items-center justify-between">
             <div>
               <span className="text-[10px] font-mono uppercase text-[#A5B5C8] font-bold">
                 CHASSIS SAFETY
               </span>
-              <h3 className="font-display font-bold text-lg text-[#F5F8FC]">
+              <h3 className="font-display font-bold text-base sm:text-lg text-[#F5F8FC]">
                 TPMS Tyre Mesh Readouts
               </h3>
             </div>
@@ -175,13 +175,13 @@ export default function DashboardPage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-3.5 my-4">
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 my-4">
             {activeVehicle.tires.map((t) => {
               const isWarning = t.status === "warning" || t.status === "critical";
               return (
                 <div
                   key={t.id}
-                  className={`p-3.5 rounded-xl border flex flex-col justify-between ${
+                  className={`p-2.5 sm:p-3.5 rounded-xl border flex flex-col justify-between ${
                     isWarning
                       ? "bg-[#F16D78]/10 border-[#F16D78]/40 text-[#F16D78]"
                       : "bg-[#1E314B] border-[#293C51] text-[#F5F8FC]"
@@ -201,7 +201,7 @@ export default function DashboardPage() {
                     </span>
                     <span className="text-[10px] font-mono text-[#A5B5C8]">PSI</span>
                   </div>
-                  <div className="flex items-center justify-between text-[10px] font-mono text-[#A5B5C8] mt-1">
+                  <div className="flex flex-wrap items-center justify-between text-[9px] sm:text-[10px] font-mono text-[#A5B5C8] mt-1 gap-1">
                     <span>Temp: {t.tempC}°C</span>
                     <span>Target: {t.targetPsi}</span>
                   </div>
@@ -210,20 +210,20 @@ export default function DashboardPage() {
             })}
           </div>
 
-          <div className="flex items-center justify-between pt-3 border-t border-[#293C51] text-[10px] font-mono text-[#A5B5C8]">
-            <span>Thresholds: Min 30 PSI • Max 42 PSI</span>
+          <div className="flex items-center justify-between pt-3 border-t border-[#293C51] text-[9px] sm:text-[10px] font-mono text-[#A5B5C8]">
+            <span>Thresholds: 30–42 PSI</span>
             <span className="text-[#35C99A]">Continuous 4-Wheel Scan</span>
           </div>
         </div>
 
         {/* Module 2: Quick Command Hub */}
-        <div className="nebula-card p-6 flex flex-col justify-between min-h-[340px]">
+        <div className="nebula-card p-4 sm:p-6 flex flex-col justify-between min-h-[340px]">
           <div className="flex items-center justify-between">
             <div>
               <span className="text-[10px] font-mono uppercase text-[#A5B5C8] font-bold">
                 OPERATIONS
               </span>
-              <h3 className="font-display font-bold text-lg text-[#F5F8FC]">
+              <h3 className="font-display font-bold text-base sm:text-lg text-[#F5F8FC]">
                 Remote Control Commands
               </h3>
             </div>
@@ -236,10 +236,10 @@ export default function DashboardPage() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-2 gap-3.5 my-4">
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-3.5 my-4">
             <button
               onClick={() => executeCommand(activeVehicle.isLocked ? "UNLOCK_VEHICLE" : "LOCK_VEHICLE")}
-              className={`p-4 rounded-xl border flex flex-col items-center justify-center space-y-2 cursor-pointer transition-all ${
+              className={`p-3 sm:p-4 rounded-xl border flex flex-col items-center justify-center space-y-1.5 sm:space-y-2 cursor-pointer transition-all min-h-[44px] ${
                 activeVehicle.isLocked
                   ? "bg-[#1E314B] border-[#293C51] hover:border-[#79C7FF]/40 text-[#F5F8FC]"
                   : "bg-[#79C7FF]/15 border-[#79C7FF]/40 text-[#79C7FF]"
@@ -262,7 +262,7 @@ export default function DashboardPage() {
 
             <button
               onClick={() => executeCommand("TOGGLE_VALET")}
-              className={`p-4 rounded-xl border flex flex-col items-center justify-center space-y-2 cursor-pointer transition-all ${
+              className={`p-3 sm:p-4 rounded-xl border flex flex-col items-center justify-center space-y-1.5 sm:space-y-2 cursor-pointer transition-all min-h-[44px] ${
                 activeVehicle.valetActive
                   ? "bg-[#35C99A]/15 border-[#35C99A]/40 text-[#35C99A]"
                   : "bg-[#1E314B] border-[#293C51] hover:border-[#79C7FF]/40 text-[#F5F8FC]"
@@ -279,29 +279,29 @@ export default function DashboardPage() {
           </div>
 
           {/* Climate preset slider quick widget */}
-          <div className="bg-[#1E314B] border border-[#293C51] p-3 rounded-xl flex items-center justify-between">
+          <div className="bg-[#1E314B] border border-[#293C51] p-3 rounded-xl flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
             <div className="flex flex-col">
               <span className="text-[9px] font-mono text-[#A5B5C8] uppercase">Thermostat Target</span>
               <span className="text-xs font-bold font-mono text-[#F5F8FC]">
                 {activeVehicle.climateTempC.toFixed(1)}°C (Pre-Conditioning)
               </span>
             </div>
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-2 self-end sm:self-auto">
               <button
                 onClick={() => setClimateTemp(18.0)}
-                className="px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-[9px] font-mono text-[#A5B5C8] hover:text-[#F5F8FC]"
+                className="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-[10px] font-mono text-[#A5B5C8] hover:text-[#F5F8FC] min-h-[32px]"
               >
                 18°C
               </button>
               <button
                 onClick={() => setClimateTemp(21.0)}
-                className="px-2 py-1 rounded bg-[#79C7FF]/15 border border-[#79C7FF]/30 text-[#79C7FF] text-[9px] font-mono font-bold"
+                className="px-2.5 py-1 rounded bg-[#79C7FF]/15 border border-[#79C7FF]/30 text-[#79C7FF] text-[10px] font-mono font-bold min-h-[32px]"
               >
                 21°C
               </button>
               <button
                 onClick={() => setClimateTemp(24.5)}
-                className="px-2 py-1 rounded bg-white/5 hover:bg-white/10 text-[9px] font-mono text-[#A5B5C8] hover:text-[#F5F8FC]"
+                className="px-2.5 py-1 rounded bg-white/5 hover:bg-white/10 text-[10px] font-mono text-[#A5B5C8] hover:text-[#F5F8FC] min-h-[32px]"
               >
                 24.5°C
               </button>

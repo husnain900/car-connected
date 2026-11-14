@@ -127,7 +127,7 @@ export default function LandingPage() {
           </div>
 
           {/* Cinematic Automotive Visual Preview */}
-          <div className="relative mt-12 w-full max-w-4xl mx-auto h-72 sm:h-96 rounded-2xl overflow-hidden nebula-card border border-[#293C51] shadow-2xl flex items-center justify-center p-6">
+          <div className="relative mt-8 sm:mt-12 w-full max-w-4xl mx-auto h-64 sm:h-96 rounded-2xl overflow-hidden nebula-card border border-[#293C51] shadow-2xl flex items-center justify-center p-3 sm:p-6">
             <div className="absolute top-4 left-4 z-10 flex items-center space-x-2 text-[10px] font-mono text-[#A5B5C8] bg-[#091321]/90 px-2.5 py-1 rounded-lg border border-[#293C51]">
               <span className="w-1.5 h-1.5 rounded-full bg-[#35C99A]" />
               <span>DIGITAL TWIN // HYPERION GT (SIMULATED PROTOTYPE)</span>

@@ -200,31 +200,38 @@ export default function Vehicle3DViewer({
     controls.autoRotate = false;
     setIsRotating(false);
 
+    const container = containerRef.current;
+    const isMobile = container ? container.clientWidth < 640 : false;
+
     switch (presetName) {
       case "Front":
-        camera.position.set(0, 1.1, 4.8);
-        controls.target.set(0, 0.5, 0);
+        camera.position.set(0, 1.2, isMobile ? 5.6 : 4.8);
+        controls.target.set(0, 0.45, 0);
         break;
       case "Rear":
-        camera.position.set(0, 1.1, -4.8);
-        controls.target.set(0, 0.5, 0);
+        camera.position.set(0, 1.2, isMobile ? -5.6 : -4.8);
+        controls.target.set(0, 0.45, 0);
         break;
       case "Side (Left)":
-        camera.position.set(-4.8, 1.0, 0);
-        controls.target.set(0, 0.5, 0);
+        camera.position.set(isMobile ? -6.2 : -4.8, 1.1, 0);
+        controls.target.set(0, 0.45, 0);
         break;
       case "Side (Right)":
-        camera.position.set(4.8, 1.0, 0);
-        controls.target.set(0, 0.5, 0);
+        camera.position.set(isMobile ? 6.2 : 4.8, 1.1, 0);
+        controls.target.set(0, 0.45, 0);
         break;
       case "Top View":
-        camera.position.set(0, 5.8, 0.01);
+        camera.position.set(0, isMobile ? 7.2 : 5.8, 0.01);
         controls.target.set(0, 0, 0);
         break;
       case "3/4 Showroom":
       default:
-        camera.position.set(3.8, 1.8, 3.8);
-        controls.target.set(0, 0.5, 0);
+        if (isMobile) {
+          camera.position.set(4.8, 2.2, 4.8);
+        } else {
+          camera.position.set(3.8, 1.8, 3.8);
+        }
+        controls.target.set(0, 0.45, 0);
         break;
     }
     controls.update();
@@ -257,6 +264,7 @@ export default function Vehicle3DViewer({
 
     const width = container.clientWidth || 800;
     const height = container.clientHeight || 500;
+    const isMobile = width < 640;
 
     // Scene
     const scene = new THREE.Scene();
@@ -264,9 +272,14 @@ export default function Vehicle3DViewer({
     scene.background = new THREE.Color("#091321");
     scene.fog = new THREE.FogExp2("#091321", 0.04);
 
-    // Camera
-    const camera = new THREE.PerspectiveCamera(42, width / height, 0.1, 100);
-    camera.position.set(3.8, 1.8, 3.8);
+    // Camera with adaptive mobile FOV and distance
+    const fov = isMobile ? 45 : 42;
+    const camera = new THREE.PerspectiveCamera(fov, width / height, 0.1, 100);
+    if (isMobile) {
+      camera.position.set(4.8, 2.2, 4.8);
+    } else {
+      camera.position.set(3.8, 1.8, 3.8);
+    }
     cameraRef.current = camera;
 
     // Renderer
@@ -287,8 +300,8 @@ export default function Vehicle3DViewer({
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.05;
-    controls.minDistance = 2.2;
-    controls.maxDistance = 8.5;
+    controls.minDistance = isMobile ? 3.0 : 2.2;
+    controls.maxDistance = 9.5;
     controls.maxPolarAngle = Math.PI / 2 - 0.05; // Prevent flipping below floor
     controls.autoRotate = true;
     controls.autoRotateSpeed = 0.8;
@@ -299,7 +312,7 @@ export default function Vehicle3DViewer({
       ONE: THREE.TOUCH.ROTATE,
       TWO: THREE.TOUCH.DOLLY_PAN,
     };
-    controls.target.set(0, 0.5, 0);
+    controls.target.set(0, 0.45, 0);
     controlsRef.current = controls;
 
     // Studio Lighting
@@ -537,6 +550,8 @@ export default function Vehicle3DViewer({
       if (!container || !renderer || !camera) return;
       const newWidth = container.clientWidth;
       const newHeight = container.clientHeight;
+      const isMobileNow = newWidth < 640;
+      camera.fov = isMobileNow ? 45 : 42;
       camera.aspect = newWidth / newHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(newWidth, newHeight);
@@ -558,7 +573,7 @@ export default function Vehicle3DViewer({
   const resetView = () => {
     applyCameraPreset("3/4 Showroom");
     if (controlsRef.current) {
-      controlsRef.current.target.set(0, 0.5, 0);
+      controlsRef.current.target.set(0, 0.45, 0);
       controlsRef.current.update();
     }
   };
