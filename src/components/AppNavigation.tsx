@@ -49,13 +49,15 @@ export default function AppNavigation() {
   const [scenarioOpen, setScenarioOpen] = useState(false);
   const [vehicleSelectorOpen, setVehicleSelectorOpen] = useState(false);
 
-  const [prevPathname, setPrevPathname] = useState(pathname);
-  if (prevPathname !== pathname) {
-    setPrevPathname(pathname);
-    setMoreDrawerOpen(false);
-    setScenarioOpen(false);
-    setVehicleSelectorOpen(false);
-  }
+  // Close drawers and menus on route change safely via async microtask
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setMoreDrawerOpen(false);
+      setScenarioOpen(false);
+      setVehicleSelectorOpen(false);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [pathname]);
 
   // Lock background scroll when drawer is open
   useEffect(() => {

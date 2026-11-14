@@ -294,7 +294,18 @@ if (typeof window !== "undefined") {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      currentState = { ...DEFAULT_STATE, ...parsed };
+      if (
+        parsed &&
+        Array.isArray(parsed.vehicles) &&
+        parsed.vehicles.length > 0 &&
+        parsed.vehicles[0].tires &&
+        Array.isArray(parsed.vehicles[0].tires)
+      ) {
+        currentState = { ...DEFAULT_STATE, ...parsed };
+      } else {
+        localStorage.removeItem(STORAGE_KEY);
+        currentState = DEFAULT_STATE;
+      }
     }
   } catch {
     currentState = DEFAULT_STATE;
@@ -599,10 +610,23 @@ export function useSimulationStore() {
     () => DEFAULT_STATE
   );
 
-  const activeVehicle =
-    store.vehicles.find((v) => v.id === store.activeVehicleId) || store.vehicles[0];
+  const foundVehicle =
+    (store.vehicles && store.vehicles.find((v) => v.id === store.activeVehicleId)) ||
+    (store.vehicles && store.vehicles[0]) ||
+    DEFAULT_STATE.vehicles[0];
 
-  const unreadAlertsCount = store.alerts.filter((a) => !a.read).length;
+  // Defensive normalization to prevent any crash from missing properties
+  const activeVehicle: Vehicle = {
+    ...DEFAULT_STATE.vehicles[0],
+    ...foundVehicle,
+    tires:
+      foundVehicle.tires && foundVehicle.tires.length > 0
+        ? foundVehicle.tires
+        : DEFAULT_STATE.vehicles[0].tires,
+    activeFaults: foundVehicle.activeFaults || [],
+  };
+
+  const unreadAlertsCount = (store.alerts || []).filter((a) => !a.read).length;
 
   return {
     ...store,

@@ -32,8 +32,8 @@ export default function DashboardPage() {
               {activeVehicle.dataSourceLabel}
             </span>
             <span className="text-[#293C51]">•</span>
-            <span className="font-mono text-[10px] text-[#A5B5C8]">
-              Last Tick: {new Date(activeVehicle.lastUpdated).toLocaleTimeString()}
+            <span className="font-mono text-[10px] text-[#A5B5C8]" suppressHydrationWarning>
+              Last Tick: {activeVehicle?.lastUpdated ? new Date(activeVehicle.lastUpdated).toLocaleTimeString() : "Live"}
             </span>
           </div>
 
@@ -81,7 +81,7 @@ export default function DashboardPage() {
       </div>
 
       {/* Active Fault Notification Alert (if any fault injected) */}
-      {activeVehicle.activeFaults.length > 0 && (
+      {Boolean(activeVehicle?.activeFaults && activeVehicle.activeFaults.length > 0) && (
         <div className="p-4 rounded-xl bg-[#F16D78]/10 border border-[#F16D78]/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <div className="flex items-center space-x-3">
             <div className="w-9 h-9 rounded-lg bg-[#F16D78]/20 border border-[#F16D78]/30 flex items-center justify-center text-[#F16D78] flex-shrink-0">

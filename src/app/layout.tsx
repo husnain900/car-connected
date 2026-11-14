@@ -22,8 +22,11 @@ export const metadata: Metadata = {
     "M245008",
   ],
   icons: {
-    icon: "/assets/images/nebula-logo.png",
-    shortcut: "/assets/images/nebula-logo.png",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/assets/images/nebula-logo.png", type: "image/png" },
+    ],
+    shortcut: "/icon.svg",
     apple: "/assets/images/nebula-logo.png",
   },
 };
